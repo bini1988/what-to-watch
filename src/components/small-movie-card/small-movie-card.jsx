@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const SmallMovieCard = (props) => {
-  const {title} = props;
+  const {title, onTitleClick} = props;
 
   return (
     <article className="small-movie-card catalog__movies-card">
@@ -16,7 +16,7 @@ const SmallMovieCard = (props) => {
           width="280"
           height="175"/>
       </div>
-      <h3 className="small-movie-card__title">
+      <h3 className="small-movie-card__title" onClick={onTitleClick}>
         <a className="small-movie-card__link" href="movie-page.html">
           {title}
         </a>
@@ -28,6 +28,8 @@ const SmallMovieCard = (props) => {
 SmallMovieCard.propTypes = {
   /** Название фильма */
   title: PropTypes.string.isRequired,
+  /** Обрабочик события клика по заголовку фильма */
+  onTitleClick: PropTypes.func,
 };
 
 export default SmallMovieCard;
