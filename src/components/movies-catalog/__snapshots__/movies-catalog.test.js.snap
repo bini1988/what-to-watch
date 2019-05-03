@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviesCatalog correctly renders default markup 1`] = `
+<section
+  className="catalog"
+>
+  <h2
+    className="catalog__title visually-hidden"
+  >
+    Catalog
+  </h2>
+  <ul
+    className="catalog__genres-list"
+  >
+    <li
+      className="catalog__genres-item catalog__genres-item--active"
+    >
+      <a
+        className="catalog__genres-link"
+        href="#"
+      >
+        All genres
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item"
+    >
+      <a
+        className="catalog__genres-link"
+        href="#"
+      >
+        Others
+      </a>
+    </li>
+  </ul>
+  <div
+    className="catalog__movies-list"
+  >
+    <article
+      className="small-movie-card catalog__movies-card"
+    >
+      <button
+        className="small-movie-card__play-btn"
+        type="button"
+      >
+        Play
+      </button>
+      <div
+        className="small-movie-card__image"
+      >
+        <img
+          alt="Movie Title #0"
+          height="175"
+          src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Movie Title #0
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+    >
+      <button
+        className="small-movie-card__play-btn"
+        type="button"
+      >
+        Play
+      </button>
+      <div
+        className="small-movie-card__image"
+      >
+        <img
+          alt="Movie Title #1"
+          height="175"
+          src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Movie Title #1
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+    >
+      <button
+        className="small-movie-card__play-btn"
+        type="button"
+      >
+        Play
+      </button>
+      <div
+        className="small-movie-card__image"
+      >
+        <img
+          alt="Movie Title #2"
+          height="175"
+          src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Movie Title #2
+        </a>
+      </h3>
+    </article>
+  </div>
+  <div
+    className="catalog__more"
+  >
+    <button
+      className="catalog__button"
+      type="button"
+    >
+      Show more
+    </button>
+  </div>
+</section>
+`;
