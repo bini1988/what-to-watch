@@ -1,0 +1,325 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App correctly renders default markup 1`] = `
+<div
+  className="page-content"
+>
+  <section
+    className="catalog"
+  >
+    <h2
+      className="catalog__title visually-hidden"
+    >
+      Catalog
+    </h2>
+    <ul
+      className="catalog__genres-list"
+    >
+      <li
+        className="catalog__genres-item catalog__genres-item--active"
+      >
+        <a
+          className="catalog__genres-link"
+          href="#"
+        >
+          All genres
+        </a>
+      </li>
+      <li
+        className="catalog__genres-item"
+      >
+        <a
+          className="catalog__genres-link"
+          href="#"
+        >
+          Others
+        </a>
+      </li>
+    </ul>
+    <div
+      className="catalog__movies-list"
+    >
+      <article
+        className="small-movie-card catalog__movies-card"
+      >
+        <button
+          className="small-movie-card__play-btn"
+          type="button"
+        >
+          Play
+        </button>
+        <div
+          className="small-movie-card__image"
+        >
+          <img
+            alt="Fantastic Beasts: The Crimes of Grindelwald"
+            height="175"
+            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="movie-page.html"
+          >
+            Fantastic Beasts: The Crimes of Grindelwald
+          </a>
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+      >
+        <button
+          className="small-movie-card__play-btn"
+          type="button"
+        >
+          Play
+        </button>
+        <div
+          className="small-movie-card__image"
+        >
+          <img
+            alt="Bohemian Rhapsody"
+            height="175"
+            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="movie-page.html"
+          >
+            Bohemian Rhapsody
+          </a>
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+      >
+        <button
+          className="small-movie-card__play-btn"
+          type="button"
+        >
+          Play
+        </button>
+        <div
+          className="small-movie-card__image"
+        >
+          <img
+            alt="Macbeth"
+            height="175"
+            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="movie-page.html"
+          >
+            Macbeth
+          </a>
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+      >
+        <button
+          className="small-movie-card__play-btn"
+          type="button"
+        >
+          Play
+        </button>
+        <div
+          className="small-movie-card__image"
+        >
+          <img
+            alt="Aviator"
+            height="175"
+            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="movie-page.html"
+          >
+            Aviator
+          </a>
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+      >
+        <button
+          className="small-movie-card__play-btn"
+          type="button"
+        >
+          Play
+        </button>
+        <div
+          className="small-movie-card__image"
+        >
+          <img
+            alt="We need to talk about Kevin"
+            height="175"
+            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="movie-page.html"
+          >
+            We need to talk about Kevin
+          </a>
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+      >
+        <button
+          className="small-movie-card__play-btn"
+          type="button"
+        >
+          Play
+        </button>
+        <div
+          className="small-movie-card__image"
+        >
+          <img
+            alt="What We Do in the Shadows"
+            height="175"
+            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="movie-page.html"
+          >
+            What We Do in the Shadows
+          </a>
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+      >
+        <button
+          className="small-movie-card__play-btn"
+          type="button"
+        >
+          Play
+        </button>
+        <div
+          className="small-movie-card__image"
+        >
+          <img
+            alt="Revenant"
+            height="175"
+            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="movie-page.html"
+          >
+            Revenant
+          </a>
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+      >
+        <button
+          className="small-movie-card__play-btn"
+          type="button"
+        >
+          Play
+        </button>
+        <div
+          className="small-movie-card__image"
+        >
+          <img
+            alt="Johnny English"
+            height="175"
+            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="movie-page.html"
+          >
+            Johnny English
+          </a>
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+      >
+        <button
+          className="small-movie-card__play-btn"
+          type="button"
+        >
+          Play
+        </button>
+        <div
+          className="small-movie-card__image"
+        >
+          <img
+            alt="Shutter Island"
+            height="175"
+            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="movie-page.html"
+          >
+            Shutter Island
+          </a>
+        </h3>
+      </article>
+    </div>
+    <div
+      className="catalog__more"
+    >
+      <button
+        className="catalog__button"
+        type="button"
+      >
+        Show more
+      </button>
+    </div>
+  </section>
+</div>
+`;
