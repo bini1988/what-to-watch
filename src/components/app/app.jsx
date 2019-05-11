@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import MoviesCatalog from "../movies-catalog/movies-catalog.jsx";
 
 const App = ({films}) => (
@@ -11,16 +10,7 @@ const App = ({films}) => (
 
 App.propTypes = {
   /** Список отображаемых фильмов */
-  films: PropTypes.arrayOf(
-      PropTypes.shape({
-        /** id фильма */
-        id: PropTypes.string.isRequired,
-        /** Название фильма */
-        title: PropTypes.string.isRequired,
-        /** Путь к постеру фильма */
-        img: PropTypes.string,
-      })
-  ).isRequired,
+  films: MoviesCatalog.propTypes.films,
 };
 
 export default App;
