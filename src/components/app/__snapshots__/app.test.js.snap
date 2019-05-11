@@ -41,6 +41,9 @@ exports[`App correctly renders default markup 1`] = `
     >
       <article
         className="small-movie-card catalog__movies-card"
+        id="480d2236-6c7d-4fd3-a225-80c66710a71f"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
         <button
           className="small-movie-card__play-btn"
@@ -72,6 +75,9 @@ exports[`App correctly renders default markup 1`] = `
       </article>
       <article
         className="small-movie-card catalog__movies-card"
+        id="505f451a-0b69-47ed-96c6-66d5525d5a5e"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
         <button
           className="small-movie-card__play-btn"

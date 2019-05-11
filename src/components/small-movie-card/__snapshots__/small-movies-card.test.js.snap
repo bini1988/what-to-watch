@@ -3,6 +3,9 @@
 exports[`SmallMovieCard correctly renders default markup 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  id="b15a1da5-8142-4d2a-b567-26599e333988"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <button
     className="small-movie-card__play-btn"

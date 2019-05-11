@@ -9,6 +9,9 @@ class MoviesCatalog extends PureComponent {
     this.state = {
       activeCard: null,
     };
+
+    this._setActiveCard = this._setActiveCard.bind(this);
+    this._resetActiveCard = this._resetActiveCard.bind(this);
   }
 
   render() {
@@ -31,7 +34,9 @@ class MoviesCatalog extends PureComponent {
           {films.map((it = {}) => (
             <SmallMovieCard
               key={it.id}
-              card={it}/>
+              card={it}
+              onMouseEnter={this._setActiveCard}
+              onMouseLeave={this._resetActiveCard}/>
           ))}
         </div>
         <div className="catalog__more">
@@ -41,6 +46,14 @@ class MoviesCatalog extends PureComponent {
         </div>
       </section>
     );
+  }
+
+  _setActiveCard(card) {
+    this.setState({activeCard: card});
+  }
+
+  _resetActiveCard() {
+    this.setState({activeCard: null});
   }
 }
 

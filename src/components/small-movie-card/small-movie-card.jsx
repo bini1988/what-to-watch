@@ -2,12 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const SmallMovieCard = (props) => {
-  const {card, onTitleClick, onMoviePlay = () => {}} = props;
+  const {card, onTitleClick, onMoviePlay, onMouseEnter, onMouseLeave} = props;
   const {id, title, img} = card;
 
   return (
     <article
-      className="small-movie-card catalog__movies-card">
+      id={id}
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={(event) => onMouseEnter(card, event)}
+      onMouseLeave={(event) => onMouseLeave(card, event)}>
       <button
         className="small-movie-card__play-btn"
         type="button"
@@ -34,6 +37,12 @@ const SmallMovieCard = (props) => {
   );
 };
 
+SmallMovieCard.defaultProps = {
+  onMoviePlay: () => {},
+  onMouseEnter: () => {},
+  onMouseLeave: () => {},
+};
+
 SmallMovieCard.propTypes = {
   /** Карточка фильма */
   card: PropTypes.shape({
@@ -48,6 +57,10 @@ SmallMovieCard.propTypes = {
   onTitleClick: PropTypes.func,
   /** Обрабочик события клика по заголовку фильма */
   onMoviePlay: PropTypes.func,
+  /** Обрабочик события курсор мыши на элементе */
+  onMouseEnter: PropTypes.func,
+  /** Обрабочик события курсор мыши покинул элемент */
+  onMouseLeave: PropTypes.func,
 };
 
 export default SmallMovieCard;
