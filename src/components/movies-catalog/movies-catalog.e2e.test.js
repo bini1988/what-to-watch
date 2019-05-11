@@ -28,12 +28,23 @@ describe(`MoviesCatalog`, () => {
     const card = wrapper.find(`.catalog__movies-card[id='${activeCard.id}']`);
     expect(card).toHaveLength(1);
 
-    expect(wrapper.state(`activeCard`)).toEqual(null);
-
     card.simulate(`mouseenter`);
     wrapper.update();
 
     expect(wrapper.state(`activeCard`)).toEqual(activeCard);
+  });
+  it(`Reset catalog active card on movie's card mouse leave event`, () => {
+    const wrapper = mount(
+        <MoviesCatalog
+          films={filmsMock}/>
+    );
+
+    const activeCard = filmsMock[0];
+    const card = wrapper.find(`.catalog__movies-card[id='${activeCard.id}']`);
+    expect(card).toHaveLength(1);
+
+    wrapper.setState({activeCard});
+    wrapper.update();
 
     card.simulate(`mouseleave`);
     wrapper.update();
