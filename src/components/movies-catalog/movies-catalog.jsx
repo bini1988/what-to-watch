@@ -1,40 +1,61 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 
-const MoviesCatalog = (props) => {
-  const {items = []} = props;
+class MoviesCatalog extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
-    <section className="catalog">
-      <h2 className="catalog__title visually-hidden">
-        {`Catalog`}
-      </h2>
-      <ul className="catalog__genres-list">
-        <li className="catalog__genres-item catalog__genres-item--active">
-          <a href="#" className="catalog__genres-link">{`All genres`}</a>
-        </li>
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">{`Others`}</a>
-        </li>
-      </ul>
-      <div className="catalog__movies-list">
-        {items.map((it, index) => (
-          <SmallMovieCard key={index} title={it}/>
-        ))}
-      </div>
-      <div className="catalog__more">
-        <button className="catalog__button" type="button">
-          {`Show more`}
-        </button>
-      </div>
-    </section>
-  );
-};
+    this.state = {
+      activeCard: null,
+    };
+  }
+
+  render() {
+    const {films = []} = this.props;
+
+    return (
+      <section className="catalog">
+        <h2 className="catalog__title visually-hidden">
+          {`Catalog`}
+        </h2>
+        <ul className="catalog__genres-list">
+          <li className="catalog__genres-item catalog__genres-item--active">
+            <a href="#" className="catalog__genres-link">{`All genres`}</a>
+          </li>
+          <li className="catalog__genres-item">
+            <a href="#" className="catalog__genres-link">{`Others`}</a>
+          </li>
+        </ul>
+        <div className="catalog__movies-list">
+          {films.map((it = {}) => (
+            <SmallMovieCard
+              key={it.id}
+              card={it}/>
+          ))}
+        </div>
+        <div className="catalog__more">
+          <button className="catalog__button" type="button">
+            {`Show more`}
+          </button>
+        </div>
+      </section>
+    );
+  }
+}
 
 MoviesCatalog.propTypes = {
   /** Список отображаемых фильмов */
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  films: PropTypes.arrayOf(
+      PropTypes.shape({
+        /** id фильма */
+        id: PropTypes.string.isRequired,
+        /** Название фильма */
+        title: PropTypes.string.isRequired,
+        /** Путь к постеру фильма */
+        img: PropTypes.string,
+      })
+  ).isRequired,
 };
 
 export default MoviesCatalog;

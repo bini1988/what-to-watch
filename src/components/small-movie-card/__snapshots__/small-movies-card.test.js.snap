@@ -6,6 +6,7 @@ exports[`SmallMovieCard correctly renders default markup 1`] = `
 >
   <button
     className="small-movie-card__play-btn"
+    onClick={[Function]}
     type="button"
   >
     Play
@@ -16,7 +17,7 @@ exports[`SmallMovieCard correctly renders default markup 1`] = `
     <img
       alt="Movie Title"
       height="175"
-      src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      src="img/path"
       width="280"
     />
   </div>
@@ -25,7 +26,7 @@ exports[`SmallMovieCard correctly renders default markup 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
+      href="/film/b15a1da5-8142-4d2a-b567-26599e333988"
     >
       Movie Title
     </a>

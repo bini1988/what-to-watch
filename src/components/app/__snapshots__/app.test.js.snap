@@ -44,6 +44,7 @@ exports[`App correctly renders default markup 1`] = `
       >
         <button
           className="small-movie-card__play-btn"
+          onClick={[Function]}
           type="button"
         >
           Play
@@ -63,7 +64,7 @@ exports[`App correctly renders default markup 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/film/480d2236-6c7d-4fd3-a225-80c66710a71f"
           >
             Fantastic Beasts: The Crimes of Grindelwald
           </a>
@@ -74,6 +75,7 @@ exports[`App correctly renders default markup 1`] = `
       >
         <button
           className="small-movie-card__play-btn"
+          onClick={[Function]}
           type="button"
         >
           Play
@@ -84,7 +86,7 @@ exports[`App correctly renders default markup 1`] = `
           <img
             alt="Bohemian Rhapsody"
             height="175"
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            src="img/bohemian-rhapsody.jpg"
             width="280"
           />
         </div>
@@ -93,219 +95,9 @@ exports[`App correctly renders default markup 1`] = `
         >
           <a
             className="small-movie-card__link"
-            href="movie-page.html"
+            href="/film/505f451a-0b69-47ed-96c6-66d5525d5a5e"
           >
             Bohemian Rhapsody
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <button
-          className="small-movie-card__play-btn"
-          type="button"
-        >
-          Play
-        </button>
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="Macbeth"
-            height="175"
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            Macbeth
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <button
-          className="small-movie-card__play-btn"
-          type="button"
-        >
-          Play
-        </button>
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="Aviator"
-            height="175"
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            Aviator
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <button
-          className="small-movie-card__play-btn"
-          type="button"
-        >
-          Play
-        </button>
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="We need to talk about Kevin"
-            height="175"
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            We need to talk about Kevin
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <button
-          className="small-movie-card__play-btn"
-          type="button"
-        >
-          Play
-        </button>
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="What We Do in the Shadows"
-            height="175"
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            What We Do in the Shadows
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <button
-          className="small-movie-card__play-btn"
-          type="button"
-        >
-          Play
-        </button>
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="Revenant"
-            height="175"
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            Revenant
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <button
-          className="small-movie-card__play-btn"
-          type="button"
-        >
-          Play
-        </button>
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="Johnny English"
-            height="175"
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            Johnny English
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <button
-          className="small-movie-card__play-btn"
-          type="button"
-        >
-          Play
-        </button>
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="Shutter Island"
-            height="175"
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            Shutter Island
           </a>
         </h3>
       </article>
