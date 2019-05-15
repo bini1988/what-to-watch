@@ -10,6 +10,7 @@ it(`SmallMovieCard correctly renders default markup`, () => {
             id: `b15a1da5-8142-4d2a-b567-26599e333988`,
             title: `Movie Title`,
             img: `img/path`,
+            trailer: `trailer/path`,
           }}/>
     ).toJSON();
 

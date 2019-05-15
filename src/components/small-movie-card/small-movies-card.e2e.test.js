@@ -1,48 +1,63 @@
 import React from "react";
-import {configure, shallow} from "enzyme";
+import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import SmallMovieCard from "./small-movie-card";
 
 configure({adapter: new Adapter()});
 
-describe(`SmallMovieCard`, () => {
-  it(`should call handler on movie's title click`, () => {
-    const titleClickHandler = jest.fn();
+jest.useFakeTimers();
+
+describe.only(`SmallMovieCard`, () => {
+  it(`should play trailer on card mouse enter`, () => {
     const cardMock = {
       id: `b15a1da5-8142-4d2a-b567-26599e333988`,
       title: `Movie Title`,
       img: `img/path`,
+      trailer: `trailer/path`,
     };
-    const wrapper = shallow(
+    const wrapper = mount(
         <SmallMovieCard
-          card={cardMock}
-          onTitleClick={titleClickHandler}/>
+          card={cardMock}/>
     );
 
-    const btn = wrapper.find(`.small-movie-card__title`);
-    expect(btn).toHaveLength(1);
+    const player = wrapper.find(`.small-movie-card__image`).childAt(0);
+    const playerInstance = player.instance();
 
-    btn.simulate(`click`);
-    expect(titleClickHandler).toHaveBeenCalledTimes(1);
+    const playMethodSpy = jest
+      .spyOn(playerInstance, `play`)
+      .mockImplementation(jest.fn());
+
+    wrapper.simulate(`mouseenter`);
+
+    jest.runAllTimers();
+
+    expect(playMethodSpy).toHaveBeenCalled();
+
+    playMethodSpy.mockRestore();
   });
-  it(`should call handler on movie's Play click`, () => {
-    const playHandler = jest.fn();
+  it(`should stop trailer on card mouse leave`, () => {
     const cardMock = {
       id: `b15a1da5-8142-4d2a-b567-26599e333988`,
       title: `Movie Title`,
       img: `img/path`,
+      trailer: `trailer/path`,
     };
-    const wrapper = shallow(
+    const wrapper = mount(
         <SmallMovieCard
-          card={cardMock}
-          onMoviePlay={playHandler}/>
+          card={cardMock}/>
     );
 
-    const btn = wrapper.find(`.small-movie-card__play-btn`);
-    expect(btn).toHaveLength(1);
+    const player = wrapper.find(`.small-movie-card__image`).childAt(0);
+    const playerInstance = player.instance();
 
-    btn.simulate(`click`);
-    expect(playHandler).toHaveBeenCalledTimes(1);
-    expect(playHandler).toHaveBeenCalledWith(cardMock);
+    const stopMethodSpy = jest
+      .spyOn(playerInstance, `stop`)
+      .mockImplementation(jest.fn());
+
+    wrapper.simulate(`mouseleave`);
+
+    expect(stopMethodSpy).toHaveBeenCalled();
+
+    stopMethodSpy.mockRestore();
   });
 });

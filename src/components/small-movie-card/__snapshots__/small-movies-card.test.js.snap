@@ -7,21 +7,16 @@ exports[`SmallMovieCard correctly renders default markup 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <button
-    className="small-movie-card__play-btn"
-    onClick={[Function]}
-    type="button"
-  >
-    Play
-  </button>
   <div
     className="small-movie-card__image"
   >
-    <img
-      alt="Movie Title"
-      height="175"
-      src="img/path"
-      width="280"
+    <video
+      height={175}
+      muted={true}
+      poster="img/path"
+      preload="none"
+      src="trailer/path"
+      width={280}
     />
   </div>
   <h3
