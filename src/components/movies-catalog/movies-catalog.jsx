@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
+import GenresList from "../genres-list/genres-list.jsx";
 
 class MoviesCatalog extends PureComponent {
   constructor(props) {
@@ -15,23 +16,19 @@ class MoviesCatalog extends PureComponent {
   }
 
   render() {
-    const {films = []} = this.props;
+    const {moviesGenreGroups = {}, activeGenre, onGenreChange} = this.props;
 
     return (
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">
           {`Catalog`}
         </h2>
-        <ul className="catalog__genres-list">
-          <li className="catalog__genres-item catalog__genres-item--active">
-            <a href="#" className="catalog__genres-link">{`All genres`}</a>
-          </li>
-          <li className="catalog__genres-item">
-            <a href="#" className="catalog__genres-link">{`Others`}</a>
-          </li>
-        </ul>
+        <GenresList
+          genres={Object.keys(moviesGenreGroups)}
+          activeGenre={activeGenre}
+          onGenreChange={onGenreChange}/>
         <div className="catalog__movies-list">
-          {films.map((it = {}) => (
+          {moviesGenreGroups[activeGenre].map((it = {}) => (
             <SmallMovieCard
               key={it.id}
               card={it}
@@ -58,10 +55,16 @@ class MoviesCatalog extends PureComponent {
 }
 
 MoviesCatalog.propTypes = {
-  /** Список отображаемых фильмов */
-  films: PropTypes.arrayOf(
-      SmallMovieCard.propTypes.card
-  ).isRequired,
+  /** Список отображаемых фильмов группированных по жанрам */
+  moviesGenreGroups: PropTypes.objectOf(
+      PropTypes.arrayOf(
+          SmallMovieCard.propTypes.card
+      )
+  ),
+  /** Активный жанр */
+  activeGenre: PropTypes.string,
+  /** Изменить фильтр списка фильмов по жанру */
+  onGenreChange: PropTypes.func,
 };
 
 export default MoviesCatalog;
