@@ -9,6 +9,10 @@ jest.useFakeTimers();
 
 describe.only(`SmallMovieCard`, () => {
   it(`should play trailer on card mouse enter`, () => {
+    HTMLMediaElement.prototype.play = jest.fn();
+    HTMLMediaElement.prototype.pause = jest.fn();
+    HTMLMediaElement.prototype.load = jest.fn();
+
     const cardMock = {
       id: `b15a1da5-8142-4d2a-b567-26599e333988`,
       title: `Movie Title`,
@@ -20,22 +24,19 @@ describe.only(`SmallMovieCard`, () => {
           card={cardMock}/>
     );
 
-    const player = wrapper.find(`.small-movie-card__image`).childAt(0);
-    const playerInstance = player.instance();
-
-    const playMethodSpy = jest
-      .spyOn(playerInstance, `play`)
-      .mockImplementation(jest.fn());
+    expect(wrapper.state(`isTrailerPlaying`)).toEqual(false);
 
     wrapper.simulate(`mouseenter`);
 
     jest.runAllTimers();
 
-    expect(playMethodSpy).toHaveBeenCalled();
-
-    playMethodSpy.mockRestore();
+    expect(wrapper.state(`isTrailerPlaying`)).toEqual(true);
   });
   it(`should stop trailer on card mouse leave`, () => {
+    HTMLMediaElement.prototype.play = jest.fn();
+    HTMLMediaElement.prototype.pause = jest.fn();
+    HTMLMediaElement.prototype.load = jest.fn();
+
     const cardMock = {
       id: `b15a1da5-8142-4d2a-b567-26599e333988`,
       title: `Movie Title`,
@@ -47,17 +48,12 @@ describe.only(`SmallMovieCard`, () => {
           card={cardMock}/>
     );
 
-    const player = wrapper.find(`.small-movie-card__image`).childAt(0);
-    const playerInstance = player.instance();
-
-    const stopMethodSpy = jest
-      .spyOn(playerInstance, `stop`)
-      .mockImplementation(jest.fn());
+    wrapper.setState({isTrailerPlaying: true});
+    wrapper.update();
 
     wrapper.simulate(`mouseleave`);
+    wrapper.update();
 
-    expect(stopMethodSpy).toHaveBeenCalled();
-
-    stopMethodSpy.mockRestore();
+    expect(wrapper.state(`isTrailerPlaying`)).toEqual(false);
   });
 });

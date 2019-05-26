@@ -10,9 +10,14 @@ class SmallMovieCard extends PureComponent {
     this._handleMouseEnter = this._handleMouseEnter.bind(this);
     this._handleMouseLeave = this._handleMouseLeave.bind(this);
     this._timeout = null;
+
+    this.state = {
+      isTrailerPlaying: false,
+    };
   }
 
   render() {
+    const {isTrailerPlaying} = this.state;
     const {card} = this.props;
     const {id, title, img, trailer} = card;
 
@@ -24,7 +29,7 @@ class SmallMovieCard extends PureComponent {
         onMouseLeave={this._handleMouseLeave}>
         <div className="small-movie-card__image">
           <VideoPlayer
-            ref={this._playerRef}
+            isPlaying={isTrailerPlaying}
             src={trailer}
             poster={img}
             width={280}
@@ -50,8 +55,8 @@ class SmallMovieCard extends PureComponent {
     const {card, autoPlayTimeout, onMouseEnter} = this.props;
 
     this._timeout = setTimeout(() => {
-      if (this._timeout && this._playerRef.current) {
-        this._playerRef.current.play();
+      if (this._timeout) {
+        this.setState({isTrailerPlaying: true});
       }
     }, autoPlayTimeout);
 
@@ -62,15 +67,14 @@ class SmallMovieCard extends PureComponent {
     const {card, onMouseLeave} = this.props;
 
     this._handleTimeoutReset();
-    if (this._playerRef.current) {
-      this._playerRef.current.stop();
-    }
+    this.setState({isTrailerPlaying: false});
 
     onMouseLeave(card, event);
   }
 
   _handleTimeoutReset() {
     clearTimeout(this._timeout);
+    this._timeout = null;
   }
 }
 

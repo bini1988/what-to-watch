@@ -7,6 +7,12 @@ class VideoPlayer extends PureComponent {
     this._videoRef = React.createRef();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.isPlaying !== prevProps.isPlaying) {
+      this.toggle();
+    }
+  }
+
   render() {
     const {src, poster, width, height, muted} = this.props;
 
@@ -22,6 +28,14 @@ class VideoPlayer extends PureComponent {
     );
   }
 
+  toggle() {
+    if (this.props.isPlaying) {
+      this.play();
+    } else {
+      this.stop();
+    }
+  }
+
   play() {
     const video = this._videoRef.current;
     if (video) {
@@ -35,16 +49,11 @@ class VideoPlayer extends PureComponent {
       video.load();
     }
   }
-
-  pause() {
-    const video = this._videoRef.current;
-    if (video) {
-      video.pause();
-    }
-  }
 }
 
 VideoPlayer.propTypes = {
+  /** Воспроизвести/остановить видеоролик */
+  isPlaying: PropTypes.bool,
   /** Указывает путь к воспроизводимому видеоролику */
   src: PropTypes.string,
   /** Указывает адрес картинки, которая будет отображаться, пока видео не доступно или не воспроизводится */
