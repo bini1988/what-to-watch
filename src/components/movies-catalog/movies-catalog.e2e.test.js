@@ -5,6 +5,10 @@ import MoviesCatalog from "./movies-catalog";
 
 configure({adapter: new Adapter()});
 
+HTMLMediaElement.prototype.play = jest.fn();
+HTMLMediaElement.prototype.pause = jest.fn();
+HTMLMediaElement.prototype.load = jest.fn();
+
 const filmsMock = [
   {
     id: `480d2236-6c7d-4fd3-a225-80c66710a71f`,

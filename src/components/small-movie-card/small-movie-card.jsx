@@ -1,44 +1,85 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import VideoPlayer from "../video-player/video-player.jsx";
 
-const SmallMovieCard = (props) => {
-  const {card, onTitleClick, onMoviePlay, onMouseEnter, onMouseLeave} = props;
-  const {id, title, img} = card;
+class SmallMovieCard extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
-    <article
-      id={id}
-      className="small-movie-card catalog__movies-card"
-      onMouseEnter={(event) => onMouseEnter(card, event)}
-      onMouseLeave={(event) => onMouseLeave(card, event)}>
-      <button
-        className="small-movie-card__play-btn"
-        type="button"
-        onClick={() => onMoviePlay(card)}>
-        {`Play`}
-      </button>
-      <div className="small-movie-card__image">
-        <img
-          src={img}
-          alt={title}
-          width="280"
-          height="175"/>
-      </div>
-      <h3
-        className="small-movie-card__title"
-        onClick={onTitleClick}>
-        <a
-          className="small-movie-card__link"
-          href={`/film/${id}`}>
-          {title}
-        </a>
-      </h3>
-    </article>
-  );
-};
+    this._playerRef = React.createRef();
+    this._handleMouseEnter = this._handleMouseEnter.bind(this);
+    this._handleMouseLeave = this._handleMouseLeave.bind(this);
+    this._timeout = null;
+
+    this.state = {
+      isTrailerPlaying: false,
+    };
+  }
+
+  render() {
+    const {isTrailerPlaying} = this.state;
+    const {card} = this.props;
+    const {id, title, img, trailer} = card;
+
+    return (
+      <article
+        id={id}
+        className="small-movie-card catalog__movies-card"
+        onMouseEnter={this._handleMouseEnter}
+        onMouseLeave={this._handleMouseLeave}>
+        <div className="small-movie-card__image">
+          <VideoPlayer
+            isPlaying={isTrailerPlaying}
+            src={trailer}
+            poster={img}
+            width={280}
+            height={175}
+            muted={true}/>
+        </div>
+        <h3 className="small-movie-card__title">
+          <a
+            className="small-movie-card__link"
+            href={`/film/${id}`}>
+            {title}
+          </a>
+        </h3>
+      </article>
+    );
+  }
+
+  componentWillUnmount() {
+    this._handleTimeoutReset();
+  }
+
+  _handleMouseEnter(event) {
+    const {card, autoPlayTimeout, onMouseEnter} = this.props;
+
+    this._timeout = setTimeout(() => {
+      if (this._timeout) {
+        this.setState({isTrailerPlaying: true});
+      }
+    }, autoPlayTimeout);
+
+    onMouseEnter(card, event);
+  }
+
+  _handleMouseLeave(event) {
+    const {card, onMouseLeave} = this.props;
+
+    this._handleTimeoutReset();
+    this.setState({isTrailerPlaying: false});
+
+    onMouseLeave(card, event);
+  }
+
+  _handleTimeoutReset() {
+    clearTimeout(this._timeout);
+    this._timeout = null;
+  }
+}
 
 SmallMovieCard.defaultProps = {
-  onMoviePlay: () => {},
+  autoPlayTimeout: 500,
   onMouseEnter: () => {},
   onMouseLeave: () => {},
 };
@@ -52,11 +93,11 @@ SmallMovieCard.propTypes = {
     title: PropTypes.string.isRequired,
     /** Путь к постеру фильма */
     img: PropTypes.string,
+    /** Путь к трейлеру фильма */
+    trailer: PropTypes.string,
   }).isRequired,
-  /** Обрабочик события клика по заголовку фильма */
-  onTitleClick: PropTypes.func,
-  /** Обрабочик события клика по заголовку фильма */
-  onMoviePlay: PropTypes.func,
+  /** Таймаут автовоспроизведения трейлера фильма, мс */
+  autoPlayTimeout: PropTypes.number,
   /** Обрабочик события курсор мыши на элементе */
   onMouseEnter: PropTypes.func,
   /** Обрабочик события курсор мыши покинул элемент */

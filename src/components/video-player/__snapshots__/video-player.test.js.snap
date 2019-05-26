@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoPlayer correctly renders default markup 1`] = `
+<video
+  preload="none"
+/>
+`;
