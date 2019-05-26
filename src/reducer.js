@@ -5,6 +5,7 @@ export const QUERY_MOVIES_BY_GENRE = `QUERY_MOVIES_BY_GENRE`;
 /**
  * Получение списка фильмов сгруппированног по жанрам
  * @param {Object} state Текущее состояние redux стора
+ * @return {Object}
  */
 export const getMoviesByGenres = (state) => {
   const {movies} = state;

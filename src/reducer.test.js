@@ -28,12 +28,12 @@ describe(`App Reducer`, () => {
     const groups = getMoviesByGenres({movies});
 
     expect(groups).toEqual({
-        [`All genres`]: movies,
-        1: [movies[0], movies[5]],
-        2: [movies[1], movies[3]],
-        3: [movies[2]],
-        4: [movies[4]],
-        5: [movies[6]],
+      [`All genres`]: movies,
+      1: [movies[0], movies[5]],
+      2: [movies[1], movies[3]],
+      3: [movies[2]],
+      4: [movies[4]],
+      5: [movies[6]],
     });
   });
 });
