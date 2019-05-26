@@ -9,7 +9,7 @@ extends: ['htmlacademy/es6', 'plugin:react/recommended']
 parserOptions:
   ecmaFeatures:
     jsx: true
-  ecmaVersion: 6
+  ecmaVersion: 9
   sourceType: module
 
 plugins: ['react']
