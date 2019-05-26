@@ -91,6 +91,8 @@ SmallMovieCard.propTypes = {
     id: PropTypes.string.isRequired,
     /** Название фильма */
     title: PropTypes.string.isRequired,
+    /** Жанр фильма */
+    genre: PropTypes.string,
     /** Путь к постеру фильма */
     img: PropTypes.string,
     /** Путь к трейлеру фильма */

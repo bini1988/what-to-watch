@@ -1,16 +1,32 @@
 import React from "react";
+import {connect} from "react-redux";
+import {getMoviesByGenres, queryMoviesByGenre} from "../../reducer";
 import MoviesCatalog from "../movies-catalog/movies-catalog.jsx";
 
-const App = ({films}) => (
+export const App = ({moviesGenreGroups, activeGenre, onGenreChange}) => (
   <div className="page-content">
     <MoviesCatalog
-      films={films}/>
+      moviesGenreGroups={moviesGenreGroups}
+      activeGenre={activeGenre}
+      onGenreChange={onGenreChange}/>
   </div>
 );
 
 App.propTypes = {
-  /** Список отображаемых фильмов */
-  films: MoviesCatalog.propTypes.films,
+  /** Список отображаемых фильмов группированных по жанрам */
+  moviesGenreGroups: MoviesCatalog.propTypes.moviesGenreGroups,
+  /** Активный жанр */
+  activeGenre: MoviesCatalog.propTypes.activeGenre,
+  /** Изменить фильтр списка фильмов по жанру */
+  onGenreChange: MoviesCatalog.propTypes.onGenreChange,
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    moviesGenreGroups: getMoviesByGenres(state),
+    activeGenre: state.activeGenre,
+  };
+};
+const mapDispatchToProps = {onGenreChange: queryMoviesByGenre};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

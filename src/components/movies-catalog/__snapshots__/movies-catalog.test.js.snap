@@ -17,19 +17,9 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
     >
       <a
         className="catalog__genres-link"
-        href="#"
+        onClick={[Function]}
       >
-        All genres
-      </a>
-    </li>
-    <li
-      className="catalog__genres-item"
-    >
-      <a
-        className="catalog__genres-link"
-        href="#"
-      >
-        Others
+        All Genres
       </a>
     </li>
   </ul>

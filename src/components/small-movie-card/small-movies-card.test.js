@@ -9,6 +9,7 @@ it(`SmallMovieCard correctly renders default markup`, () => {
           card={{
             id: `b15a1da5-8142-4d2a-b567-26599e333988`,
             title: `Movie Title`,
+            genre: `Movie Genre`,
             img: `img/path`,
             trailer: `trailer/path`,
           }}/>
