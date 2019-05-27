@@ -1,4 +1,4 @@
-import reducer, {initialState, QUERY_MOVIES_BY_GENRE, getMoviesByGenres, queryMoviesByGenre} from "./reducer";
+import reducer, {initialState, QUERY_MOVIES_BY_GENRE, getMoviesByGenres, queryMoviesByGenre, ALL_GENRES_GROUP} from "./reducer";
 
 describe(`App Reducer`, () => {
   it(`should set activeGenre state by queryMoviesByGenre`, () => {
@@ -28,7 +28,7 @@ describe(`App Reducer`, () => {
     const groups = getMoviesByGenres({movies});
 
     expect(groups).toEqual({
-      [`All genres`]: movies,
+      [ALL_GENRES_GROUP]: movies,
       1: [movies[0], movies[5]],
       2: [movies[1], movies[3]],
       3: [movies[2]],
