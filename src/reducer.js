@@ -26,7 +26,7 @@ export const getMoviesByGenres = (state) => {
  * @param {string} genre Жанр фильма
  * @return {Object}
  */
-export const queryMoviesByGenre = (genre) => {
+export const changeMoviesActiveGenre = (genre) => {
   return {type: QUERY_MOVIES_BY_GENRE, payload: genre};
 };
 
