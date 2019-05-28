@@ -1,24 +1,17 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import VideoPlayer from "../video-player/video-player.jsx";
+import withPlayer, {withPlayerProps} from "../../hocs/with-player";
 
 class SmallMovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._playerRef = React.createRef();
     this._handleMouseEnter = this._handleMouseEnter.bind(this);
     this._handleMouseLeave = this._handleMouseLeave.bind(this);
-    this._timeout = null;
-
-    this.state = {
-      isTrailerPlaying: false,
-    };
   }
 
   render() {
-    const {isTrailerPlaying} = this.state;
-    const {card} = this.props;
+    const {card, renderPlayer} = this.props;
     const {id, title, img, trailer} = card;
 
     return (
@@ -28,13 +21,11 @@ class SmallMovieCard extends PureComponent {
         onMouseEnter={this._handleMouseEnter}
         onMouseLeave={this._handleMouseLeave}>
         <div className="small-movie-card__image">
-          <VideoPlayer
-            isPlaying={isTrailerPlaying}
-            src={trailer}
-            poster={img}
-            width={280}
-            height={175}
-            muted={true}/>
+          {renderPlayer({
+            src: trailer,
+            poster: img,
+            muted: true,
+          })}
         </div>
         <h3 className="small-movie-card__title">
           <a
@@ -47,39 +38,26 @@ class SmallMovieCard extends PureComponent {
     );
   }
 
-  componentWillUnmount() {
-    this._handleTimeoutReset();
-  }
-
   _handleMouseEnter(event) {
-    const {card, autoPlayTimeout, onMouseEnter} = this.props;
+    const {card, autoPlayTimeout, onPlayerPlay, onMouseEnter} = this.props;
 
-    this._timeout = setTimeout(() => {
-      if (this._timeout) {
-        this.setState({isTrailerPlaying: true});
-      }
-    }, autoPlayTimeout);
-
+    onPlayerPlay(autoPlayTimeout);
     onMouseEnter(card, event);
   }
 
   _handleMouseLeave(event) {
-    const {card, onMouseLeave} = this.props;
+    const {card, onPlayerPause, onMouseLeave} = this.props;
 
-    this._handleTimeoutReset();
-    this.setState({isTrailerPlaying: false});
-
+    onPlayerPause();
     onMouseLeave(card, event);
-  }
-
-  _handleTimeoutReset() {
-    clearTimeout(this._timeout);
-    this._timeout = null;
   }
 }
 
 SmallMovieCard.defaultProps = {
   autoPlayTimeout: 500,
+  renderPlayer: () => null,
+  onPlayerPlay: () => {},
+  onPlayerPause: () => {},
   onMouseEnter: () => {},
   onMouseLeave: () => {},
 };
@@ -104,6 +82,9 @@ SmallMovieCard.propTypes = {
   onMouseEnter: PropTypes.func,
   /** Обрабочик события курсор мыши покинул элемент */
   onMouseLeave: PropTypes.func,
+  /** Пропсы withPlayer HOC */
+  ...withPlayerProps,
 };
 
-export default SmallMovieCard;
+export {SmallMovieCard};
+export default withPlayer(SmallMovieCard);

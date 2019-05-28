@@ -1,18 +1,15 @@
 import React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import SmallMovieCard from "./small-movie-card";
+import {SmallMovieCard} from "./small-movie-card";
 
 configure({adapter: new Adapter()});
 
 jest.useFakeTimers();
 
-describe.only(`SmallMovieCard`, () => {
-  it(`should play trailer on card mouse enter`, () => {
-    HTMLMediaElement.prototype.play = jest.fn();
-    HTMLMediaElement.prototype.pause = jest.fn();
-    HTMLMediaElement.prototype.load = jest.fn();
-
+describe(`SmallMovieCard`, () => {
+  it(`should call onPlayerPlay on card mouse enter`, () => {
+    const handlePlay = jest.fn();
     const cardMock = {
       id: `b15a1da5-8142-4d2a-b567-26599e333988`,
       title: `Movie Title`,
@@ -21,22 +18,16 @@ describe.only(`SmallMovieCard`, () => {
     };
     const wrapper = mount(
         <SmallMovieCard
-          card={cardMock}/>
+          card={cardMock}
+          autoPlayTimeout={100}
+          onPlayerPlay={handlePlay}/>
     );
-
-    expect(wrapper.state(`isTrailerPlaying`)).toEqual(false);
 
     wrapper.simulate(`mouseenter`);
-
-    jest.runAllTimers();
-
-    expect(wrapper.state(`isTrailerPlaying`)).toEqual(true);
+    expect(handlePlay).toBeCalledWith(100);
   });
-  it(`should stop trailer on card mouse leave`, () => {
-    HTMLMediaElement.prototype.play = jest.fn();
-    HTMLMediaElement.prototype.pause = jest.fn();
-    HTMLMediaElement.prototype.load = jest.fn();
-
+  it(`should call onPlayerPause on card mouse leave`, () => {
+    const handlePause = jest.fn();
     const cardMock = {
       id: `b15a1da5-8142-4d2a-b567-26599e333988`,
       title: `Movie Title`,
@@ -45,15 +36,11 @@ describe.only(`SmallMovieCard`, () => {
     };
     const wrapper = mount(
         <SmallMovieCard
-          card={cardMock}/>
+          card={cardMock}
+          onPlayerPause={handlePause}/>
     );
 
-    wrapper.setState({isTrailerPlaying: true});
-    wrapper.update();
-
     wrapper.simulate(`mouseleave`);
-    wrapper.update();
-
-    expect(wrapper.state(`isTrailerPlaying`)).toEqual(false);
+    expect(handlePause).toBeCalled();
   });
 });
