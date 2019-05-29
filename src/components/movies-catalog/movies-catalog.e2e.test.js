@@ -1,7 +1,7 @@
 import React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import MoviesCatalog from "./movies-catalog";
+import {MoviesCatalog} from "./movies-catalog";
 
 configure({adapter: new Adapter()});
 
@@ -23,11 +23,13 @@ const genreGroupsMock = {
   ]};
 
 describe(`MoviesCatalog`, () => {
-  it(`Set catalog active card on movie's card mouse enter event`, () => {
+  it(`Should call setActiveElement method on movie's card mouse enter event`, () => {
+    const handleSetActiveElement = jest.fn();
     const wrapper = mount(
         <MoviesCatalog
           moviesGenreGroups={genreGroupsMock}
-          activeGenre="All Genres"/>
+          activeGenre="All Genres"
+          setActiveElement={handleSetActiveElement}/>
     );
 
     const activeCard = genreGroupsMock[`All Genres`][0];
@@ -35,27 +37,22 @@ describe(`MoviesCatalog`, () => {
     expect(card).toHaveLength(1);
 
     card.simulate(`mouseenter`);
-    wrapper.update();
-
-    expect(wrapper.state(`activeCard`)).toEqual(activeCard);
+    expect(handleSetActiveElement).toHaveBeenCalledWith(activeCard);
   });
-  it(`Reset catalog active card on movie's card mouse leave event`, () => {
+  it(`Should call resetActiveElement method on movie's card mouse leave event`, () => {
+    const handleResetActiveElement = jest.fn();
     const wrapper = mount(
         <MoviesCatalog
           moviesGenreGroups={genreGroupsMock}
-          activeGenre="All Genres"/>
+          activeGenre="All Genres"
+          resetActiveElement={handleResetActiveElement}/>
     );
 
     const activeCard = genreGroupsMock[`All Genres`][0];
     const card = wrapper.find(`.catalog__movies-card[id='${activeCard.id}']`);
     expect(card).toHaveLength(1);
 
-    wrapper.setState({activeCard});
-    wrapper.update();
-
     card.simulate(`mouseleave`);
-    wrapper.update();
-
-    expect(wrapper.state(`activeCard`)).toEqual(null);
+    expect(handleResetActiveElement).toBeCalled();
   });
 });

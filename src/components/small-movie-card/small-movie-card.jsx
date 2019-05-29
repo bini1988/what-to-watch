@@ -38,18 +38,18 @@ class SmallMovieCard extends PureComponent {
     );
   }
 
-  _handleMouseEnter(event) {
+  _handleMouseEnter() {
     const {card, autoPlayTimeout, onPlayerPlay, onMouseEnter} = this.props;
 
     onPlayerPlay(autoPlayTimeout);
-    onMouseEnter(card, event);
+    onMouseEnter(card);
   }
 
-  _handleMouseLeave(event) {
+  _handleMouseLeave() {
     const {card, onPlayerPause, onMouseLeave} = this.props;
 
     onPlayerPause();
-    onMouseLeave(card, event);
+    onMouseLeave(card);
   }
 }
 
