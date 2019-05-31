@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../components/video-player/video-player.jsx";
 
-const withPlayer = (Component) => {
+const withPlayer = (options = {}) => (Component) => {
   class WithPlayer extends PureComponent {
     constructor(props) {
       super(props);
@@ -42,9 +42,14 @@ const withPlayer = (Component) => {
       );
     }
 
-    _handlePlay(timeout) {
+    _handlePlay() {
+      const timeout =
+        this.props.autoPlayTimeout ||
+        options.autoPlayTimeout;
+
       if ((typeof timeout === `number`) && (timeout > 0)) {
         this._resetTimeout();
+
         this._timeout = setTimeout(() => {
           if (this._timeout) {
             this._play();
@@ -78,6 +83,8 @@ const withPlayer = (Component) => {
 export const withPlayerPropTypes = {
   /** Рендер плейра */
   renderPlayer: PropTypes.func,
+  /** Таймаут автовоспроизведения трейлера фильма, мс */
+  autoPlayTimeout: PropTypes.number,
   /** Состояние плейра пауза/воспроизведение */
   isPlayerPlaying: PropTypes.bool,
   /** Обработчик события воспроизведения */

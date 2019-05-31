@@ -24,7 +24,7 @@ describe(`SmallMovieCard`, () => {
     );
 
     wrapper.simulate(`mouseenter`);
-    expect(handlePlay).toBeCalledWith(100);
+    expect(handlePlay).toBeCalled();
   });
   it(`should call onPlayerPause on card mouse leave`, () => {
     const handlePause = jest.fn();

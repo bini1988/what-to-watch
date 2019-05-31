@@ -14,7 +14,7 @@ function MockComponent() {
 
 describe(`withPlayer`, () => {
   it(`should change isPlayerPlaying prop with Play and Pause handlers`, () => {
-    const WrappedMockComponent = withPlayer(MockComponent);
+    const WrappedMockComponent = withPlayer()(MockComponent);
     const wrapper = mount(
         <WrappedMockComponent/>
     );
@@ -35,7 +35,7 @@ describe(`withPlayer`, () => {
     expect(component.prop(`isPlayerPlaying`)).toEqual(false);
   });
   it(`should change isPlayerPlaying prop with Play after timeout`, () => {
-    const WrappedMockComponent = withPlayer(MockComponent);
+    const WrappedMockComponent = withPlayer({autoPlayTimeout: 1000})(MockComponent);
     const wrapper = mount(
         <WrappedMockComponent/>
     );
@@ -45,19 +45,19 @@ describe(`withPlayer`, () => {
     component = wrapper.find(MockComponent);
     expect(component.prop(`isPlayerPlaying`)).toEqual(false);
 
-    component.prop(`onPlayerPlay`)(1000);
+    component.prop(`onPlayerPlay`)();
     wrapper.update();
     component = wrapper.find(MockComponent);
     expect(component.prop(`isPlayerPlaying`)).toEqual(false);
 
-    component.prop(`onPlayerPlay`)(1000);
+    component.prop(`onPlayerPlay`)();
     jest.runAllTimers();
     wrapper.update();
     component = wrapper.find(MockComponent);
     expect(component.prop(`isPlayerPlaying`)).toEqual(true);
   });
   it(`should return Audio component on renderPlayer method call`, () => {
-    const WrappedMockComponent = withPlayer(MockComponent);
+    const WrappedMockComponent = withPlayer()(MockComponent);
     const wrapper = mount(
         <WrappedMockComponent/>
     );

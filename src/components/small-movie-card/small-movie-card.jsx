@@ -39,9 +39,9 @@ class SmallMovieCard extends PureComponent {
   }
 
   _handleMouseEnter() {
-    const {card, autoPlayTimeout, onPlayerPlay, onMouseEnter} = this.props;
+    const {card, onPlayerPlay, onMouseEnter} = this.props;
 
-    onPlayerPlay(autoPlayTimeout);
+    onPlayerPlay();
     onMouseEnter(card);
   }
 
@@ -54,7 +54,6 @@ class SmallMovieCard extends PureComponent {
 }
 
 SmallMovieCard.defaultProps = {
-  autoPlayTimeout: 500,
   renderPlayer: () => null,
   onPlayerPlay: () => {},
   onPlayerPause: () => {},
@@ -76,8 +75,6 @@ SmallMovieCard.propTypes = {
     /** Путь к трейлеру фильма */
     trailer: PropTypes.string,
   }).isRequired,
-  /** Таймаут автовоспроизведения трейлера фильма, мс */
-  autoPlayTimeout: PropTypes.number,
   /** Обрабочик события курсор мыши на элементе */
   onMouseEnter: PropTypes.func,
   /** Обрабочик события курсор мыши покинул элемент */
@@ -87,4 +84,4 @@ SmallMovieCard.propTypes = {
 };
 
 export {SmallMovieCard};
-export default withPlayer(SmallMovieCard);
+export default withPlayer({autoPlayTimeout: 500})(SmallMovieCard);
