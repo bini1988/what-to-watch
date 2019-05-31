@@ -5,8 +5,6 @@ import withActiveElement from "./with-active-element";
 
 configure({adapter: new Adapter()});
 
-jest.useFakeTimers();
-
 function MockComponent() {
   return <div />;
 }

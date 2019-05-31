@@ -75,7 +75,7 @@ const withPlayer = (Component) => {
   return WithPlayer;
 };
 
-export const withPlayerProps = {
+export const withPlayerPropTypes = {
   /** Рендер плейра */
   renderPlayer: PropTypes.func,
   /** Состояние плейра пауза/воспроизведение */

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
-import withActiveElement, {withActiveElementProps} from "../../hocs/with-active-element";
+import withActiveElement, {withActiveElementPropTypes} from "../../hocs/with-active-element";
 
 function MoviesCatalog(props) {
   const {moviesGenreGroups = {}, activeGenre, onGenreChange, setActiveElement, resetActiveElement} = props;
@@ -45,7 +45,7 @@ MoviesCatalog.propTypes = {
   activeGenre: PropTypes.string,
   /** Изменить фильтр списка фильмов по жанру */
   onGenreChange: PropTypes.func,
-  ...withActiveElementProps,
+  ...withActiveElementPropTypes,
 };
 
 export {MoviesCatalog};

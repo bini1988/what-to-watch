@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import withPlayer, {withPlayerProps} from "../../hocs/with-player";
+import withPlayer, {withPlayerPropTypes} from "../../hocs/with-player";
 
 class SmallMovieCard extends PureComponent {
   constructor(props) {
@@ -83,7 +83,7 @@ SmallMovieCard.propTypes = {
   /** Обрабочик события курсор мыши покинул элемент */
   onMouseLeave: PropTypes.func,
   /** Пропсы withPlayer HOC */
-  ...withPlayerProps,
+  ...withPlayerPropTypes,
 };
 
 export {SmallMovieCard};

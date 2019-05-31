@@ -35,7 +35,7 @@ const withActiveElement = (Component) => {
   return WithActiveElement;
 };
 
-export const withActiveElementProps = {
+export const withActiveElementPropTypes = {
   /** Активный элемент */
   activeElement: PropTypes.any,
   /** Задать активный элемент */
