@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loadMovies, getMoviesByGenres, changeMoviesActiveGenre} from "../../reducer";
+import {loadMovies, changeMoviesActiveGenre} from "../../reducer/catalog/catalog";
+import {getMoviesByGenres, getActiveGenre} from "../../reducer/catalog/selectors";
 import MoviesCatalog from "../movies-catalog/movies-catalog.jsx";
 
 export class App extends PureComponent {
@@ -39,12 +40,11 @@ App.propTypes = {
 const mapStateToProps = (state) => {
   return {
     moviesGenreGroups: getMoviesByGenres(state),
-    activeGenre: state.activeGenre,
+    activeGenre: getActiveGenre(state),
   };
 };
 const mapDispatchToProps = {
-  onGenreChange: changeMoviesActiveGenre,
-  loadMovies
+  onGenreChange: changeMoviesActiveGenre, loadMovies
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

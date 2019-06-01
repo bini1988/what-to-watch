@@ -1,6 +1,6 @@
-import reducer, {initialState, CHANGE_MOVIES_ACTIVE_GENRE, getMoviesByGenres, loadMovies, storeMovies, changeMoviesActiveGenre, ALL_GENRES_GROUP} from "./reducer";
+import reducer, {initialState, ActionTypes, loadMovies, storeMovies, changeMoviesActiveGenre} from "./catalog";
 
-describe(`App Reducer`, () => {
+describe(`Catalog Reducer`, () => {
   it(`should set activeGenre state by changeMoviesActiveGenre`, () => {
     const activeGenre = `GENRE`;
     const action = changeMoviesActiveGenre(activeGenre);
@@ -20,28 +20,7 @@ describe(`App Reducer`, () => {
     const action = changeMoviesActiveGenre(activeGenre);
 
     expect(action)
-      .toEqual({type: CHANGE_MOVIES_ACTIVE_GENRE, payload: activeGenre});
-  });
-  it(`should return grouped movies by getMoviesByGenres`, () => {
-    const movies = [
-      {id: `0`, genre: `1`},
-      {id: `1`, genre: `2`},
-      {id: `2`, genre: `3`},
-      {id: `3`, genre: `2`},
-      {id: `4`, genre: `4`},
-      {id: `5`, genre: `1`},
-      {id: `6`, genre: `5`},
-    ];
-    const groups = getMoviesByGenres({movies});
-
-    expect(groups).toEqual({
-      [ALL_GENRES_GROUP]: movies,
-      1: [movies[0], movies[5]],
-      2: [movies[1], movies[3]],
-      3: [movies[2]],
-      4: [movies[4]],
-      5: [movies[6]],
-    });
+      .toEqual({type: ActionTypes.CHANGE_MOVIES_ACTIVE_GENRE, payload: activeGenre});
   });
   it(`should make movies API request and call storeMovies`, () => {
     const mockData = [`movie#1`, `movie#2`];
