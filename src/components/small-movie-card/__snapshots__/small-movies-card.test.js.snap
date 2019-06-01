@@ -3,7 +3,7 @@
 exports[`SmallMovieCard correctly renders default markup 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
-  id="b15a1da5-8142-4d2a-b567-26599e333988"
+  id="movie-11"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
@@ -24,7 +24,7 @@ exports[`SmallMovieCard correctly renders default markup 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="/film/b15a1da5-8142-4d2a-b567-26599e333988"
+      href="/film/11"
     >
       Movie Title
     </a>

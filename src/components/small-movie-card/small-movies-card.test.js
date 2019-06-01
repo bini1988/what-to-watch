@@ -7,7 +7,7 @@ it(`SmallMovieCard correctly renders default markup`, () => {
     .create(
         <SmallMovieCard
           card={{
-            id: `b15a1da5-8142-4d2a-b567-26599e333988`,
+            id: 11,
             title: `Movie Title`,
             genre: `Movie Genre`,
             img: `img/path`,

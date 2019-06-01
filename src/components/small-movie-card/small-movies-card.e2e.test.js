@@ -11,7 +11,7 @@ describe(`SmallMovieCard`, () => {
   it(`should call onPlayerPlay on card mouse enter`, () => {
     const handlePlay = jest.fn();
     const cardMock = {
-      id: `b15a1da5-8142-4d2a-b567-26599e333988`,
+      id: 11,
       title: `Movie Title`,
       img: `img/path`,
       trailer: `trailer/path`,
@@ -29,7 +29,7 @@ describe(`SmallMovieCard`, () => {
   it(`should call onPlayerPause on card mouse leave`, () => {
     const handlePause = jest.fn();
     const cardMock = {
-      id: `b15a1da5-8142-4d2a-b567-26599e333988`,
+      id: 11,
       title: `Movie Title`,
       img: `img/path`,
       trailer: `trailer/path`,

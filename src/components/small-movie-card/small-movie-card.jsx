@@ -16,7 +16,7 @@ class SmallMovieCard extends PureComponent {
 
     return (
       <article
-        id={id}
+        id={`movie-${id}`}
         className="small-movie-card catalog__movies-card"
         onMouseEnter={this._handleMouseEnter}
         onMouseLeave={this._handleMouseLeave}>
@@ -65,7 +65,7 @@ SmallMovieCard.propTypes = {
   /** Карточка фильма */
   card: PropTypes.shape({
     /** id фильма */
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     /** Название фильма */
     title: PropTypes.string.isRequired,
     /** Жанр фильма */
