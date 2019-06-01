@@ -1,14 +1,15 @@
 import MockAxios from "axios-mock-adapter";
 import MovieCard from "./models/movie-card";
-import {axiosInstance, fetchMovies} from "./api";
+import {createApi} from "./api";
 
 it(`should make get movies API request`, () => {
-  const apiMock = new MockAxios(axiosInstance);
+  const api = createApi();
+  const apiMock = new MockAxios(api.getInstance());
   const mockData = [{}, {}];
 
   apiMock.onGet(`/films`).reply(200, mockData);
 
-  return fetchMovies().then((movies) => {
+  return api.fetchMovies().then((movies) => {
     expect(movies).toHaveLength(mockData.length);
     movies.forEach((it) => expect(it).toBeInstanceOf(MovieCard));
   });

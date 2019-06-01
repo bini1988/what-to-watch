@@ -6,9 +6,20 @@ import {Provider} from "react-redux";
 
 import reducer from "./reducer/index";
 import App from "./components/app/app.jsx";
-import * as api from "./api";
+import {createApi} from "./api";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const api = createApi({
+  url: `https://es31-server.appspot.com/wtw`,
+  onError: (error) => {
+    if (error) {
+      store.dispatch({type: `NETWORK_ERROR`, error});
+    }
+    if (error.status && (error.status === 403)) {
+      store.dispatch({type: `REQUIRED_AUTHORIZATION`, error});
+    }
+  },
+});
 const store = createStore(
     reducer,
     composeEnhancers(
