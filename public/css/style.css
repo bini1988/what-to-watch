@@ -772,11 +772,11 @@ main {
 
 .movie-card__director {
   line-height: 21px;
-  color: rgba(31, 22, 15, 0.46); }
+  color: rgba(0, 0, 0, 0.4); }
 
 .movie-card__starring {
   line-height: 24px;
-  color: #866866; }
+  color: rgba(0, 0, 0, 0.4); }
 
 .movie-card__row {
   display: -webkit-box;
@@ -870,14 +870,14 @@ main {
   border-radius: 8px;
   font-size: 30px;
   line-height: 36px;
-  color: #866A68;
+  color: rgba(0, 0, 0, 0.5);
   padding: 8px 12px;
   margin-right: 9px; }
 
 .movie-rating__meta {
   margin: 0;
   font-size: 19px;
-  color: #866866;
+  color: rgba(0, 0, 0, 0.5);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex; }
@@ -1140,7 +1140,7 @@ main {
   display: flex;
   font-size: 16px;
   line-height: 27px;
-  color: #866866; }
+  color: rgba(0, 0, 0, 0.4); }
 
 .review__author {
   font-style: normal;
