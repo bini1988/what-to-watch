@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getMoviesByGenres, queryMoviesByGenre} from "../../reducer";
+import {getMoviesByGenres, changeMoviesActiveGenre} from "../../reducer";
 import MoviesCatalog from "../movies-catalog/movies-catalog.jsx";
 
 export const App = ({moviesGenreGroups, activeGenre, onGenreChange}) => (
@@ -27,6 +27,6 @@ const mapStateToProps = (state) => {
     activeGenre: state.activeGenre,
   };
 };
-const mapDispatchToProps = {onGenreChange: queryMoviesByGenre};
+const mapDispatchToProps = {onGenreChange: changeMoviesActiveGenre};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

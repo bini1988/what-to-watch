@@ -1,16 +1,16 @@
-import reducer, {initialState, QUERY_MOVIES_BY_GENRE, getMoviesByGenres, queryMoviesByGenre} from "./reducer";
+import reducer, {initialState, QUERY_MOVIES_BY_GENRE, getMoviesByGenres, changeMoviesActiveGenre, ALL_GENRES_GROUP} from "./reducer";
 
 describe(`App Reducer`, () => {
-  it(`should set activeGenre state by queryMoviesByGenre`, () => {
+  it(`should set activeGenre state by changeMoviesActiveGenre`, () => {
     const activeGenre = `GENRE`;
-    const action = queryMoviesByGenre(activeGenre);
+    const action = changeMoviesActiveGenre(activeGenre);
 
     expect(reducer(initialState, action))
       .toEqual({...initialState, activeGenre});
   });
-  it(`should return action by queryMoviesByGenre`, () => {
+  it(`should return action by changeMoviesActiveGenre`, () => {
     const activeGenre = `GENRE`;
-    const action = queryMoviesByGenre(activeGenre);
+    const action = changeMoviesActiveGenre(activeGenre);
 
     expect(action)
       .toEqual({type: QUERY_MOVIES_BY_GENRE, payload: activeGenre});
@@ -28,7 +28,7 @@ describe(`App Reducer`, () => {
     const groups = getMoviesByGenres({movies});
 
     expect(groups).toEqual({
-      [`All genres`]: movies,
+      [ALL_GENRES_GROUP]: movies,
       1: [movies[0], movies[5]],
       2: [movies[1], movies[3]],
       3: [movies[2]],
