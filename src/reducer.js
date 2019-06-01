@@ -1,6 +1,6 @@
-import initialMovies from "./mocks/movies";
 
-export const QUERY_MOVIES_BY_GENRE = `QUERY_MOVIES_BY_GENRE`;
+export const STORE_MOVIES = `STORE_MOVIES`;
+export const CHANGE_MOVIES_ACTIVE_GENRE = `CHANGE_MOVIES_ACTIVE_GENRE`;
 
 export const ALL_GENRES_GROUP = `All genres`;
 
@@ -27,7 +27,28 @@ export const getMoviesByGenres = (state) => {
  * @return {Object}
  */
 export const changeMoviesActiveGenre = (genre) => {
-  return {type: QUERY_MOVIES_BY_GENRE, payload: genre};
+  return {type: CHANGE_MOVIES_ACTIVE_GENRE, payload: genre};
+};
+
+/**
+ * Сохранить полный список фильмов
+ * @param {Object[]} movies Список фильмов
+ * @return {Object}
+ */
+export const storeMovies = (movies) => {
+  return {type: STORE_MOVIES, payload: movies};
+};
+
+/**
+ * Получить полный список фильмов
+ * @return {Object}
+ */
+export const loadMovies = () => {
+  return (dispath, getState, api) => {
+    return api.fetchMovies().then((movies) => {
+      dispath(storeMovies(movies));
+    });
+  };
 };
 
 
@@ -35,13 +56,15 @@ export const initialState = {
   /** Фильтр списка фильмов по жанру */
   activeGenre: ALL_GENRES_GROUP,
   /** Список фильмов */
-  movies: initialMovies,
+  movies: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case QUERY_MOVIES_BY_GENRE:
+    case CHANGE_MOVIES_ACTIVE_GENRE:
       return {...state, activeGenre: action.payload};
+    case STORE_MOVIES:
+      return {...state, movies: action.payload};
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import reducer, {initialState, QUERY_MOVIES_BY_GENRE, getMoviesByGenres, changeMoviesActiveGenre, ALL_GENRES_GROUP} from "./reducer";
+import reducer, {initialState, CHANGE_MOVIES_ACTIVE_GENRE, getMoviesByGenres, loadMovies, storeMovies, changeMoviesActiveGenre, ALL_GENRES_GROUP} from "./reducer";
 
 describe(`App Reducer`, () => {
   it(`should set activeGenre state by changeMoviesActiveGenre`, () => {
@@ -8,12 +8,19 @@ describe(`App Reducer`, () => {
     expect(reducer(initialState, action))
       .toEqual({...initialState, activeGenre});
   });
+  it(`should set movies state by storeMovies`, () => {
+    const movies = [];
+    const action = storeMovies(movies);
+
+    expect(reducer(initialState, action))
+      .toEqual({...initialState, movies});
+  });
   it(`should return action by changeMoviesActiveGenre`, () => {
     const activeGenre = `GENRE`;
     const action = changeMoviesActiveGenre(activeGenre);
 
     expect(action)
-      .toEqual({type: QUERY_MOVIES_BY_GENRE, payload: activeGenre});
+      .toEqual({type: CHANGE_MOVIES_ACTIVE_GENRE, payload: activeGenre});
   });
   it(`should return grouped movies by getMoviesByGenres`, () => {
     const movies = [
@@ -34,6 +41,18 @@ describe(`App Reducer`, () => {
       3: [movies[2]],
       4: [movies[4]],
       5: [movies[6]],
+    });
+  });
+  it(`should make movies API request and call storeMovies`, () => {
+    const mockData = [`movie#1`, `movie#2`];
+    const dispatch = jest.fn();
+    const fetchMovies = jest.fn(() => Promise.resolve(mockData));
+    const loadMoviesThunk = loadMovies();
+
+    return loadMoviesThunk(dispatch, undefined, {fetchMovies}).then(() => {
+      expect(fetchMovies).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith(storeMovies(mockData));
     });
   });
 });
