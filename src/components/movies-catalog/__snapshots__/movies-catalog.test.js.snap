@@ -28,7 +28,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
   >
     <article
       className="small-movie-card catalog__movies-card"
-      id="480d2236-6c7d-4fd3-a225-80c66710a71f"
+      id="movie-11"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -48,7 +48,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
       >
         <a
           className="small-movie-card__link"
-          href="/film/480d2236-6c7d-4fd3-a225-80c66710a71f"
+          href="/film/11"
         >
           Fantastic Beasts: The Crimes of Grindelwald
         </a>
@@ -56,7 +56,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
     </article>
     <article
       className="small-movie-card catalog__movies-card"
-      id="505f451a-0b69-47ed-96c6-66d5525d5a5e"
+      id="movie-22"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -76,7 +76,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
       >
         <a
           className="small-movie-card__link"
-          href="/film/505f451a-0b69-47ed-96c6-66d5525d5a5e"
+          href="/film/22"
         >
           Bohemian Rhapsody
         </a>
