@@ -2,25 +2,13 @@ import React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {MoviesCatalog} from "./movies-catalog";
+import genreGroupsMock from "../../mocks/movies-groups";
 
 configure({adapter: new Adapter()});
 
 HTMLMediaElement.prototype.play = jest.fn();
 HTMLMediaElement.prototype.pause = jest.fn();
 HTMLMediaElement.prototype.load = jest.fn();
-
-const genreGroupsMock = {
-  "All Genres": [
-    {
-      id: 11,
-      title: `Fantastic Beasts: The Crimes of Grindelwald`,
-      img: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    }, {
-      id: 22,
-      title: `Bohemian Rhapsody`,
-      img: `img/bohemian-rhapsody.jpg`,
-    }
-  ]};
 
 describe(`MoviesCatalog`, () => {
   it(`Should call setActiveElement method on movie's card mouse enter event`, () => {

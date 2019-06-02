@@ -38,8 +38,9 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
         <video
           height={175}
           muted={true}
-          poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+          poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
           preload="none"
+          src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
           width={280}
         />
       </div>
@@ -50,7 +51,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
           className="small-movie-card__link"
           href="/film/11"
         >
-          Fantastic Beasts: The Crimes of Grindelwald
+          Beach
         </a>
       </h3>
     </article>
@@ -66,8 +67,9 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
         <video
           height={175}
           muted={true}
-          poster="img/bohemian-rhapsody.jpg"
+          poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
           preload="none"
+          src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
           width={280}
         />
       </div>
@@ -78,7 +80,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
           className="small-movie-card__link"
           href="/film/22"
         >
-          Bohemian Rhapsody
+          Beach
         </a>
       </h3>
     </article>
@@ -124,8 +126,9 @@ exports[`MoviesCatalog correctly renders default markup with more button 1`] = `
         <video
           height={175}
           muted={true}
-          poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+          poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
           preload="none"
+          src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
           width={280}
         />
       </div>
@@ -136,7 +139,7 @@ exports[`MoviesCatalog correctly renders default markup with more button 1`] = `
           className="small-movie-card__link"
           href="/film/11"
         >
-          Fantastic Beasts: The Crimes of Grindelwald
+          Beach
         </a>
       </h3>
     </article>
@@ -152,8 +155,9 @@ exports[`MoviesCatalog correctly renders default markup with more button 1`] = `
         <video
           height={175}
           muted={true}
-          poster="img/bohemian-rhapsody.jpg"
+          poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
           preload="none"
+          src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
           width={280}
         />
       </div>
@@ -164,7 +168,7 @@ exports[`MoviesCatalog correctly renders default markup with more button 1`] = `
           className="small-movie-card__link"
           href="/film/22"
         >
-          Bohemian Rhapsody
+          Beach
         </a>
       </h3>
     </article>
