@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
-import WTWLogo from "../wtw-logo/wtw-logo.jsx";
+import WTWLogo from "../wtw-logo/wtw-logo";
 
 function PageHeader({className, children}) {
   return (
