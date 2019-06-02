@@ -1,14 +1,8 @@
+import card from "./movie-card";
 
 export default {
   "All Genres": [
-    {
-      id: 11,
-      title: `Fantastic Beasts: The Crimes of Grindelwald`,
-      img: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    }, {
-      id: 22,
-      title: `Bohemian Rhapsody`,
-      img: `img/bohemian-rhapsody.jpg`,
-    }
+    {...card, id: 11},
+    {...card, id: 22},
   ]
 };
