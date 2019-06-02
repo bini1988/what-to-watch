@@ -32,6 +32,18 @@ export const createApi = (options = {}) => {
       return axiosInstance.get(`/films`).then((responce) => {
         return responce.data.map((it) => new MovieCard(it));
       });
+    },
+    /**
+     * Авторизовать пользователя
+     * @param {Object} params Параметры авторизации
+     * @param {string} params.email E-mail пользователя
+     * @param {string} params.password Пароль пользователя
+     * @return {Object}
+     */
+    loginUser(params) {
+      return axiosInstance.post(`/login`, params).then((responce) => {
+        return responce.data;
+      });
     }
   };
 };
