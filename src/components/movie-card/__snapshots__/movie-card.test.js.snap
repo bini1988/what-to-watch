@@ -63,7 +63,7 @@ exports[`MovieCard correctly renders default markup 1`] = `
               width="19"
             >
               <use
-                xlinkHhref="#play-s"
+                xlinkHref="#play-s"
               />
             </svg>
             <span>
@@ -80,7 +80,7 @@ exports[`MovieCard correctly renders default markup 1`] = `
               width="19"
             >
               <use
-                xlinkHhref="#add"
+                xlinkHref="#add"
               />
             </svg>
             <span>
