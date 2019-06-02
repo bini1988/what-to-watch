@@ -2,7 +2,7 @@
 
 exports[`SignIn correctly renders default markup 1`] = `
 <div
-  className="sign-in user-page__content"
+  className="sign-in class-name"
 >
   <form
     className="sign-in__form"

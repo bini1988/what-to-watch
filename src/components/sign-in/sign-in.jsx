@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 
-function SignIn({onSubmit}) {
+function SignIn({className, onSubmit}) {
   return (
-    <div className="sign-in user-page__content">
+    <div className={cn(`sign-in`, className)}>
       <form
         className="sign-in__form"
         onSubmit={(event) => {
@@ -58,6 +59,8 @@ function SignIn({onSubmit}) {
 }
 
 SignIn.propTypes = {
+  /** Дополнительный класс к контейнеру */
+  className: PropTypes.string,
   /** Отправить форму логина */
   onSubmit: PropTypes.func,
 };
