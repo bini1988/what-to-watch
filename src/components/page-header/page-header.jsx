@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 import WTWLogo from "../wtw-logo/wtw-logo.jsx";
 
 function PageHeader({className, children}) {
-  const headerClassName = className ? ` ${className}` : ``;
   return (
-    <header className={`page-header${headerClassName}`}>
+    <header className={cn(`page-header`, className)}>
       <WTWLogo/>
       {children}
     </header>

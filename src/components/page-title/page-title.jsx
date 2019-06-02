@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 
 function PageTitle({className, children}) {
-  const titleClassName = className ? ` ${className}` : ``;
   return (
-    <h1 className={`page-title${titleClassName}`}>
+    <h1 className={cn(`page-title`, className)}>
       {children}
     </h1>
   );
