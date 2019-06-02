@@ -55,4 +55,19 @@ describe(`MoviesCatalog`, () => {
     card.simulate(`mouseleave`);
     expect(handleResetActiveElement).toBeCalled();
   });
+  it(`Should call onMoviesMore method on more button click`, () => {
+    const handleMoviesMore = jest.fn();
+    const wrapper = mount(
+        <MoviesCatalog
+          moviesGenreGroups={genreGroupsMock}
+          activeGenre="All Genres"
+          onMoviesMore={handleMoviesMore}/>
+    );
+
+    const moreBtn = wrapper.find(`.catalog__more .catalog__button`);
+    expect(moreBtn).toHaveLength(1);
+
+    moreBtn.simulate(`click`);
+    expect(handleMoviesMore).toBeCalled();
+  });
 });

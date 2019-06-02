@@ -26,3 +26,16 @@ it(`MoviesCatalog correctly renders default markup`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it(`MoviesCatalog correctly renders default markup with more button`, () => {
+  const tree = renderer
+    .create(
+        <MoviesCatalog
+          moviesGenreGroups={genreGroupsMock}
+          activeGenre="All Genres"
+          onGenreChange={() => {}}
+          onMoviesMore={() => {}}/>
+    ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
