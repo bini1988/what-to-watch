@@ -12,7 +12,7 @@ class SmallMovieCard extends PureComponent {
 
   render() {
     const {card, renderPlayer} = this.props;
-    const {id, title, img, trailer} = card;
+    const {id, title, images, trailer} = card;
 
     return (
       <article
@@ -23,7 +23,7 @@ class SmallMovieCard extends PureComponent {
         <div className="small-movie-card__image">
           {renderPlayer({
             src: trailer,
-            poster: img,
+            poster: images.preview,
             muted: true,
           })}
         </div>
@@ -70,8 +70,17 @@ SmallMovieCard.propTypes = {
     title: PropTypes.string.isRequired,
     /** Жанр фильма */
     genre: PropTypes.string,
-    /** Путь к постеру фильма */
-    img: PropTypes.string,
+    /** Год выхода */
+    year: PropTypes.number,
+    /** Набор изображений фильма */
+    images: PropTypes.shape({
+      /** Превью к трейлеру фильма */
+      preview: PropTypes.string,
+      /** Постер к фильму */
+      poster: PropTypes.string,
+      /** Оформление к фильму */
+      background: PropTypes.string,
+    }),
     /** Путь к трейлеру фильма */
     trailer: PropTypes.string,
   }).isRequired,

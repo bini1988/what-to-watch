@@ -2,6 +2,7 @@ import React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {SmallMovieCard} from "./small-movie-card";
+import card from "../../mocks/movie-card";
 
 configure({adapter: new Adapter()});
 
@@ -10,15 +11,9 @@ jest.useFakeTimers();
 describe(`SmallMovieCard`, () => {
   it(`should call onPlayerPlay on card mouse enter`, () => {
     const handlePlay = jest.fn();
-    const cardMock = {
-      id: 11,
-      title: `Movie Title`,
-      img: `img/path`,
-      trailer: `trailer/path`,
-    };
     const wrapper = mount(
         <SmallMovieCard
-          card={cardMock}
+          card={card}
           autoPlayTimeout={100}
           onPlayerPlay={handlePlay}/>
     );
@@ -28,15 +23,9 @@ describe(`SmallMovieCard`, () => {
   });
   it(`should call onPlayerPause on card mouse leave`, () => {
     const handlePause = jest.fn();
-    const cardMock = {
-      id: 11,
-      title: `Movie Title`,
-      img: `img/path`,
-      trailer: `trailer/path`,
-    };
     const wrapper = mount(
         <SmallMovieCard
-          card={cardMock}
+          card={card}
           onPlayerPause={handlePause}/>
     );
 
