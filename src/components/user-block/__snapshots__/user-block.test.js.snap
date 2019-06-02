@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserBlock correctly renders default markup 1`] = `
+<div
+  className="user-block"
+>
+  <div
+    className="user-block__avatar"
+  >
+    <img
+      alt="User"
+      height="63"
+      src="/avatar.jpg"
+      width="63"
+    />
+  </div>
+</div>
+`;
