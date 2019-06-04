@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageTitle correctly renders default markup 1`] = `
+<h1
+  className="page-title title-class"
+>
+  Page Title
+</h1>
+`;

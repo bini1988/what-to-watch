@@ -1,5 +1,6 @@
 import axios from "axios";
 import MovieCard from "./models/movie-card";
+import User from "./models/user";
 
 const isFunction = (value) => typeof value === `function`;
 const injectErrorHandler = (handler) => {
@@ -31,6 +32,18 @@ export const createApi = (options = {}) => {
     fetchMovies() {
       return axiosInstance.get(`/films`).then((responce) => {
         return responce.data.map((it) => new MovieCard(it));
+      });
+    },
+    /**
+     * Авторизовать пользователя
+     * @param {Object} params Параметры авторизации
+     * @param {string} params.email E-mail пользователя
+     * @param {string} params.password Пароль пользователя
+     * @return {Object}
+     */
+    loginUser(params) {
+      return axiosInstance.post(`/login`, params).then((responce) => {
+        return new User(responce.data);
       });
     }
   };

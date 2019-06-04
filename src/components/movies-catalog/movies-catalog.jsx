@@ -5,7 +5,7 @@ import GenresList from "../genres-list/genres-list.jsx";
 import withActiveElement, {withActiveElementPropTypes} from "../../hocs/with-active-element";
 
 function MoviesCatalog(props) {
-  const {moviesGenreGroups = {}, activeGenre, onGenreChange, setActiveElement, resetActiveElement} = props;
+  const {moviesGenreGroups = {}, activeGenre, onGenreChange, onMoviesMore, setActiveElement, resetActiveElement} = props;
 
   return (
     <section className="catalog">
@@ -25,11 +25,16 @@ function MoviesCatalog(props) {
             onMouseLeave={resetActiveElement}/>
         ))}
       </div>
-      <div className="catalog__more">
-        <button className="catalog__button" type="button">
-          {`Show more`}
-        </button>
-      </div>
+      {(typeof onMoviesMore === `function`) && (
+        <div className="catalog__more">
+          <button
+            className="catalog__button"
+            type="button"
+            onClick={onMoviesMore}>
+            {`Show more`}
+          </button>
+        </div>
+      )}
     </section>
   );
 }
@@ -45,6 +50,8 @@ MoviesCatalog.propTypes = {
   activeGenre: PropTypes.string,
   /** Изменить фильтр списка фильмов по жанру */
   onGenreChange: PropTypes.func,
+  /** Получить следующие элементы списка */
+  onMoviesMore: PropTypes.func,
   ...withActiveElementPropTypes,
 };
 
