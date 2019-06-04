@@ -1,5 +1,6 @@
 import axios from "axios";
 import MovieCard from "./models/movie-card";
+import User from "./models/user";
 
 const isFunction = (value) => typeof value === `function`;
 const injectErrorHandler = (handler) => {
@@ -42,7 +43,7 @@ export const createApi = (options = {}) => {
      */
     loginUser(params) {
       return axiosInstance.post(`/login`, params).then((responce) => {
-        return responce.data;
+        return new User(responce.data);
       });
     }
   };
