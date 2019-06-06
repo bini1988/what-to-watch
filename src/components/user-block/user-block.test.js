@@ -8,7 +8,7 @@ import user from "../../mocks/user";
 it(`UserBlock correctly renders default markup`, () => {
   const tree = renderer.create(
       <MemoryRouter
-        nitialEntries = {[`/`]}>
+        initialEntries = {[`/`]}>
         <UserBlock user={user}/>
       </MemoryRouter>
   ).toJSON();
@@ -18,7 +18,7 @@ it(`UserBlock correctly renders default markup`, () => {
 it(`UserBlock correctly renders signin markup`, () => {
   const tree = renderer.create(
       <MemoryRouter
-        nitialEntries = {[`/`]}>
+        initialEntries = {[`/`]}>
         <UserBlock/>
       </MemoryRouter>
   ).toJSON();

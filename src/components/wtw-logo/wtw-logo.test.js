@@ -6,7 +6,7 @@ import WTWLogo from "./wtw-logo.jsx";
 it(`WTWLogo correctly renders default markup`, () => {
   const tree = renderer.create(
       <MemoryRouter
-        nitialEntries = {[`/`]}>
+        initialEntries = {[`/`]}>
         <WTWLogo/>
       </MemoryRouter>
   ).toJSON();
@@ -16,7 +16,7 @@ it(`WTWLogo correctly renders default markup`, () => {
 it(`WTWLogo correctly renders light markup`, () => {
   const tree = renderer.create(
       <MemoryRouter
-        nitialEntries = {[`/`]}>
+        initialEntries = {[`/`]}>
         <WTWLogo mode="light"/>
       </MemoryRouter>
   ).toJSON();
