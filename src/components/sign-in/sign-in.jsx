@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
-function SignIn({className, onSubmit}) {
+function SignIn({className, message, valid = {}, onSubmit}) {
   return (
     <div className={cn(`sign-in`, className)}>
       <form
@@ -18,8 +18,17 @@ function SignIn({className, onSubmit}) {
             onSubmit({email, password});
           }
         }}>
+        {message && (
+          <div className="sign-in__message">
+            <p>{message}</p>
+          </div>
+        )}
         <div className="sign-in__fields">
-          <div className="sign-in__field">
+          <div
+            className={cn(
+                `sign-in__field`,
+                {[`sign-in__field--error`]: valid.email},
+            )}>
             <input
               className="sign-in__input"
               id="user-email"
@@ -33,7 +42,11 @@ function SignIn({className, onSubmit}) {
               {`Email address`}
             </label>
           </div>
-          <div className="sign-in__field">
+          <div
+            className={cn(
+                `sign-in__field`,
+                {[`sign-in__field--error`]: valid.password},
+            )}>
             <input
               className="sign-in__input"
               id="user-password"
@@ -61,6 +74,15 @@ function SignIn({className, onSubmit}) {
 SignIn.propTypes = {
   /** Дополнительный класс к контейнеру */
   className: PropTypes.string,
+  /** Сообщение об ошибке */
+  message: PropTypes.string,
+  /** Объект валидации формы */
+  valid: PropTypes.shape({
+    /** Является ли поле email валидным */
+    email: PropTypes.bool,
+    /** Является ли поле password валидным */
+    password: PropTypes.bool,
+  }),
   /** Отправить форму логина */
   onSubmit: PropTypes.func,
 };

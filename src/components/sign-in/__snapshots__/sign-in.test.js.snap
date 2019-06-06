@@ -9,6 +9,13 @@ exports[`SignIn correctly renders default markup 1`] = `
     onSubmit={[Function]}
   >
     <div
+      className="sign-in__message"
+    >
+      <p>
+        We can’t recognize this email and password combination. Please try again.
+      </p>
+    </div>
+    <div
       className="sign-in__fields"
     >
       <div
