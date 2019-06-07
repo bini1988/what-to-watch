@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function AddReview({maxRating, onSubmit}) {
+function AddReview({maxRating, defaultRating, onSubmit}) {
   const toIndex = (it, index) => index + 1;
   const ratings = Array.from({length: maxRating}, toIndex);
 
@@ -31,7 +31,7 @@ function AddReview({maxRating, onSubmit}) {
                   name="rating"
                   type="radio"
                   value={rating}
-                  defaultChecked={rating === `3`}/>
+                  defaultChecked={rating === defaultRating}/>
                 <label
                   className="rating__label"
                   htmlFor={`star-${rating}`}>
@@ -60,10 +60,13 @@ function AddReview({maxRating, onSubmit}) {
 
 AddReview.defaultProps = {
   maxRating: 5,
+  defaultRating: 3,
 };
 AddReview.propTypes = {
   /** Максимальный рейтинг */
   maxRating: PropTypes.number,
+  /** Рейтинг по умолчанию */
+  defaultRating: PropTypes.number,
   /** Отправить форму */
   onSubmit: PropTypes.func,
 };
