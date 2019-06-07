@@ -7,11 +7,13 @@ it(`Breadcrumbs correctly renders default markup`, () => {
   const tree = renderer.create(
       <MemoryRouter
         initialEntries = {[`/`]}>
-        <Breadcrumbs
-          items={[
-            {label: `The Grand Budapest Hotel`, href: `/movie`},
-            {label: `Add review`},
-          ]}/>
+        <Breadcrumbs>
+          <Breadcrumbs.Item
+            label="The Grand Budapest Hotel"
+            href="/film/:id"/>
+          <Breadcrumbs.Item
+            label="Add review"/>
+        </Breadcrumbs>
       </MemoryRouter>
   ).toJSON();
   expect(tree).toMatchSnapshot();

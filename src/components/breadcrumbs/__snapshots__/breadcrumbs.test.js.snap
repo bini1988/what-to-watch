@@ -12,7 +12,7 @@ exports[`Breadcrumbs correctly renders default markup 1`] = `
     >
       <a
         className="breadcrumbs__link"
-        href="/movie"
+        href="/film/:id"
         onClick={[Function]}
       >
         The Grand Budapest Hotel

@@ -2,36 +2,41 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-function Breadcrumbs({items = []}) {
+function Breadcrumbs({children}) {
   return (
     <nav className="breadcrumbs">
       <ul className="breadcrumbs__list">
-        {items.map((it = {}, index) => {
-          const Component = it.href ? Link : `a`;
-          return (
-            <li className="breadcrumbs__item" key={index}>
-              <Component
-                className="breadcrumbs__link"
-                to={it.href}>
-                {it.label}
-              </Component>
-            </li>
-          );
-        })}
+        {children}
       </ul>
     </nav>
   );
 }
 
+export function Item({label, href}) {
+  const Component = href ? Link : `a`;
+
+  return (
+    <li className="breadcrumbs__item">
+      <Component
+        className="breadcrumbs__link"
+        to={href}>
+        {label}
+      </Component>
+    </li>
+  );
+}
+
+Item.propTypes = {
+  /** Подпись к ссылке */
+  label: PropTypes.string,
+  /** Ссылка */
+  href: PropTypes.string,
+};
+
+Breadcrumbs.Item = Item;
 Breadcrumbs.propTypes = {
-  /** Массив ссылок */
-  items: PropTypes.arrayOf(
-      PropTypes.shape({
-        /** Подпись к ссылке */
-        label: PropTypes.string,
-        /** Ссылка */
-        href: PropTypes.string,
-      }),
+  children: PropTypes.arrayOf(
+      PropTypes.element
   ),
 };
 
