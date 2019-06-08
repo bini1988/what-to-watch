@@ -25,7 +25,7 @@ const groupByGenres = (movies) => {
  * @return {Object[]}
  */
 export const getMovies = (state) => {
-  return state[NameSpace.Catalog].movies;
+  return state[NameSpace.Movies].items;
 };
 
 /**
@@ -34,7 +34,7 @@ export const getMovies = (state) => {
  * @return {Object[]}
  */
 export const getActiveGenre = (state) => {
-  return state[NameSpace.Catalog].activeGenre;
+  return state[NameSpace.Movies].activeGenre;
 };
 
 /**

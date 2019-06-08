@@ -1,7 +1,7 @@
 import {ALL_GENRES_GROUP, getMoviesByGenres} from "./selectors";
 import NameSpace from "../name-spaces";
 
-describe(`Catalog Selectors`, () => {
+describe(`Movies Selectors`, () => {
   it(`should return grouped movies by getMoviesByGenres`, () => {
     const movies = [
       {id: `0`, genre: `1`},
