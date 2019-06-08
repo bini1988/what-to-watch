@@ -10,8 +10,10 @@ it(`MyListPage correctly renders default markup`, () => {
         initialEntries = {[`/`]}>
         <MyListPage
           moviesGenreGroups={genreGroupsMock}
-          activeGenre="All Genres"
-          onGenreChange={() => {}}/>
+          myListMovies={[]}
+          fetchMovies={() => {}}
+          fetchMyListMovies={() => {}}
+        />
       </MemoryRouter>
   ).toJSON();
 
