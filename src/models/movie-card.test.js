@@ -1,4 +1,4 @@
-import MovieCard from "./movie-card";
+import MovieCard, {getRatingLevel, RatingLevels} from "./movie-card";
 
 describe(`MovieCard model`, () => {
   it(`should return MovieCard model`, () => {
@@ -37,7 +37,23 @@ describe(`MovieCard model`, () => {
           poster: `https://es31-server.appspot.com/wtw/static/film/poster/War_of_the_Worlds.jpg`,
           background: `https://es31-server.appspot.com/wtw/static/film/background/War_of_the_Worlds.jpg`
         },
-        trailer: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
+        trailer: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+        rating: {
+          count: 386834,
+          level: `Good`,
+          score: 6.5,
+        },
       });
+  });
+  it(`should return movie reting level`, () => {
+    for (const [level, range] of Object.entries(RatingLevels)) {
+      const [min, max] = range;
+      for (let score = min; score < max; score++) {
+        expect(getRatingLevel(score)).toEqual(level);
+      }
+    }
+
+    expect(getRatingLevel()).toEqual(`Unknown`);
+    expect(getRatingLevel(10000)).toEqual(`Unknown`);
   });
 });
