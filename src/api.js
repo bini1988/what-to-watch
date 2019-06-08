@@ -91,7 +91,7 @@ export const createApi = (options = {}) => {
      * @param {string} review.comment Текст отзыва
      * @return {MovieReview[]}
      */
-    postMovieReview(id, review) {
+    submitMovieReview(id, review) {
       return axiosInstance.post(`/comments/${id}`, review).then((responce) => {
         return responce.data.map((it) => new MovieReview(it));
       });
