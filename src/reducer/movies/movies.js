@@ -88,7 +88,7 @@ export const Operation = {
 
 export const initialState = {
   /** Промо фильм */
-  promoItem: null,
+  promoItem: undefined,
   /** Массив фильмов из списка «к просмотру» */
   myListItems: [],
   /** Фильтр списка фильмов по жанру */
