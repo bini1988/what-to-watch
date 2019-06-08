@@ -1,22 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+import cn from "classnames";
 
-function WTWLogo({href, mode}) {
-  const modeClass = mode ? ` logo__link--${mode}` : ``;
+function WTWLogo({mode}) {
   return (
     <div className="logo">
-      <a className={`logo__link${modeClass}`} href={href}>
+      <Link to="/" className={cn(`logo__link`, {[`logo__link--${mode}`]: mode})}>
         <span className="logo__letter logo__letter--1">{`W`}</span>
         <span className="logo__letter logo__letter--2">{`T`}</span>
         <span className="logo__letter logo__letter--3">{`W`}</span>
-      </a>
+      </Link>
     </div>
   );
 }
 
-WTWLogo.defaultProps = {
-  href: `/`,
-};
 WTWLogo.propTypes = {
   /** Ссылка */
   href: PropTypes.string,

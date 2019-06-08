@@ -19,6 +19,7 @@ function SignInPage({onUserLogin}) {
       </PageHeader>
       <SignIn
         className="user-page__content"
+        message="We can’t recognize this email and password combination. Please try again."
         onSubmit={onUserLogin}/>
       <PageFooter/>
     </div>

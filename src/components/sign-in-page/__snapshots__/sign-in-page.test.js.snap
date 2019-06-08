@@ -13,6 +13,7 @@ exports[`SignInPage correctly renders default markup 1`] = `
       <a
         className="logo__link"
         href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -44,6 +45,13 @@ exports[`SignInPage correctly renders default markup 1`] = `
       className="sign-in__form"
       onSubmit={[Function]}
     >
+      <div
+        className="sign-in__message"
+      >
+        <p>
+          We can’t recognize this email and password combination. Please try again.
+        </p>
+      </div>
       <div
         className="sign-in__fields"
       >
@@ -105,6 +113,7 @@ exports[`SignInPage correctly renders default markup 1`] = `
       <a
         className="logo__link logo__link--light"
         href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"

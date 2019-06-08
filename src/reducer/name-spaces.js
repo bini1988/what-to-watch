@@ -1,6 +1,7 @@
 
 const NameSpaces = {
-  Catalog: `catalog`,
+  Movies: `movies`,
+  Reviews: `reviews`,
   User: `user`,
 };
 

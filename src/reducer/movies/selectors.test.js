@@ -1,9 +1,9 @@
 import {ALL_GENRES_GROUP, getMoviesByGenres} from "./selectors";
 import NameSpace from "../name-spaces";
 
-describe(`Catalog Selectors`, () => {
+describe(`Movies Selectors`, () => {
   it(`should return grouped movies by getMoviesByGenres`, () => {
-    const movies = [
+    const items = [
       {id: `0`, genre: `1`},
       {id: `1`, genre: `2`},
       {id: `2`, genre: `3`},
@@ -12,16 +12,16 @@ describe(`Catalog Selectors`, () => {
       {id: `5`, genre: `1`},
       {id: `6`, genre: `5`},
     ];
-    const state = {[NameSpace.Catalog]: {movies}};
+    const state = {[NameSpace.Movies]: {items}};
     const groups = getMoviesByGenres(state);
 
     expect(groups).toEqual({
-      [ALL_GENRES_GROUP]: movies,
-      1: [movies[0], movies[5]],
-      2: [movies[1], movies[3]],
-      3: [movies[2]],
-      4: [movies[4]],
-      5: [movies[6]],
+      [ALL_GENRES_GROUP]: items,
+      1: [items[0], items[5]],
+      2: [items[1], items[3]],
+      3: [items[2]],
+      4: [items[4]],
+      5: [items[6]],
     });
   });
 });

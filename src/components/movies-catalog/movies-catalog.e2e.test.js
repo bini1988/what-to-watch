@@ -1,4 +1,5 @@
 import React from "react";
+import {MemoryRouter} from "react-router-dom";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {MoviesCatalog} from "./movies-catalog";
@@ -14,10 +15,13 @@ describe(`MoviesCatalog`, () => {
   it(`Should call setActiveElement method on movie's card mouse enter event`, () => {
     const handleSetActiveElement = jest.fn();
     const wrapper = mount(
-        <MoviesCatalog
-          moviesGenreGroups={genreGroupsMock}
-          activeGenre="All Genres"
-          setActiveElement={handleSetActiveElement}/>
+        <MemoryRouter
+          initialEntries = {[`/`]}>
+          <MoviesCatalog
+            moviesGenreGroups={genreGroupsMock}
+            activeGenre="All Genres"
+            setActiveElement={handleSetActiveElement}/>
+        </MemoryRouter>
     );
 
     const activeCard = genreGroupsMock[`All Genres`][0];
@@ -30,10 +34,12 @@ describe(`MoviesCatalog`, () => {
   it(`Should call resetActiveElement method on movie's card mouse leave event`, () => {
     const handleResetActiveElement = jest.fn();
     const wrapper = mount(
-        <MoviesCatalog
-          moviesGenreGroups={genreGroupsMock}
-          activeGenre="All Genres"
-          resetActiveElement={handleResetActiveElement}/>
+        <MemoryRouter
+          initialEntries = {[`/`]}><MoviesCatalog
+            moviesGenreGroups={genreGroupsMock}
+            activeGenre="All Genres"
+            resetActiveElement={handleResetActiveElement}/>
+        </MemoryRouter>
     );
 
     const activeCard = genreGroupsMock[`All Genres`][0];
@@ -46,10 +52,13 @@ describe(`MoviesCatalog`, () => {
   it(`Should call onMoviesMore method on more button click`, () => {
     const handleMoviesMore = jest.fn();
     const wrapper = mount(
-        <MoviesCatalog
-          moviesGenreGroups={genreGroupsMock}
-          activeGenre="All Genres"
-          onMoviesMore={handleMoviesMore}/>
+        <MemoryRouter
+          initialEntries = {[`/`]}>
+          <MoviesCatalog
+            moviesGenreGroups={genreGroupsMock}
+            activeGenre="All Genres"
+            onMoviesMore={handleMoviesMore}/>
+        </MemoryRouter>
     );
 
     const moreBtn = wrapper.find(`.catalog__more .catalog__button`);

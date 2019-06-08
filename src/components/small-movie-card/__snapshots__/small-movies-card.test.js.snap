@@ -25,6 +25,7 @@ exports[`SmallMovieCard correctly renders default markup 1`] = `
     <a
       className="small-movie-card__link"
       href="/film/1"
+      onClick={[Function]}
     >
       Beach
     </a>

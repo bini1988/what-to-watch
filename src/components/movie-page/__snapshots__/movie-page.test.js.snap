@@ -1,0 +1,288 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MoviePage correctly renders default markup 1`] = `
+Array [
+  <section
+    className="movie-card movie-card--full"
+  >
+    <div
+      className="movie-card__hero"
+    >
+      <div
+        className="movie-card__bg"
+      >
+        <img />
+      </div>
+      <header
+        className="page-header movie-card__head"
+      >
+        <div
+          className="logo"
+        >
+          <a
+            className="logo__link"
+            href="/"
+            onClick={[Function]}
+          >
+            <span
+              className="logo__letter logo__letter--1"
+            >
+              W
+            </span>
+            <span
+              className="logo__letter logo__letter--2"
+            >
+              T
+            </span>
+            <span
+              className="logo__letter logo__letter--3"
+            >
+              W
+            </span>
+          </a>
+        </div>
+        <h1
+          className="page-title visually-hidden"
+        >
+          WTW
+        </h1>
+        <div
+          className="user-block"
+        >
+          <div
+            className="user-block__avatar"
+          >
+            <a
+              href="/mylist"
+              onClick={[Function]}
+            >
+              <img
+                alt="Nicolas Cage"
+                height="63"
+                src="https://s3.amazonaws.com/uifaces/faces/twitter/wim1k/128.jpg"
+                width="63"
+              />
+            </a>
+          </div>
+        </div>
+      </header>
+      <div
+        className="movie-card__wrap"
+      >
+        <div
+          className="movie-card__desc"
+        >
+          <h2
+            className="movie-card__title"
+          />
+          <p
+            className="movie-card__meta"
+          >
+            <span
+              className="movie-card__genre"
+            />
+            <span
+              className="movie-card__year"
+            />
+          </p>
+          <div
+            className="movie-card__buttons"
+          >
+            <button
+              className="btn btn--play movie-card__button"
+              type="button"
+            >
+              <svg
+                height={19}
+                viewBox="0 0 19 19"
+                width={19}
+              >
+                <use
+                  xlinkHref="#play-s"
+                />
+              </svg>
+              <span>
+                Play
+              </span>
+            </button>
+            <button
+              className="btn btn--list movie-card__button"
+              type="button"
+            >
+              <svg
+                height={20}
+                viewBox="0 0 19 20"
+                width={19}
+              >
+                <use
+                  xlinkHref="#add"
+                />
+              </svg>
+              <span>
+                My list
+              </span>
+            </button>
+            <a
+              className="btn movie-card__button"
+              href="/film/undefined/review"
+              onClick={[Function]}
+            >
+              Add review
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="movie-card__wrap movie-card__translate-top"
+    >
+      <div
+        className="movie-card__info"
+      >
+        <div
+          className="movie-card__poster movie-card__poster--big"
+        >
+          <img
+            height="327"
+            width="218"
+          />
+        </div>
+        <div
+          className="movie-card__desc"
+        >
+          <nav
+            className="movie-nav movie-card__nav"
+          >
+            <ul
+              className="movie-nav__list"
+            >
+              <li
+                className="movie-nav__item"
+              >
+                <a
+                  className="movie-nav__link"
+                  href="#overview"
+                >
+                  Overview
+                </a>
+              </li>
+              <li
+                className="movie-nav__item"
+              >
+                <a
+                  className="movie-nav__link"
+                  href="#details"
+                >
+                  Details
+                </a>
+              </li>
+              <li
+                className="movie-nav__item"
+              >
+                <a
+                  className="movie-nav__link"
+                  href="#reviews"
+                >
+                  Reviews
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div
+            className="movie-rating"
+          >
+            <div
+              className="movie-rating__score"
+            />
+            <p
+              className="movie-rating__meta"
+            >
+              <span
+                className="movie-rating__level"
+              />
+              <span
+                className="movie-rating__count"
+              >
+                undefined ratings
+              </span>
+            </p>
+          </div>
+          <div
+            className="movie-card__text"
+          >
+            <p
+              className="movie-card__director"
+            >
+              <strong>
+                Director: undefined
+              </strong>
+            </p>
+            <p
+              className="movie-card__starring"
+            >
+              <strong>
+                Starring:  and other
+              </strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>,
+  <div
+    className="page-content"
+  >
+    <section
+      className="catalog"
+    >
+      <h2
+        className="catalog__title visually-hidden"
+      >
+        Catalog
+      </h2>
+      <ul
+        className="catalog__genres-list"
+      />
+      <div
+        className="catalog__movies-list"
+      />
+    </section>
+    <footer
+      className="page-footer"
+    >
+      <div
+        className="logo"
+      >
+        <a
+          className="logo__link logo__link--light"
+          href="/"
+          onClick={[Function]}
+        >
+          <span
+            className="logo__letter logo__letter--1"
+          >
+            W
+          </span>
+          <span
+            className="logo__letter logo__letter--2"
+          >
+            T
+          </span>
+          <span
+            className="logo__letter logo__letter--3"
+          >
+            W
+          </span>
+        </a>
+      </div>
+      <div
+        className="copyright"
+      >
+        <p>
+          © 2019 What to watch Ltd.
+        </p>
+      </div>
+    </footer>
+  </div>,
+]
+`;

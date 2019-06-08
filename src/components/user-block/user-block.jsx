@@ -1,24 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
-function UserBlock({user, onSignIn}) {
+function UserBlock({user}) {
   return (
     <div className="user-block">
       {user ? (
         <div className="user-block__avatar">
-          <img
-            alt={user.name}
-            src={user.avatar}
-            width="63"
-            height="63"/>
+          <Link to="/mylist">
+            <img
+              alt={user.name}
+              src={user.avatar}
+              width="63"
+              height="63"/>
+          </Link>
         </div>
       ) : (
-        <a
+        <Link
           className="user-block__link"
-          href="/sign-in"
-          onClick={onSignIn}>
+          to="/login">
           {`Sign in`}
-        </a>
+        </Link>
       )}
     </div>
   );
@@ -35,8 +37,6 @@ UserBlock.propTypes = {
     /** Аватар пользователя */
     avatar: PropTypes.string,
   }),
-  /** Авторизовать пользователя */
-  onSignIn: PropTypes.func,
 };
 
 export default UserBlock;

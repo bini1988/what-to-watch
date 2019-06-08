@@ -10,6 +10,7 @@ exports[`PageHeader correctly renders default markup 1`] = `
     <a
       className="logo__link"
       href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"

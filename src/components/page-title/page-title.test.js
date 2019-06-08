@@ -11,3 +11,14 @@ it(`PageTitle correctly renders default markup`, () => {
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+it(`PageTitle correctly renders hidden mode markup`, () => {
+  const tree = renderer.create(
+      <PageTitle
+        className="title-class"
+        hidden={true}>
+        {`Page Title`}
+      </PageTitle>
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+});

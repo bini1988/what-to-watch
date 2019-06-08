@@ -6,6 +6,7 @@ import withActiveElement, {withActiveElementPropTypes} from "../../hocs/with-act
 
 function MoviesCatalog(props) {
   const {moviesGenreGroups = {}, activeGenre, onGenreChange, onMoviesMore, setActiveElement, resetActiveElement} = props;
+  const movies = moviesGenreGroups[activeGenre] || [];
 
   return (
     <section className="catalog">
@@ -17,7 +18,7 @@ function MoviesCatalog(props) {
         activeGenre={activeGenre}
         onGenreChange={onGenreChange}/>
       <div className="catalog__movies-list">
-        {moviesGenreGroups[activeGenre].map((it = {}) => (
+        {movies.map((it = {}) => (
           <SmallMovieCard
             key={it.id}
             card={it}
@@ -39,6 +40,9 @@ function MoviesCatalog(props) {
   );
 }
 
+MoviesCatalog.defaultProps = {
+  activeGenre: `All genres`,
+};
 MoviesCatalog.propTypes = {
   /** Список отображаемых фильмов группированных по жанрам */
   moviesGenreGroups: PropTypes.objectOf(

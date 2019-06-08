@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs correctly renders default markup 1`] = `
+<nav
+  className="breadcrumbs"
+>
+  <ul
+    className="breadcrumbs__list"
+  >
+    <li
+      className="breadcrumbs__item"
+    >
+      <a
+        className="breadcrumbs__link"
+        href="/film/:id"
+        onClick={[Function]}
+      >
+        The Grand Budapest Hotel
+      </a>
+    </li>
+    <li
+      className="breadcrumbs__item"
+    >
+      <a
+        className="breadcrumbs__link"
+      >
+        Add review
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
