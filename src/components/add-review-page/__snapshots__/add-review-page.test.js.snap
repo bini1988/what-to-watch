@@ -15,11 +15,6 @@ exports[`AddReviewPage correctly renders default markup 1`] = `
         src="https://es31-server.appspot.com/wtw/static/film/background/beach.jpg"
       />
     </div>
-    <h1
-      className="visually-hidden"
-    >
-      WTW
-    </h1>
     <header
       className="page-header"
     >
@@ -76,6 +71,11 @@ exports[`AddReviewPage correctly renders default markup 1`] = `
           </li>
         </ul>
       </nav>
+      <h1
+        className="page-title visually-hidden"
+      >
+        WTW
+      </h1>
       <div
         className="user-block"
       >

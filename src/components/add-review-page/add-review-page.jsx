@@ -5,6 +5,7 @@ import {getUserProfile} from "../../reducer/user/selectors";
 
 import MovieCard from "../movie-card/movie-card";
 import PageHeader from "../page-header/page-header";
+import PageTitle from "../page-title/page-title";
 import UserBlock from "../user-block/user-block";
 import Breadcrumbs from "../breadcrumbs/breadcrumbs";
 import AddReview from "../add-review/add-review";
@@ -25,10 +26,14 @@ function AddReviewPage({user, onSubmit}) {
             <Breadcrumbs.Item
               label="Add review"/>
           </Breadcrumbs>
+          <PageTitle hidden={true}>
+            {`WTW`}
+          </PageTitle>
           <UserBlock user={user}/>
         </PageHeader>
       )}>
-      <AddReview onSubmit={onSubmit}/>
+      <AddReview
+        onSubmit={onSubmit}/>
     </MovieCard>
   );
 }
