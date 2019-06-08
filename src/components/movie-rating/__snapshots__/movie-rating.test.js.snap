@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieRating correctly renders default markup 1`] = `
+<div
+  className="movie-rating"
+>
+  <div
+    className="movie-rating__score"
+  >
+    8.5
+  </div>
+  <p
+    className="movie-rating__meta"
+  >
+    <span
+      className="movie-rating__level"
+    >
+      Good
+    </span>
+    <span
+      className="movie-rating__count"
+    >
+      666 ratings
+    </span>
+  </p>
+</div>
+`;
