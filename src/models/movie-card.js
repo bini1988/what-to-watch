@@ -27,6 +27,20 @@ export function getRatingLevel(score) {
 }
 
 /**
+ * Возвращает текстовое представление продолжительности фильма
+ * @param {number} time Продолжительсноть фильма, мин
+ * @return {string}
+ */
+export function getDuration(time = 0) {
+  const timeHours = Math.trunc(time / 60);
+  const timeMinutes = time - timeHours * 60;
+
+  return (timeHours > 0)
+    ? `${timeHours}h ${timeMinutes}m`
+    : `${timeMinutes}m`;
+}
+
+/**
  * Карточка фильма
  * @class
  * @param {Object} data
@@ -36,6 +50,10 @@ function MovieCard(data = {}) {
   this.title = data.name;
   this.genre = data.genre;
   this.year = data.released;
+  this.director = data.director;
+  this.description = data.description;
+  this.starring = data.starring;
+  this.duration = getDuration(data.run_time);
 
   this.images = {};
   this.images.preview = data.preview_image;
