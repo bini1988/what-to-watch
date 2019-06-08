@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import withPlayer, {withPlayerPropTypes} from "../../hocs/with-player";
 
 class SmallMovieCard extends PureComponent {
@@ -28,11 +29,11 @@ class SmallMovieCard extends PureComponent {
           })}
         </div>
         <h3 className="small-movie-card__title">
-          <a
+          <Link
             className="small-movie-card__link"
-            href={`/film/${id}`}>
+            to={`/film/${id}`}>
             {title}
-          </a>
+          </Link>
         </h3>
       </article>
     );
