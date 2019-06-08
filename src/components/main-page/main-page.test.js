@@ -11,7 +11,10 @@ it(`MainPage correctly renders default markup`, () => {
         <MainPage
           moviesGenreGroups={genreGroupsMock}
           activeGenre="All Genres"
-          onGenreChange={() => {}}/>
+          onGenreChange={() => {}}
+          fetchMovies={() => {}}
+          fetchPromoMovie={() => {}}
+        />
       </MemoryRouter>
   ).toJSON();
   expect(tree).toMatchSnapshot();

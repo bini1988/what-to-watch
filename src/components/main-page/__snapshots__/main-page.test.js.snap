@@ -8,16 +8,8 @@ Array [
     <div
       className="movie-card__bg"
     >
-      <img
-        alt="Beach"
-        src="https://es31-server.appspot.com/wtw/static/film/background/beach.jpg"
-      />
+      <img />
     </div>
-    <h1
-      className="visually-hidden"
-    >
-      WTW
-    </h1>
     <header
       className="page-header movie-card__head"
     >
@@ -46,16 +38,29 @@ Array [
           </span>
         </a>
       </div>
+      <h1
+        className="page-title visually-hidden"
+      >
+        WTW
+      </h1>
       <div
         className="user-block"
       >
-        <a
-          className="user-block__link"
-          href="/login"
-          onClick={[Function]}
+        <div
+          className="user-block__avatar"
         >
-          Sign in
-        </a>
+          <a
+            href="/mylist"
+            onClick={[Function]}
+          >
+            <img
+              alt="Nicolas Cage"
+              height="63"
+              src="https://s3.amazonaws.com/uifaces/faces/twitter/wim1k/128.jpg"
+              width="63"
+            />
+          </a>
+        </div>
       </div>
     </header>
     <div
@@ -68,9 +73,7 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="Beach"
             height="327"
-            src="https://es31-server.appspot.com/wtw/static/film/poster/beach.jpg"
             width="218"
           />
         </div>
@@ -79,22 +82,16 @@ Array [
         >
           <h2
             className="movie-card__title"
-          >
-            Beach
-          </h2>
+          />
           <p
             className="movie-card__meta"
           >
             <span
               className="movie-card__genre"
-            >
-              Adventure
-            </span>
+            />
             <span
               className="movie-card__year"
-            >
-              2000
-            </span>
+            />
           </p>
           <div
             className="movie-card__buttons"
@@ -104,9 +101,9 @@ Array [
               type="button"
             >
               <svg
-                height="19"
+                height={19}
                 viewBox="0 0 19 19"
-                width="19"
+                width={19}
               >
                 <use
                   xlinkHref="#play-s"
@@ -121,9 +118,9 @@ Array [
               type="button"
             >
               <svg
-                height="20"
+                height={20}
                 viewBox="0 0 19 20"
-                width="19"
+                width={19}
               >
                 <use
                   xlinkHref="#add"
