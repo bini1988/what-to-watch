@@ -7,11 +7,13 @@ function UserBlock({user}) {
     <div className="user-block">
       {user ? (
         <div className="user-block__avatar">
-          <img
-            alt={user.name}
-            src={user.avatar}
-            width="63"
-            height="63"/>
+          <Link to="/mylist">
+            <img
+              alt={user.name}
+              src={user.avatar}
+              width="63"
+              height="63"/>
+          </Link>
         </div>
       ) : (
         <Link
