@@ -4,7 +4,7 @@ import renderer from "react-test-renderer";
 import genreGroupsMock from "../../mocks/movies-groups";
 import {MyListPage} from "./my-list-page";
 
-it(`MoviesCatalog correctly renders default markup`, () => {
+it(`MyListPage correctly renders default markup`, () => {
   const tree = renderer.create(
       <MemoryRouter
         initialEntries = {[`/`]}>
