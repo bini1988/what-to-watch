@@ -82,12 +82,17 @@ exports[`AddReviewPage correctly renders default markup 1`] = `
         <div
           className="user-block__avatar"
         >
-          <img
-            alt="Nicolas Cage"
-            height="63"
-            src="https://s3.amazonaws.com/uifaces/faces/twitter/wim1k/128.jpg"
-            width="63"
-          />
+          <a
+            href="/mylist"
+            onClick={[Function]}
+          >
+            <img
+              alt="Nicolas Cage"
+              height="63"
+              src="https://s3.amazonaws.com/uifaces/faces/twitter/wim1k/128.jpg"
+              width="63"
+            />
+          </a>
         </div>
       </div>
     </header>

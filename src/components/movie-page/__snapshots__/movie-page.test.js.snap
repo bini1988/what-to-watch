@@ -124,7 +124,8 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="/review"
+              href="/film/undefined/review"
+              onClick={[Function]}
             >
               Add review
             </a>
@@ -188,18 +189,41 @@ Array [
             </ul>
           </nav>
           <div
-            className="movie-card__reviews movie-card__row"
+            className="movie-rating"
           >
             <div
-              className="movie-card__reviews-col"
+              className="movie-rating__score"
+            />
+            <p
+              className="movie-rating__meta"
             >
-              Col1
-            </div>
-            <div
-              className="movie-card__reviews-col"
+              <span
+                className="movie-rating__level"
+              />
+              <span
+                className="movie-rating__count"
+              >
+                undefined ratings
+              </span>
+            </p>
+          </div>
+          <div
+            className="movie-card__text"
+          >
+            <p
+              className="movie-card__director"
             >
-              Col2
-            </div>
+              <strong>
+                Director: undefined
+              </strong>
+            </p>
+            <p
+              className="movie-card__starring"
+            >
+              <strong>
+                Starring:  and other
+              </strong>
+            </p>
           </div>
         </div>
       </div>

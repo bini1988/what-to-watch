@@ -187,6 +187,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="/film/11"
+              onClick={[Function]}
             >
               Beach
             </a>
@@ -216,6 +217,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="/film/22"
+              onClick={[Function]}
             >
               Beach
             </a>

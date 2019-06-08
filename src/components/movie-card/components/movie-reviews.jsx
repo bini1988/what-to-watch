@@ -5,10 +5,11 @@ function MovieReviews({children}) {
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
-        {"Col1"}
+        {`Col1`}
+        {children}
       </div>
       <div className="movie-card__reviews-col">
-        {"Col2"}
+        {`Col2`}
       </div>
     </div>
   );
