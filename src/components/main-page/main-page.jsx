@@ -12,8 +12,6 @@ import PageFooter from "../page-footer/page-footer";
 import UserBlock from "../user-block/user-block";
 import MoviesCatalog from "../movies-catalog/movies-catalog";
 
-import user from "../../mocks/user";
-
 class MainPage extends PureComponent {
   componentDidMount() {
     this.props.fetchMovies();
@@ -31,7 +29,7 @@ class MainPage extends PureComponent {
           renderHeader={({className}) => (
             <PageHeader className={className}>
               <PageTitle hidden={true}>{`WTW`}</PageTitle>
-              <UserBlock user={user}/>
+              <UserBlock/>
             </PageHeader>
           )}>
           <MovieCard.Info>

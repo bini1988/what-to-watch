@@ -49,21 +49,13 @@ Array [
       <div
         className="user-block"
       >
-        <div
-          className="user-block__avatar"
+        <a
+          className="user-block__link"
+          href="/login"
+          onClick={[Function]}
         >
-          <a
-            href="/mylist"
-            onClick={[Function]}
-          >
-            <img
-              alt="Nicolas Cage"
-              height="63"
-              src="https://s3.amazonaws.com/uifaces/faces/twitter/wim1k/128.jpg"
-              width="63"
-            />
-          </a>
-        </div>
+          Sign in
+        </a>
       </div>
     </header>
     <div
