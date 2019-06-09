@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {MovieCardPropTypes} from "../../prop-types";
 import withPlayer, {withPlayerPropTypes} from "../../hocs/with-player";
 
 class SmallMovieCard extends PureComponent {
@@ -64,27 +65,7 @@ SmallMovieCard.defaultProps = {
 
 SmallMovieCard.propTypes = {
   /** Карточка фильма */
-  card: PropTypes.shape({
-    /** id фильма */
-    id: PropTypes.number.isRequired,
-    /** Название фильма */
-    title: PropTypes.string.isRequired,
-    /** Жанр фильма */
-    genre: PropTypes.string,
-    /** Год выхода */
-    year: PropTypes.number,
-    /** Набор изображений фильма */
-    images: PropTypes.shape({
-      /** Превью к трейлеру фильма */
-      preview: PropTypes.string,
-      /** Постер к фильму */
-      poster: PropTypes.string,
-      /** Оформление к фильму */
-      background: PropTypes.string,
-    }),
-    /** Путь к трейлеру фильма */
-    trailer: PropTypes.string,
-  }).isRequired,
+  card: MovieCardPropTypes,
   /** Обрабочик события курсор мыши на элементе */
   onMouseEnter: PropTypes.func,
   /** Обрабочик события курсор мыши покинул элемент */
