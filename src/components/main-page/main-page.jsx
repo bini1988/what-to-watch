@@ -20,30 +20,21 @@ class MainPage extends PureComponent {
 
   render() {
     const {promoMovie = {}, movies, moviesGenres, activeGenre, onGenreChange} = this.props;
-    const {title, genre, year, images = {}} = promoMovie;
 
     return (
       <React.Fragment>
-        <MovieCard
-          card={promoMovie}
-          renderHeader={({className}) => (
-            <PageHeader className={className}>
-              <PageTitle hidden={true}>{`WTW`}</PageTitle>
-              <UserBlock/>
-            </PageHeader>
-          )}>
-          <MovieCard.Info>
-            <MovieCard.Poster
-              title={title}
-              poster={images.poster}/>
-            <MovieCard.Description
-              title={title}
-              genre={genre}
-              year={year}>
+        <MovieCard card={promoMovie}>
+          <MovieCard.Header component={PageHeader}>
+            <PageTitle hidden>{`WTW`}</PageTitle>
+            <UserBlock/>
+          </MovieCard.Header>
+          <MovieCard.InfoWrapper>
+            <MovieCard.Poster/>
+            <MovieCard.Description>
               <MovieCard.PlayButton/>
               <MovieCard.ListButton/>
             </MovieCard.Description>
-          </MovieCard.Info>
+          </MovieCard.InfoWrapper>
         </MovieCard>
         <div className="page-content">
           <MoviesCatalog
