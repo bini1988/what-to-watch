@@ -8,6 +8,8 @@ it(`SignInPage correctly renders default markup`, () => {
       <MemoryRouter
         initialEntries = {[`/`]}>
         <SignInPage
+          location={{state: {referrer: `/mylist`}}}
+          history={{}}
           onUserLogin={() => {}}/>
       </MemoryRouter>
   ).toJSON();
