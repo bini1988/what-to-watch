@@ -5,8 +5,7 @@ import GenresList from "../genres-list/genres-list.jsx";
 import withActiveElement, {withActiveElementPropTypes} from "../../hocs/with-active-element";
 
 function MoviesCatalog(props) {
-  const {moviesGenreGroups = {}, activeGenre, onGenreChange, onMoviesMore, setActiveElement, resetActiveElement} = props;
-  const movies = moviesGenreGroups[activeGenre] || [];
+  const {movies, moviesGenres, activeGenre, onGenreChange, onMoviesMore} = props;
 
   return (
     <section className="catalog">
@@ -14,7 +13,7 @@ function MoviesCatalog(props) {
         {`Catalog`}
       </h2>
       <GenresList
-        genres={Object.keys(moviesGenreGroups)}
+        genres={moviesGenres}
         activeGenre={activeGenre}
         onGenreChange={onGenreChange}/>
       <div className="catalog__movies-list">
@@ -22,8 +21,8 @@ function MoviesCatalog(props) {
           <SmallMovieCard
             key={it.id}
             card={it}
-            onMouseEnter={setActiveElement}
-            onMouseLeave={resetActiveElement}/>
+            onMouseEnter={props.setActiveElement}
+            onMouseLeave={props.resetActiveElement}/>
         ))}
       </div>
       {(typeof onMoviesMore === `function`) && (
@@ -41,21 +40,26 @@ function MoviesCatalog(props) {
 }
 
 MoviesCatalog.defaultProps = {
+  movies: [],
+  moviesGenres: [],
   activeGenre: `All genres`,
 };
 MoviesCatalog.propTypes = {
-  /** Список отображаемых фильмов группированных по жанрам */
-  moviesGenreGroups: PropTypes.objectOf(
-      PropTypes.arrayOf(
-          SmallMovieCard.propTypes.card
-      )
+  /** Список отображаемых фильмов */
+  movies: PropTypes.arrayOf(
+      SmallMovieCard.propTypes.card,
   ),
-  /** Активный жанр */
+  /** Список отображаемых жанров фильмов */
+  moviesGenres: PropTypes.arrayOf(
+      PropTypes.string,
+  ),
+  /** Активный жанр фильмов */
   activeGenre: PropTypes.string,
   /** Изменить фильтр списка фильмов по жанру */
   onGenreChange: PropTypes.func,
   /** Получить следующие элементы списка */
   onMoviesMore: PropTypes.func,
+  /** HOC пропсы */
   ...withActiveElementPropTypes,
 };
 

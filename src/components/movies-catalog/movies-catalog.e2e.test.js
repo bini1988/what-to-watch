@@ -18,7 +18,8 @@ describe(`MoviesCatalog`, () => {
         <MemoryRouter
           initialEntries = {[`/`]}>
           <MoviesCatalog
-            moviesGenreGroups={genreGroupsMock}
+            movies={genreGroupsMock[`All Genres`]}
+            moviesGenres={Object.keys(genreGroupsMock)}
             activeGenre="All Genres"
             setActiveElement={handleSetActiveElement}/>
         </MemoryRouter>
@@ -35,8 +36,10 @@ describe(`MoviesCatalog`, () => {
     const handleResetActiveElement = jest.fn();
     const wrapper = mount(
         <MemoryRouter
-          initialEntries = {[`/`]}><MoviesCatalog
-            moviesGenreGroups={genreGroupsMock}
+          initialEntries = {[`/`]}>
+          <MoviesCatalog
+            movies={genreGroupsMock[`All Genres`]}
+            moviesGenres={Object.keys(genreGroupsMock)}
             activeGenre="All Genres"
             resetActiveElement={handleResetActiveElement}/>
         </MemoryRouter>
@@ -55,7 +58,8 @@ describe(`MoviesCatalog`, () => {
         <MemoryRouter
           initialEntries = {[`/`]}>
           <MoviesCatalog
-            moviesGenreGroups={genreGroupsMock}
+            movies={genreGroupsMock[`All Genres`]}
+            moviesGenres={Object.keys(genreGroupsMock)}
             activeGenre="All Genres"
             onMoviesMore={handleMoviesMore}/>
         </MemoryRouter>

@@ -10,7 +10,8 @@ it(`MoviesCatalog correctly renders default markup`, () => {
         <MemoryRouter
           initialEntries = {[`/`]}>
           <MoviesCatalog
-            moviesGenreGroups={genreGroupsMock}
+            movies={genreGroupsMock[`All Genres`]}
+            moviesGenres={Object.keys(genreGroupsMock)}
             activeGenre="All Genres"
             onGenreChange={() => {}}/>
         </MemoryRouter>
@@ -25,7 +26,8 @@ it(`MoviesCatalog correctly renders default markup with more button`, () => {
         <MemoryRouter
           initialEntries = {[`/`]}>
           <MoviesCatalog
-            moviesGenreGroups={genreGroupsMock}
+            movies={genreGroupsMock[`All Genres`]}
+            moviesGenres={Object.keys(genreGroupsMock)}
             activeGenre="All Genres"
             onGenreChange={() => {}}
             onMoviesMore={() => {}}/>
