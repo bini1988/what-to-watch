@@ -1,70 +1,81 @@
 
-export const initialState = {
-  isAuthorizationRequired: false,
-  profile: null,
-};
-
 export const ActionTypes = {
-  AUTHORIZE_USER: `AUTHORIZE_USER`,
-  UNAUTHORIZE_USER: `UNAUTHORIZE_USER`,
-  AUTHORIZATION_REQUIRED: `AUTHORIZATION_REQUIRED`,
+  LOGIN_USER: `LOGIN_USER`,
+  LOGOUT_USER: `LOGOUT_USER`,
+  LOGIN_ERROR: `LOGIN_ERROR`,
 };
 
-/**
- * Пользователю необходимо авторизоваться
- * @return {Object}
- */
-export const requireAuthorization = () => {
-  return {
-    type: ActionTypes.AUTHORIZATION_REQUIRED,
-  };
+export const ActionCreator = {
+  /**
+   * Авторизовать пользователя
+   * @param {Object} user Параметры пользователя
+   * @return {Object}
+   */
+  login: (user) => {
+    return {type: ActionTypes.LOGIN_USER, payload: user};
+  },
+  /**
+   * Сбросить авторизацию текущего пользователя
+   * @return {Object}
+   */
+  logout: () => {
+    return {type: ActionTypes.LOGOUT_USER};
+  },
+  /**
+   * Ошибка авторизации пользователя
+   * @param {Any} error Описание ошибки
+   * @return {Object}
+   */
+  loginError: (error) => {
+    return {type: ActionTypes.LOGIN_ERROR, error};
+  },
 };
 
-/**
- * Сбросить данные авторизованного пользователя
- * @return {Object}
- */
-export const unauthorizeUser = () => {
-  return {
-    type: ActionTypes.UNAUTHORIZE_USER,
-  };
+export const Operation = {
+  /**
+   * Авторизовать пользователя с заданными параметрами
+   * @param {Object} params Параметры авторизации
+   * @param {string} params.email E-mail пользователя
+   * @param {string} params.password Пароль пользователя
+   * @return {Promise}
+   */
+  loginUser: (params) => {
+    return (dispath, getState, api) => {
+      return api.loginUser(params).then((user) => {
+        return dispath(ActionCreator.login(user));
+      });
+    };
+  },
+  /**
+   * Проверить аторизован ли текущий пользователь
+   * @return {Promise}
+   */
+  echoUser: () => {
+    return (dispath, getState, api) => {
+      return api.echoUser().then((user) => {
+        return dispath(ActionCreator.login(user));
+      });
+    };
+  }
 };
 
-/**
- * Авторизовать пользователя
- * @param {Object} user Параметры пользователя
- * @return {Object}
- */
-export const authorizeUser = (user) => {
-  return {
-    type: ActionTypes.AUTHORIZE_USER,
-    payload: user,
-  };
-};
-
-/**
- * Запросить авторизацию пользователя
- * @param {Object} params Параметры авторизации
- * @param {string} params.email E-mail пользователя
- * @param {string} params.password Пароль пользователя
- * @return {Function}
- */
-export const loginUser = (params) => {
-  return (dispath, getState, api) => {
-    return api.loginUser(params).then((user) => {
-      return dispath(authorizeUser(user));
-    });
-  };
+export const initialState = {
+  /** Авторизован ли текущий пользователь */
+  isAuthenticated: false,
+  /** Ошибка авторизации */
+  error: null,
+  /** Пользовательские данные */
+  data: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.UNAUTHORIZE_USER:
-      return {...state, profile: null};
-    case ActionTypes.AUTHORIZE_USER:
-      return {...state, isAuthorizationRequired: false, profile: action.payload};
-    case ActionTypes.AUTHORIZATION_REQUIRED:
-      return {...state, isAuthorizationRequired: true};
+    case ActionTypes.LOGIN_USER:
+      return {...state, isAuthenticated: true, data: action.payload, error: null};
+    case ActionTypes.LOGOUT_USER:
+      return {...initialState};
+    case ActionTypes.LOGIN_ERROR:
+      return {...initialState, error: action.error};
     default:
       return state;
   }
