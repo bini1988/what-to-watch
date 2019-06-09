@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {Operation} from "../../reducer/movies/movies";
-import {getMyListMovies, getMoviesByGenres} from "../../reducer/movies/selectors";
+import {getMyListMovies} from "../../reducer/movies/selectors";
 
 import PageHeader from "../page-header/page-header";
 import PageTitle from "../page-title/page-title";
@@ -11,15 +11,13 @@ import PageFooter from "../page-footer/page-footer";
 import UserBlock from "../user-block/user-block";
 import MoviesCatalog from "../movies-catalog/movies-catalog";
 
-import user from "../../mocks/user";
-
 class MyListPage extends PureComponent {
   componentDidMount() {
-    this.props.fetchMovies();
+    this.props.fetchMyListMovies();
   }
 
   render() {
-    const {moviesGenreGroups} = this.props;
+    const {movies} = this.props;
 
     return (
       <div className="user-page">
@@ -27,10 +25,10 @@ class MyListPage extends PureComponent {
           <PageTitle className="user-page__title">
             {`My list`}
           </PageTitle>
-          <UserBlock user={user}/>
+          <UserBlock/>
         </PageHeader>
         <MoviesCatalog
-          moviesGenreGroups={moviesGenreGroups}/>
+          movies={movies}/>
         <PageFooter/>
       </div>
     );
@@ -38,14 +36,10 @@ class MyListPage extends PureComponent {
 }
 
 MyListPage.propTypes = {
-  /** Список отображаемых фильмов группированных по жанрам */
-  myListMovies: PropTypes.arrayOf(
+  /** Список фильмов добавленных в список «к просмотру» */
+  movies: PropTypes.arrayOf(
       PropTypes.object,
   ),
-  /** Список отображаемых фильмов группированных по жанрам */
-  moviesGenreGroups: MoviesCatalog.propTypes.moviesGenreGroups,
-  /** Получить список фильмов */
-  fetchMovies: PropTypes.func,
   /** Получить список фильмов добавленных в список «к просмотру» */
   fetchMyListMovies: PropTypes.func,
   /** Вложенные элементы */
@@ -54,12 +48,10 @@ MyListPage.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    moviesGenreGroups: getMoviesByGenres(state),
-    myListMovies: getMyListMovies(state),
+    movies: getMyListMovies(state),
   };
 };
 const mapDispatchToProps = {
-  fetchMovies: Operation.fetchMovies,
   fetchMyListMovies: Operation.fetchMyListMovies,
 };
 
