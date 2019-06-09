@@ -1,8 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {compose} from "redux";
 import {Link} from "react-router-dom";
+import {withRouter} from "react-router";
+import withUser from "../../hocs/with-user";
 
-function UserBlock({user}) {
+function UserBlock({user, location}) {
+  const currentLocation = location && location.pathname;
+
   return (
     <div className="user-block">
       {user ? (
@@ -18,7 +23,10 @@ function UserBlock({user}) {
       ) : (
         <Link
           className="user-block__link"
-          to="/login">
+          to={{
+            pathname: `/login`,
+            state: {referrer: currentLocation},
+          }}>
           {`Sign in`}
         </Link>
       )}
@@ -27,6 +35,8 @@ function UserBlock({user}) {
 }
 
 UserBlock.propTypes = {
+  /** Redux Route location */
+  location: PropTypes.object,
   /** Данные пользователя */
   user: PropTypes.shape({
     id: PropTypes.number,
@@ -39,4 +49,5 @@ UserBlock.propTypes = {
   }),
 };
 
-export default UserBlock;
+export {UserBlock};
+export default compose(withRouter, withUser)(UserBlock);
