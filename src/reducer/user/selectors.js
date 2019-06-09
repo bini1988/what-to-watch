@@ -1,12 +1,21 @@
 import NameSpace from "../name-spaces";
 
 /**
+ * Вернуть пользовательские данные
+ * @param {Object} state Текущее состояние redux стора
+ * @return {boolean}
+ */
+export const getUser = (state = {}) => {
+  return state[NameSpace.User] || {};
+};
+
+/**
  * Авторизаван ли пользователь
  * @param {Object} state Текущее состояние redux стора
  * @return {boolean}
  */
 export const isAuthenticated = (state) => {
-  return state[NameSpace.User].isAuthenticated;
+  return getUser(state).isAuthenticated;
 };
 
 /**
@@ -14,8 +23,8 @@ export const isAuthenticated = (state) => {
  * @param {Object} state Текущее состояние redux стора
  * @return {boolean}
  */
-export const getUser = (state) => {
-  return state[NameSpace.User].data;
+export const getUserData = (state) => {
+  return getUser(state).data;
 };
 
 /**
@@ -24,5 +33,5 @@ export const getUser = (state) => {
  * @return {Any}
  */
 export const getAuthError = (state) => {
-  return state[NameSpace.User].error;
+  return getUser(state).error;
 };
