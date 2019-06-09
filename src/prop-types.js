@@ -1,10 +1,21 @@
 import PropTypes from "prop-types";
 
 /**
+ * Рейтинг фильма
+ */
+export const MovieRatingPropTypes = PropTypes.shape({
+  /** Оценка фильма */
+  score: PropTypes.number.isRequired,
+  /** Уровень оценки фильма */
+  level: PropTypes.string.isRequired,
+  /** Количество голосов за фильм */
+  count: PropTypes.number.isRequired,
+});
+
+/**
  * Карточка фильма
  */
-export const MovieCardPropTypes =
-PropTypes.shape({
+export const MovieCardPropTypes = PropTypes.shape({
   /** id фильма */
   id: PropTypes.number,
   /** Название фильма */
@@ -39,12 +50,6 @@ PropTypes.shape({
   /** Путь к трейлеру фильма */
   trailer: PropTypes.string,
   /** Рейтинг фильма */
-  rating: PropTypes.shape({
-    /** Оценка фильма */
-    score: PropTypes.number.isRequired,
-    /** Уровень оценки фильма */
-    level: PropTypes.string.isRequired,
-    /** Количество голосов за фильм */
-    count: PropTypes.number.isRequired,
-  }),
+  rating: MovieRatingPropTypes,
 });
+
