@@ -8,7 +8,10 @@ Array [
     <div
       className="movie-card__bg"
     >
-      <img />
+      <img
+        alt="A Star Is Born"
+        src="https://es31-server.appspot.com/wtw/static/film/background/A_Star_is_Born.jpg"
+      />
     </div>
     <header
       className="page-header movie-card__head"
@@ -73,7 +76,9 @@ Array [
           className="movie-card__poster"
         >
           <img
+            alt="A Star Is Born"
             height="327"
+            src="https://es31-server.appspot.com/wtw/static/film/poster/A_Star_Is_Born.jpg"
             width="218"
           />
         </div>
@@ -82,16 +87,22 @@ Array [
         >
           <h2
             className="movie-card__title"
-          />
+          >
+            A Star Is Born
+          </h2>
           <p
             className="movie-card__meta"
           >
             <span
               className="movie-card__genre"
-            />
+            >
+              Drama
+            </span>
             <span
               className="movie-card__year"
-            />
+            >
+              2018
+            </span>
           </p>
           <div
             className="movie-card__buttons"
@@ -150,13 +161,33 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item "
         >
           <a
             className="catalog__genres-link"
             onClick={[Function]}
           >
             All Genres
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            onClick={[Function]}
+          >
+            Genre #1
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            onClick={[Function]}
+          >
+            Genre #2
           </a>
         </li>
       </ul>
@@ -175,7 +206,7 @@ Array [
             <video
               height={175}
               muted={true}
-              poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
+              poster="https://es31-server.appspot.com/wtw/static/film/preview/A_Star_Is_Born.jpg"
               preload="none"
               src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
               width={280}
@@ -189,7 +220,7 @@ Array [
               href="/film/11"
               onClick={[Function]}
             >
-              Beach
+              A Star Is Born
             </a>
           </h3>
         </article>
@@ -205,7 +236,7 @@ Array [
             <video
               height={175}
               muted={true}
-              poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
+              poster="https://es31-server.appspot.com/wtw/static/film/preview/A_Star_Is_Born.jpg"
               preload="none"
               src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
               width={280}
@@ -219,7 +250,7 @@ Array [
               href="/film/22"
               onClick={[Function]}
             >
-              Beach
+              A Star Is Born
             </a>
           </h3>
         </article>
