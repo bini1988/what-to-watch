@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
+import {MovieCardPropTypes} from "../../../prop-types";
 
-function MovieDetails(props) {
-  const {director, starring = [], genre, year, duration} = props;
+function MovieDetails({card = {}}) {
+  const {director, starring = [], genre, year, duration} = card;
 
   return (
     <div className="movie-card__text movie-card__row">
@@ -41,18 +41,8 @@ function MovieDetails(props) {
 }
 
 MovieDetails.propTypes = {
-  /** Жанр фильма */
-  genre: PropTypes.string,
-  /** Год выхода */
-  year: PropTypes.number,
-  /** Режисер фильма */
-  director: PropTypes.string,
-  /** Актерский состав */
-  starring: PropTypes.arrayOf(
-      PropTypes.string,
-  ),
-  /** Продолжительность фильма */
-  duration: PropTypes.string,
+  /** Карточка фильма */
+  card: MovieCardPropTypes,
 };
 
 export default MovieDetails;

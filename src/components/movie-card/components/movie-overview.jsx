@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
+import {MovieCardPropTypes} from "../../../prop-types";
 import MovieRating from "../../movie-rating/movie-rating";
 
-function MovieOverview(props) {
-  const {rating, description, director, starring = []} = props;
+function MovieOverview({card = {}}) {
+  const {rating, description, director, starring = []} = card;
 
   return (
     <React.Fragment>
@@ -24,18 +24,8 @@ function MovieOverview(props) {
 }
 
 MovieOverview.propTypes = {
-  /** Рейтинг фильма */
-  rating: MovieRating.propTypes.rating,
-  /** Описание фильма */
-  description: PropTypes.string,
-  /** Режисер фильма */
-  director: PropTypes.string,
-  /** Актерский состав */
-  starring: PropTypes.arrayOf(
-      PropTypes.string,
-  ),
-  /** Вложенные элементы */
-  children: PropTypes.any,
+  /** Карточка фильма */
+  card: MovieCardPropTypes,
 };
 
 export default MovieOverview;
