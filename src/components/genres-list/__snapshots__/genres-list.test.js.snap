@@ -26,3 +26,5 @@ exports[`GenresList correctly renders default markup 1`] = `
   </li>
 </ul>
 `;
+
+exports[`GenresList correctly renders empty genres list 1`] = `null`;
