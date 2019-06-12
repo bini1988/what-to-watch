@@ -9,15 +9,15 @@ import MovieDetails from "./movie-details";
 import MovieReviews from "./movie-reviews";
 
 const AboutPages = {
-  overview: {
+  Overview: {
     label: `Overview`,
     component: MovieOverview,
   },
-  details: {
+  Details: {
     label: `Details`,
     component: MovieDetails,
   },
-  reviews: {
+  Reviews: {
     label: `Reviews`,
     component: MovieReviews,
   },
@@ -37,23 +37,20 @@ function About({card = {}, page}) {
             active={name === page}/>
         ))}
       </MovieNav>
-      {PageComponent && (
+      {PageComponent ? (
         <PageComponent.component card={card}/>
+      ) : (
+        <MovieOverview card={card}/>
       )}
     </div>
   );
 }
 
-About.defaultProps = {
-  page: `overview`,
-};
 About.propTypes = {
   /** Имя отображемой страницы */
-  page: PropTypes.oneOf([
-    `overview`,
-    `details`,
-    `reviews`,
-  ]),
+  page: PropTypes.oneOf(
+      Object.keys(AboutPages),
+  ),
   /** Карточка фильма */
   card: MovieCardPropTypes,
 };
