@@ -165,11 +165,11 @@ Array [
               className="movie-nav__list"
             >
               <li
-                className="movie-nav__item movie-nav__item--active"
+                className="movie-nav__item"
               >
                 <a
                   className="movie-nav__link"
-                  href="#overview"
+                  href="#Overview"
                 >
                   Overview
                 </a>
@@ -179,7 +179,7 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#details"
+                  href="#Details"
                 >
                   Details
                 </a>
@@ -189,7 +189,7 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#reviews"
+                  href="#Reviews"
                 >
                   Reviews
                 </a>

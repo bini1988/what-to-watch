@@ -123,11 +123,11 @@ exports[`MovieCard correctly renders complex markup 1`] = `
             className="movie-nav__list"
           >
             <li
-              className="movie-nav__item movie-nav__item--active"
+              className="movie-nav__item"
             >
               <a
                 className="movie-nav__link"
-                href="#overview"
+                href="#Overview"
               >
                 Overview
               </a>
@@ -137,7 +137,7 @@ exports[`MovieCard correctly renders complex markup 1`] = `
             >
               <a
                 className="movie-nav__link"
-                href="#details"
+                href="#Details"
               >
                 Details
               </a>
@@ -147,7 +147,7 @@ exports[`MovieCard correctly renders complex markup 1`] = `
             >
               <a
                 className="movie-nav__link"
-                href="#reviews"
+                href="#Reviews"
               >
                 Reviews
               </a>
