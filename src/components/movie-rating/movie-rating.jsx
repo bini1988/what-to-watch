@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import {MovieRatingPropTypes} from "../../prop-types";
 
 function MovieRating({rating = {}}) {
   const {score, count, level} = rating;
@@ -21,14 +21,7 @@ function MovieRating({rating = {}}) {
 }
 
 MovieRating.propTypes = {
-  rating: PropTypes.shape({
-    /** Оценка фильма */
-    score: PropTypes.number.isRequired,
-    /** Уровень оценки фильма */
-    level: PropTypes.string.isRequired,
-    /** Количество голосов за фильм */
-    count: PropTypes.number.isRequired,
-  }),
+  rating: MovieRatingPropTypes,
 };
 
 export default MovieRating;

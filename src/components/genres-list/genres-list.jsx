@@ -1,13 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const GenresList = ({genres = [], activeGenre, onGenreChange}) => {
+export const GenresList = ({genres, activeGenre, onGenreChange}) => {
   const withActiveClass = (genre) =>
     genre === activeGenre ? `catalog__genres-item--active` : ``;
   const hanldeClickWith = (genre) => (event) => {
     event.preventDefault();
     onGenreChange(genre);
   };
+
+  if (!Array.isArray(genres) || !genres.length) {
+    return null;
+  }
 
   return (
     <ul className="catalog__genres-list">

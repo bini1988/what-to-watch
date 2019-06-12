@@ -1,7 +1,7 @@
 import React from "react";
 import {MemoryRouter} from "react-router-dom";
 import renderer from "react-test-renderer";
-import UserBlock from "./user-block.jsx";
+import {UserBlock} from "./user-block.jsx";
 import user from "../../mocks/user";
 
 

@@ -54,11 +54,13 @@ function MovieCard(data = {}) {
   this.description = data.description;
   this.starring = data.starring;
   this.duration = getDuration(data.run_time);
+  this.isInList = data.is_favorite;
 
   this.images = {};
   this.images.preview = data.preview_image;
   this.images.poster = data.poster_image;
   this.images.background = data.background_image;
+  this.images.backgroundColor = data.background_color;
 
   this.trailer = data.video_link;
 

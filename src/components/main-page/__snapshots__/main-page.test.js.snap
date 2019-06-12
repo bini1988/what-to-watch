@@ -4,12 +4,12 @@ exports[`MainPage correctly renders default markup 1`] = `
 Array [
   <section
     className="movie-card"
+    style={
+      Object {
+        "background": "#9B7E61",
+      }
+    }
   >
-    <div
-      className="movie-card__bg"
-    >
-      <img />
-    </div>
     <header
       className="page-header movie-card__head"
     >
@@ -38,6 +38,14 @@ Array [
           </span>
         </a>
       </div>
+      <div
+        className="movie-card__bg"
+      >
+        <img
+          alt="War of the Worlds"
+          src="https://es31-server.appspot.com/wtw/static/film/background/War_of_the_Worlds.jpg"
+        />
+      </div>
       <h1
         className="page-title visually-hidden"
       >
@@ -46,21 +54,13 @@ Array [
       <div
         className="user-block"
       >
-        <div
-          className="user-block__avatar"
+        <a
+          className="user-block__link"
+          href="/login"
+          onClick={[Function]}
         >
-          <a
-            href="/mylist"
-            onClick={[Function]}
-          >
-            <img
-              alt="Nicolas Cage"
-              height="63"
-              src="https://s3.amazonaws.com/uifaces/faces/twitter/wim1k/128.jpg"
-              width="63"
-            />
-          </a>
-        </div>
+          Sign in
+        </a>
       </div>
     </header>
     <div
@@ -73,7 +73,9 @@ Array [
           className="movie-card__poster"
         >
           <img
+            alt="War of the Worlds"
             height="327"
+            src="https://es31-server.appspot.com/wtw/static/film/poster/War_of_the_Worlds.jpg"
             width="218"
           />
         </div>
@@ -82,16 +84,22 @@ Array [
         >
           <h2
             className="movie-card__title"
-          />
+          >
+            War of the Worlds
+          </h2>
           <p
             className="movie-card__meta"
           >
             <span
               className="movie-card__genre"
-            />
+            >
+              Adventure
+            </span>
             <span
               className="movie-card__year"
-            />
+            >
+              2005
+            </span>
           </p>
           <div
             className="movie-card__buttons"
@@ -150,13 +158,33 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item "
         >
           <a
             className="catalog__genres-link"
             onClick={[Function]}
           >
             All Genres
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            onClick={[Function]}
+          >
+            Genre #1
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            onClick={[Function]}
+          >
+            Genre #2
           </a>
         </li>
       </ul>
@@ -175,7 +203,7 @@ Array [
             <video
               height={175}
               muted={true}
-              poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
+              poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
               preload="none"
               src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
               width={280}
@@ -189,7 +217,7 @@ Array [
               href="/film/11"
               onClick={[Function]}
             >
-              Beach
+              War of the Worlds
             </a>
           </h3>
         </article>
@@ -205,7 +233,7 @@ Array [
             <video
               height={175}
               muted={true}
-              poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
+              poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
               preload="none"
               src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
               width={280}
@@ -219,7 +247,7 @@ Array [
               href="/film/22"
               onClick={[Function]}
             >
-              Beach
+              War of the Worlds
             </a>
           </h3>
         </article>

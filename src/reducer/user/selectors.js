@@ -1,12 +1,21 @@
 import NameSpace from "../name-spaces";
 
 /**
- * Необходима авторизация пользователя
+ * Вернуть пользовательские данные
  * @param {Object} state Текущее состояние redux стора
  * @return {boolean}
  */
-export const isAuthorizationRequired = (state) => {
-  return state[NameSpace.User].isAuthorizationRequired;
+export const getUser = (state = {}) => {
+  return state[NameSpace.User] || {};
+};
+
+/**
+ * Авторизаван ли пользователь
+ * @param {Object} state Текущее состояние redux стора
+ * @return {boolean}
+ */
+export const isAuthenticated = (state) => {
+  return getUser(state).isAuthenticated;
 };
 
 /**
@@ -14,6 +23,15 @@ export const isAuthorizationRequired = (state) => {
  * @param {Object} state Текущее состояние redux стора
  * @return {boolean}
  */
-export const getUserProfile = (state) => {
-  return state[NameSpace.User].profile;
+export const getUserData = (state) => {
+  return getUser(state).data;
+};
+
+/**
+ * Вернуть ошибку авторизации
+ * @param {Object} state Текущее состояние redux стора
+ * @return {Any}
+ */
+export const getAuthError = (state) => {
+  return getUser(state).error;
 };

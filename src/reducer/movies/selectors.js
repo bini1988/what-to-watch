@@ -71,3 +71,24 @@ export const getActiveGenre = (state) => {
  * @return {Object}
  */
 export const getMoviesByGenres = createSelector(getMovies, groupByGenres);
+
+/**
+ * Получение списка фильмов заданного жанра
+ * @param {Object} state Текущее состояние redux стора
+ * @param {string} genre Жанр фильма
+ * @return {Object[]}
+ */
+export const getMoviesByGenre = (state, genre) => {
+  return getMoviesByGenres(state)[genre];
+};
+
+/**
+ * Получение списка жанров
+ * @param {Object} state Текущее состояние redux стора
+ * @return {string[]}
+ */
+export const getMoviesGenres = (state) => {
+  const MAX_VISIBLE_GENRES = 10;
+  const genres = getMoviesByGenres(state);
+  return Object.keys(genres).slice(0, MAX_VISIBLE_GENRES);
+};

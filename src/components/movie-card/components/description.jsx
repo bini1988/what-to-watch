@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {MovieCardPropTypes} from "../../../prop-types";
 
-function Description({title, genre, year, children}) {
+function Description({card = {}, children}) {
+  const {title, genre, year} = card;
+
   return (
     <div className="movie-card__desc">
       <h2 className="movie-card__title">{title}</h2>
@@ -17,14 +20,8 @@ function Description({title, genre, year, children}) {
 }
 
 Description.propTypes = {
-  /** Дополнительный класс к контейнеру */
-  className: PropTypes.string,
-  /** Название фильма */
-  title: PropTypes.string,
-  /** Жанр фильма */
-  genre: PropTypes.string,
-  /** Год выхода */
-  year: PropTypes.number,
+  /** Карточка фильма */
+  card: MovieCardPropTypes,
   /** Вложенные элементы */
   children: PropTypes.any,
 };

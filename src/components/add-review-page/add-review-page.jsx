@@ -1,57 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getUserProfile} from "../../reducer/user/selectors";
+import {Operation} from "../../reducer/reviews/reviews";
 
 import MovieCard from "../movie-card/movie-card";
 import PageHeader from "../page-header/page-header";
 import PageTitle from "../page-title/page-title";
 import UserBlock from "../user-block/user-block";
-import Breadcrumbs from "../breadcrumbs/breadcrumbs";
 import AddReview from "../add-review/add-review";
 
-import card from "../../mocks/movie-card";
+import MovieCardMock from "../../mocks/movie-card";
 
-function AddReviewPage({user, onSubmit}) {
+function AddReviewPage({onReviewSubmit}) {
   return (
-    <MovieCard
-      mode="full"
-      card={card}
-      renderHeader={() => (
+    <MovieCard full card={MovieCardMock}>
+      <MovieCard.Header>
         <PageHeader>
-          <Breadcrumbs>
-            <Breadcrumbs.Item
-              label="The Grand Budapest Hotel"
-              href="/film/:id"/>
-            <Breadcrumbs.Item
-              label="Add review"/>
-          </Breadcrumbs>
-          <PageTitle hidden={true}>
-            {`WTW`}
-          </PageTitle>
-          <UserBlock user={user}/>
+          <PageTitle hidden>{`WTW`}</PageTitle>
+          <MovieCard.Breadcrumbs/>
+          <UserBlock/>
         </PageHeader>
-      )}>
+        <MovieCard.Poster
+          mode="small"/>
+      </MovieCard.Header>
       <AddReview
-        onSubmit={onSubmit}/>
+        onSubmit={onReviewSubmit}/>
     </MovieCard>
   );
 }
 
 AddReviewPage.propTypes = {
-  /** Данные пользователя */
-  user: UserBlock.propTypes.user,
   /** Обработчик события отправки формы */
-  onSubmit: PropTypes.func,
+  onReviewSubmit: PropTypes.func,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: getUserProfile(state),
-  };
+const mapDispatchToProps = {
+  onReviewSubmit: Operation.submitMovieReview,
 };
-
 
 export {AddReviewPage};
-export default connect(mapStateToProps)(AddReviewPage);
+export default connect(null, mapDispatchToProps)(AddReviewPage);
 

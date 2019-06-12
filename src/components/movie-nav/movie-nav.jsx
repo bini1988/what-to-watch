@@ -2,9 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
-function Item({label, href}) {
+function Item({label, active, href}) {
   return (
-    <li className="movie-nav__item">
+    <li className={cn(
+        `movie-nav__item`,
+        {"movie-nav__item--active": active},
+    )}>
       <a className="movie-nav__link" href={href}>
         {label}
       </a>
@@ -15,6 +18,8 @@ function Item({label, href}) {
 Item.propTypes = {
   /** Подпись к элементу */
   label: PropTypes.string,
+  /** Активная ссылка */
+  active: PropTypes.bool,
   /** Ссылка */
   href: PropTypes.string,
 };

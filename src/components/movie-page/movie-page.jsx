@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
+import {MovieCardPropTypes} from "../../prop-types";
 import {getMovieById} from "../../reducer/movies/selectors";
 
 import MovieCard from "../movie-card/movie-card";
@@ -11,20 +12,32 @@ import PageFooter from "../page-footer/page-footer";
 import UserBlock from "../user-block/user-block";
 import MoviesCatalog from "../movies-catalog/movies-catalog";
 
-import user from "../../mocks/user";
+import MovieCardMock from "../../mocks/movie-card";
 
-function MoviePage({movieCard}) {
+function MoviePage({movie = MovieCardMock, location = {}}) {
+  const {hash = ``} = location;
+  const page = hash.slice(1) || undefined;
+
   return (
     <React.Fragment>
-      <MovieCard
-        mode="full"
-        card={movieCard}
-        renderHeroHeader={({className}) => (
-          <PageHeader className={className}>
-            <PageTitle hidden={true}>{`WTW`}</PageTitle>
-            <UserBlock user={user}/>
-          </PageHeader>
-        )}>
+      <MovieCard full card={movie}>
+        <MovieCard.Wrapper main>
+          <MovieCard.Header component={PageHeader}>
+            <PageTitle hidden>{`WTW`}</PageTitle>
+            <UserBlock/>
+          </MovieCard.Header>
+          <MovieCard.Wrapper>
+            <MovieCard.Description>
+              <MovieCard.PlayButton/>
+              <MovieCard.ListButton/>
+              <MovieCard.ReviewButton/>
+            </MovieCard.Description>
+          </MovieCard.Wrapper>
+        </MovieCard.Wrapper>
+        <MovieCard.InfoWrapper translate>
+          <MovieCard.Poster mode="big"/>
+          <MovieCard.About page={page}/>
+        </MovieCard.InfoWrapper>
       </MovieCard>
       <div className="page-content">
         <MoviesCatalog/>
@@ -36,7 +49,9 @@ function MoviePage({movieCard}) {
 
 MoviePage.propTypes = {
   /** Карточка фильма */
-  movieCard: PropTypes.object,
+  movie: MovieCardPropTypes,
+  /** React Router location */
+  location: PropTypes.object,
   /** Вложенные элементы */
   children: PropTypes.any,
 };
@@ -44,7 +59,7 @@ MoviePage.propTypes = {
 const mapStateToProps = (state, {match}) => {
   const id = match && match.params.id;
   return {
-    movieCard: getMovieById(state, id),
+    movie: getMovieById(state, id),
   };
 };
 const mapDispatchToProps = {};

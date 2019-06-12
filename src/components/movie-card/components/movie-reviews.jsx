@@ -1,12 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
+import {MovieCardPropTypes} from "../../../prop-types";
 
-function MovieReviews({children}) {
+function MovieReviews({card = {}}) {
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
-        {`Col1`}
-        {children}
+        {`Col1 ${card.title}`}
       </div>
       <div className="movie-card__reviews-col">
         {`Col2`}
@@ -16,8 +15,8 @@ function MovieReviews({children}) {
 }
 
 MovieReviews.propTypes = {
-  /** Вложенные элементы */
-  children: PropTypes.any,
+  /** Карточка фильма */
+  card: MovieCardPropTypes,
 };
 
 export default MovieReviews;

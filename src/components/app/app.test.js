@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {createStore} from "redux";
 import {MemoryRouter} from "react-router-dom";
 
-import reducer from "../../reducer/index";
+import reducer from "../../reducer/reducer";
 import {Provider} from "react-redux";
 // import App from "./app";
 

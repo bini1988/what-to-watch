@@ -4,15 +4,15 @@ exports[`MoviePage correctly renders default markup 1`] = `
 Array [
   <section
     className="movie-card movie-card--full"
+    style={
+      Object {
+        "background": "#9B7E61",
+      }
+    }
   >
     <div
       className="movie-card__hero"
     >
-      <div
-        className="movie-card__bg"
-      >
-        <img />
-      </div>
       <header
         className="page-header movie-card__head"
       >
@@ -41,6 +41,14 @@ Array [
             </span>
           </a>
         </div>
+        <div
+          className="movie-card__bg"
+        >
+          <img
+            alt="War of the Worlds"
+            src="https://es31-server.appspot.com/wtw/static/film/background/War_of_the_Worlds.jpg"
+          />
+        </div>
         <h1
           className="page-title visually-hidden"
         >
@@ -49,21 +57,13 @@ Array [
         <div
           className="user-block"
         >
-          <div
-            className="user-block__avatar"
+          <a
+            className="user-block__link"
+            href="/login"
+            onClick={[Function]}
           >
-            <a
-              href="/mylist"
-              onClick={[Function]}
-            >
-              <img
-                alt="Nicolas Cage"
-                height="63"
-                src="https://s3.amazonaws.com/uifaces/faces/twitter/wim1k/128.jpg"
-                width="63"
-              />
-            </a>
-          </div>
+            Sign in
+          </a>
         </div>
       </header>
       <div
@@ -74,16 +74,22 @@ Array [
         >
           <h2
             className="movie-card__title"
-          />
+          >
+            War of the Worlds
+          </h2>
           <p
             className="movie-card__meta"
           >
             <span
               className="movie-card__genre"
-            />
+            >
+              Adventure
+            </span>
             <span
               className="movie-card__year"
-            />
+            >
+              2005
+            </span>
           </p>
           <div
             className="movie-card__buttons"
@@ -124,7 +130,7 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="/film/undefined/review"
+              href="/film/1/review"
               onClick={[Function]}
             >
               Add review
@@ -143,7 +149,9 @@ Array [
           className="movie-card__poster movie-card__poster--big"
         >
           <img
+            alt="War of the Worlds"
             height="327"
+            src="https://es31-server.appspot.com/wtw/static/film/poster/War_of_the_Worlds.jpg"
             width="218"
           />
         </div>
@@ -161,7 +169,7 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#overview"
+                  href="#Overview"
                 >
                   Overview
                 </a>
@@ -171,7 +179,7 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#details"
+                  href="#Details"
                 >
                   Details
                 </a>
@@ -181,7 +189,7 @@ Array [
               >
                 <a
                   className="movie-nav__link"
-                  href="#reviews"
+                  href="#Reviews"
                 >
                   Reviews
                 </a>
@@ -193,35 +201,40 @@ Array [
           >
             <div
               className="movie-rating__score"
-            />
+            >
+              6.5
+            </div>
             <p
               className="movie-rating__meta"
             >
               <span
                 className="movie-rating__level"
-              />
+              >
+                Good
+              </span>
               <span
                 className="movie-rating__count"
               >
-                undefined ratings
+                386834 ratings
               </span>
             </p>
           </div>
           <div
             className="movie-card__text"
           >
+            As Earth is invaded by alien tripod fighting machines, one family fights for survival.
             <p
               className="movie-card__director"
             >
               <strong>
-                Director: undefined
+                Director: Steven Spielberg
               </strong>
             </p>
             <p
               className="movie-card__starring"
             >
               <strong>
-                Starring:  and other
+                Starring: Tom Cruise, Dakota Fanning, Tim Robbin and other
               </strong>
             </p>
           </div>
@@ -240,9 +253,6 @@ Array [
       >
         Catalog
       </h2>
-      <ul
-        className="catalog__genres-list"
-      />
       <div
         className="catalog__movies-list"
       />

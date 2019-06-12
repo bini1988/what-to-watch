@@ -1,28 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Poster from "./poster";
+import cn from "classnames";
+import {MovieCardPropTypes} from "../../../prop-types";
 
-function Header({background, poster, title, children}) {
+function Header({card = {}, className, component, children}) {
+  const {title, images = {}} = card;
+  const Wrapper = component
+    ? component : `div`;
+  const wrapperClass = component
+    ? `movie-card__head` : `movie-card__header`;
+
   return (
-    <div className="movie-card__header">
+    <Wrapper className={cn(wrapperClass, className)}>
       <div className="movie-card__bg">
-        <img src={background} alt={title}/>
+        <img
+          src={images.background}
+          alt={title}/>
       </div>
       {children}
-      <Poster mode="small" title={title} poster={poster}/>
-    </div>
+    </Wrapper>
   );
 }
 
 Header.propTypes = {
+  /** Карточка фильма */
+  card: MovieCardPropTypes,
   /** Дополнительный класс к контейнеру */
   className: PropTypes.string,
-  /** Название фильма */
-  title: PropTypes.string.isRequired,
-  /** Постер к фильму */
-  poster: PropTypes.string,
-  /** Оформление к фильму */
-  background: PropTypes.string,
+  /** Компонет переопредяющий обёртку для содержимого Header */
+  component: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.element,
+  ]),
   /** Вложенные элементы */
   children: PropTypes.any,
 };

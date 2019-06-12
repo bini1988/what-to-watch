@@ -22,6 +22,26 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
         All Genres
       </a>
     </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Genre #1
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Genre #2
+      </a>
+    </li>
   </ul>
   <div
     className="catalog__movies-list"
@@ -38,7 +58,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
         <video
           height={175}
           muted={true}
-          poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
+          poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
           preload="none"
           src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
           width={280}
@@ -52,7 +72,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
           href="/film/11"
           onClick={[Function]}
         >
-          Beach
+          War of the Worlds
         </a>
       </h3>
     </article>
@@ -68,7 +88,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
         <video
           height={175}
           muted={true}
-          poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
+          poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
           preload="none"
           src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
           width={280}
@@ -82,7 +102,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
           href="/film/22"
           onClick={[Function]}
         >
-          Beach
+          War of the Worlds
         </a>
       </h3>
     </article>
@@ -112,6 +132,26 @@ exports[`MoviesCatalog correctly renders default markup with more button 1`] = `
         All Genres
       </a>
     </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Genre #1
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Genre #2
+      </a>
+    </li>
   </ul>
   <div
     className="catalog__movies-list"
@@ -128,7 +168,7 @@ exports[`MoviesCatalog correctly renders default markup with more button 1`] = `
         <video
           height={175}
           muted={true}
-          poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
+          poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
           preload="none"
           src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
           width={280}
@@ -142,7 +182,7 @@ exports[`MoviesCatalog correctly renders default markup with more button 1`] = `
           href="/film/11"
           onClick={[Function]}
         >
-          Beach
+          War of the Worlds
         </a>
       </h3>
     </article>
@@ -158,7 +198,7 @@ exports[`MoviesCatalog correctly renders default markup with more button 1`] = `
         <video
           height={175}
           muted={true}
-          poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
+          poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
           preload="none"
           src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
           width={280}
@@ -172,7 +212,7 @@ exports[`MoviesCatalog correctly renders default markup with more button 1`] = `
           href="/film/22"
           onClick={[Function]}
         >
-          Beach
+          War of the Worlds
         </a>
       </h3>
     </article>

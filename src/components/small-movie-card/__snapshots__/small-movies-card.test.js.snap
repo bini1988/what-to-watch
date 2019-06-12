@@ -13,7 +13,7 @@ exports[`SmallMovieCard correctly renders default markup 1`] = `
     <video
       height={175}
       muted={true}
-      poster="https://es31-server.appspot.com/wtw/static/film/preview/beach.jpg"
+      poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
       preload="none"
       src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
       width={280}
@@ -27,7 +27,7 @@ exports[`SmallMovieCard correctly renders default markup 1`] = `
       href="/film/1"
       onClick={[Function]}
     >
-      Beach
+      War of the Worlds
     </a>
   </h3>
 </article>
