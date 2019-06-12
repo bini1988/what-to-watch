@@ -32,8 +32,9 @@ export function getRatingLevel(score) {
  * @return {string}
  */
 export function getDuration(time = 0) {
-  const timeHours = Math.trunc(time / 60);
-  const timeMinutes = time - timeHours * 60;
+  const MINUTES_PER_HOUR = 60;
+  const timeHours = Math.trunc(time / MINUTES_PER_HOUR);
+  const timeMinutes = time - timeHours * MINUTES_PER_HOUR;
 
   return (timeHours > 0)
     ? `${timeHours}h ${timeMinutes}m`
