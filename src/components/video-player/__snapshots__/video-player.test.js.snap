@@ -4,14 +4,6 @@ exports[`VideoPlayer correctly renders default markup 1`] = `
 <div
   className="player"
 >
-  <video
-    className="player__video"
-    onCanPlayThrough={[Function]}
-    onEnded={[Function]}
-    onTimeUpdate={[Function]}
-    poster="poster/path"
-    src="src/path"
-  />
   <button
     className="player__exit"
     onClick={[Function]}
@@ -55,7 +47,6 @@ exports[`VideoPlayer correctly renders default markup 1`] = `
     >
       <button
         className="player__play"
-        onClick={[Function]}
         type="button"
       >
         <svg
@@ -78,7 +69,6 @@ exports[`VideoPlayer correctly renders default markup 1`] = `
       </div>
       <button
         className="player__full-screen"
-        onClick={[Function]}
         type="button"
       >
         <svg
