@@ -1,21 +1,33 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
-const withVideoPlayer = (Component) => {
+const withVideoPlayer = (options = {}) => (Component) => {
   class WithVideoPlayer extends PureComponent {
     constructor(props) {
       super(props);
 
       this._renderPlayer = this._renderPlayer.bind(this);
+      this._handlePlayerPlay = this._handlePlayerPlay.bind(this);
+      this._handlePlayerPause = this._handlePlayerPause.bind(this);
+      this._handlePlayerStop = this._handlePlayerStop.bind(this);
+
       this._handlePlay = this._handlePlay.bind(this);
       this._handlePause = this._handlePause.bind(this);
       this._handleEnded = this._handleEnded.bind(this);
+      this._handleLoadStart = this._handleLoadStart.bind(this);
+      this._handleCanPlayThrough = this._handleCanPlayThrough.bind(this);
+      this._handleTimeUpdate = this._handleTimeUpdate.bind(this);
+
+      this._handlePlayError = this._handlePlayError.bind(this);
+
       this._handleFullScreen = this._handleFullScreen.bind(this);
       this._handleFullScreenExit = this._handleFullScreenExit.bind(this);
 
+      this._timeout = null;
+
       this._videoRef = React.createRef();
 
-      this.state = {
+      this.initialState = {
         /** Воспроизведение/пауза */
         isPlaying: false,
         /** Общее время воспроизведения, сек */
@@ -25,6 +37,7 @@ const withVideoPlayer = (Component) => {
         /** Прогресс воспроизведения, % */
         progress: 0,
       };
+      this.state = this.initialState;
     }
 
     render() {
@@ -37,16 +50,15 @@ const withVideoPlayer = (Component) => {
         playerProgress={progress}
         playerTotalTime={totalTime}
         playerTime={currentTime}
-        onPlayerPlay={this._handlePlay}
-        onPlayerPause={this._handlePause}
+        onPlayerPlay={this._handlePlayerPlay}
+        onPlayerPause={this._handlePlayerPause}
+        onPlayerStop={this._handlePlayerStop}
         onPlayerFullScreen={this._handleFullScreen}
         onPlayerFullScreenExit={this._handleFullScreenExit}/>;
     }
 
-    componentDidUpdate(prevProps, prevState) {
-      if (this.state.isPlaying !== prevState.isPlaying) {
-        this._toggleVideoPlayer();
-      }
+    componentWillUnmount() {
+      this._resetTimeout();
     }
 
     _renderPlayer(props) {
@@ -54,37 +66,90 @@ const withVideoPlayer = (Component) => {
         <video
           {...props}
           ref={this._videoRef}
+          onPlay={this._handlePlay}
           onPause={this._handlePause}
           onEnded={this._handleEnded}
+          onAbort={this._handleAbort}
+          onLoadStart={this._handleLoadStart}
           onCanPlayThrough={this._handleCanPlayThrough}
           onTimeUpdate={this._handleTimeUpdate}/>
       );
     }
 
-    _toggleVideoPlayer() {
-      const video = this._videoRef.current;
+    _resetTimeout() {
+      clearTimeout(this._timeout);
+      this._timeout = null;
+    }
 
-      if (!video) {
+    _handlePlayerPlay() {
+      const video = this._videoRef.current;
+      const {isPlaying} = this.state;
+      const {autoPlayTimeout} = this.props;
+      const timeout = autoPlayTimeout || options.autoPlayTimeout;
+
+      if (isPlaying || !video) {
         return;
       }
 
-      if (this.state.isPlaying) {
-        video.play();
+      if ((typeof timeout === `number`) && (timeout > 0)) {
+        this._resetTimeout();
+
+        this._timeout = setTimeout(() => {
+          if (this._timeout && video) {
+            video
+              .play()
+              .catch(this._handlePlayError);
+          }
+        }, timeout);
       } else {
+        video
+          .play()
+          .catch(this._handlePlayError);
+      }
+    }
+
+    _handlePlayerPause() {
+      this._resetTimeout();
+
+      const video = this._videoRef.current;
+      const {isPlaying} = this.state;
+
+      if (video && isPlaying) {
         video.pause();
       }
     }
 
+    _handlePlayerStop() {
+      this._resetTimeout();
+
+      const video = this._videoRef.current;
+
+      if (video) {
+        video.load();
+      }
+    }
+
     _handlePlay() {
+      this._resetTimeout();
       this.setState({isPlaying: true});
     }
 
     _handlePause() {
+      this._resetTimeout();
       this.setState({isPlaying: false});
     }
 
     _handleEnded() {
-      this.setState({isPlaying: false, currentTime: 0});
+      this._resetTimeout();
+      this.setState({isPlaying: false, currentTime: 0, progress: 0});
+    }
+
+    _handlePlayError() {
+      this.setState({...this.initialState});
+    }
+
+    _handleLoadStart() {
+      this.setState({...this.initialState});
     }
 
     _handleCanPlayThrough() {
@@ -95,9 +160,11 @@ const withVideoPlayer = (Component) => {
       }
 
       const totalTime = video.duration;
-      const isPlaying = !!this.props.autoplay;
+      this.setState({totalTime});
 
-      this.setState({totalTime, isPlaying});
+      if (this.props.autoplay) {
+        video.play();
+      }
     }
 
     _handleTimeUpdate() {
@@ -121,11 +188,7 @@ const withVideoPlayer = (Component) => {
     _handleFullScreen() {
       const video = this._videoRef.current;
 
-      if (!video) {
-        return;
-      }
-
-      if (!document.fullscreenElement) {
+      if (video && !document.fullscreenElement) {
         video.requestFullscreen();
       }
     }
@@ -139,14 +202,20 @@ const withVideoPlayer = (Component) => {
     }
   }
 
-  WithVideoPlayer.propTypes = Component.propTypes;
+  WithVideoPlayer.propTypes = {
+    ...Component.propTypes,
+    /** Автовоспроизведение видеоролика */
+    autoplay: PropTypes.bool,
+  };
 
   return WithVideoPlayer;
 };
 
-export const WithVideoPlayerPropTypes = {
+export const withVideoPlayerPropTypes = {
   /** Рендер функция плейра */
   renderPlayer: PropTypes.func,
+  /** Таймаут автовоспроизведения трейлера фильма, мс */
+  autoPlayTimeout: PropTypes.number,
   /** Состояние плейра пауза/воспроизведение */
   isPlayerPlaying: PropTypes.bool,
   /** Прогресс воспроизведения, % */
