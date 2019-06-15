@@ -44,9 +44,9 @@ MovieCard.InfoWrapper = InfoWrapper;
 MovieCard.Wrapper = Wrapper;
 MovieCard.Description = withMovieCard(Description);
 /** Проиграть фильм */
-MovieCard.PlayButton = PlayButton;
+MovieCard.PlayButton = withMovieCard(PlayButton);
 /** Добавить фильм в список «к просмотру» */
-MovieCard.ListButton = ListButton;
+MovieCard.ListButton = withMovieCard(ListButton);
 /** Добавить отзыв к фильму */
 MovieCard.ReviewButton = withMovieCard(ReviewButton);
 /** Расширенная информация о фильме */

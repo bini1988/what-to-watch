@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReviewButton correctly renders default markup 1`] = `
+<a
+  className="btn movie-card__button"
+  href="/film/1/review"
+  onClick={[Function]}
+>
+  Add review
+</a>
+`;
