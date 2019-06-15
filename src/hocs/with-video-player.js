@@ -6,6 +6,10 @@ const withVideoPlayer = (options = {}) => (Component) => {
     constructor(props) {
       super(props);
 
+      this._play = this._play.bind(this);
+      this._pause = this._pause.bind(this);
+      this._stop = this._stop.bind(this);
+
       this._renderPlayer = this._renderPlayer.bind(this);
       this._handlePlayerPlay = this._handlePlayerPlay.bind(this);
       this._handlePlayerPause = this._handlePlayerPause.bind(this);
@@ -66,7 +70,6 @@ const withVideoPlayer = (options = {}) => (Component) => {
         <video
           {...props}
           ref={this._videoRef}
-          onPlay={this._handlePlay}
           onPause={this._handlePause}
           onEnded={this._handleEnded}
           onAbort={this._handleAbort}
@@ -76,56 +79,72 @@ const withVideoPlayer = (options = {}) => (Component) => {
       );
     }
 
+    _play() {
+      return new Promise((resolve, reject) => {
+        const video = this._videoRef.current;
+
+        if (!video) {
+          reject(`Reference to video is not defined`);
+        }
+
+        resolve(
+            video.play()
+              .then(this._handlePlay)
+              .catch(this._handlePlayError)
+        );
+      });
+    }
+
+    _pause() {
+      const video = this._videoRef.current;
+
+      if (video) {
+        video.pause();
+        this._handlePause();
+      }
+    }
+
+    _stop() {
+      const video = this._videoRef.current;
+
+      if (video) {
+        video.load();
+        this._handlePause();
+      }
+    }
+
     _resetTimeout() {
       clearTimeout(this._timeout);
       this._timeout = null;
     }
 
     _handlePlayerPlay() {
-      const video = this._videoRef.current;
-      const {isPlaying} = this.state;
       const {autoPlayTimeout} = this.props;
       const timeout = autoPlayTimeout || options.autoPlayTimeout;
-
-      if (isPlaying || !video) {
-        return;
-      }
 
       if ((typeof timeout === `number`) && (timeout > 0)) {
         this._resetTimeout();
 
-        this._timeout = setTimeout(() => {
-          if (this._timeout && video) {
-            video
-              .play()
-              .catch(this._handlePlayError);
-          }
-        }, timeout);
-      } else {
-        video
-          .play()
-          .catch(this._handlePlayError);
+        return new Promise((resolve) => {
+          this._timeout = setTimeout(() => {
+            if (this._timeout) {
+              resolve(this._play());
+            }
+          }, timeout);
+        });
       }
+      return this._play();
     }
 
     _handlePlayerPause() {
-      this._resetTimeout();
-
-      const video = this._videoRef.current;
-      const {isPlaying} = this.state;
-
-      if (video && isPlaying) {
-        video.pause();
+      if (this.state.isPlaying) {
+        this._pause();
       }
     }
 
     _handlePlayerStop() {
-      this._resetTimeout();
-
-      const video = this._videoRef.current;
-
-      if (video) {
-        video.load();
+      if (this.state.isPlaying) {
+        this._stop();
       }
     }
 
@@ -154,16 +173,12 @@ const withVideoPlayer = (options = {}) => (Component) => {
 
     _handleCanPlayThrough() {
       const video = this._videoRef.current;
+      const totalTime = (video && video.duration) || 0;
 
-      if (!video) {
-        return;
-      }
-
-      const totalTime = video.duration;
       this.setState({totalTime});
 
       if (this.props.autoplay) {
-        video.play();
+        this._play();
       }
     }
 
