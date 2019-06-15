@@ -66,9 +66,9 @@ class VideoPlayer extends PureComponent {
   }
 
   _handleExit() {
-    const {onPlayerFullScreenExit, onPlayerPause, onExit} = this.props;
+    const {onPlayerFullScreenExit, onPlayerStop, onExit} = this.props;
 
-    onPlayerPause();
+    onPlayerStop();
     onPlayerFullScreenExit();
 
     if (onExit) {
@@ -82,6 +82,7 @@ VideoPlayer.defaultProps = {
   autoplay: false,
 };
 VideoPlayer.propTypes = {
+  /** Пропсы withVideoPlayer HOC */
   ...withVideoPlayerPropTypes,
   /** Указывает путь к воспроизводимому видеоролику */
   src: PropTypes.string,
@@ -94,4 +95,4 @@ VideoPlayer.propTypes = {
 };
 
 export {VideoPlayer};
-export default withVideoPlayer(VideoPlayer);
+export default withVideoPlayer()(VideoPlayer);

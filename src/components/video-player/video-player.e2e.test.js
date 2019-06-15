@@ -9,21 +9,21 @@ describe(`VideoPlayer`, () => {
   it(`should call onExit callback`, () => {
     const hanleExit = jest.fn();
     const hanlePlayerFullScreenExit = jest.fn();
-    const hanlePlayerPause = jest.fn();
+    const hanlePlayerStop = jest.fn();
 
     const wrapper = mount(
         <VideoPlayer
           src=""
           onExit={hanleExit}
           onPlayerFullScreenExit={hanlePlayerFullScreenExit}
-          onPlayerPause={hanlePlayerPause}/>
+          onPlayerStop={hanlePlayerStop}/>
     );
 
     const button = wrapper.find(`.player__exit`);
     button.simulate(`click`);
 
     expect(hanleExit).toBeCalledTimes(1);
-    expect(hanlePlayerPause).toBeCalledTimes(1);
+    expect(hanlePlayerStop).toBeCalledTimes(1);
     expect(hanlePlayerFullScreenExit).toBeCalledTimes(1);
   });
 });
