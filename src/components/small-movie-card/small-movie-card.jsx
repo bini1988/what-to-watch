@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {MovieCardPropTypes} from "../../prop-types";
-import withPlayer, {withPlayerPropTypes} from "../../hocs/with-player";
+import withVideoPlayer, {withVideoPlayerPropTypes} from "../../hocs/with-video-player";
 
 class SmallMovieCard extends PureComponent {
   constructor(props) {
@@ -27,6 +27,9 @@ class SmallMovieCard extends PureComponent {
             src: trailer,
             poster: images.preview,
             muted: true,
+            width: 280,
+            height: 175,
+            preload: `none`,
           })}
         </div>
         <h3 className="small-movie-card__title">
@@ -48,9 +51,9 @@ class SmallMovieCard extends PureComponent {
   }
 
   _handleMouseLeave() {
-    const {card, onPlayerPause, onMouseLeave} = this.props;
+    const {card, onPlayerStop, onMouseLeave} = this.props;
 
-    onPlayerPause();
+    onPlayerStop();
     onMouseLeave(card);
   }
 }
@@ -58,21 +61,21 @@ class SmallMovieCard extends PureComponent {
 SmallMovieCard.defaultProps = {
   renderPlayer: () => null,
   onPlayerPlay: () => {},
-  onPlayerPause: () => {},
+  onPlayerStop: () => {},
   onMouseEnter: () => {},
   onMouseLeave: () => {},
 };
 
 SmallMovieCard.propTypes = {
+  /** Пропсы withVideoPlayer HOC */
+  ...withVideoPlayerPropTypes,
   /** Карточка фильма */
   card: MovieCardPropTypes,
   /** Обрабочик события курсор мыши на элементе */
   onMouseEnter: PropTypes.func,
   /** Обрабочик события курсор мыши покинул элемент */
   onMouseLeave: PropTypes.func,
-  /** Пропсы withPlayer HOC */
-  ...withPlayerPropTypes,
 };
 
 export {SmallMovieCard};
-export default withPlayer({autoPlayTimeout: 500})(SmallMovieCard);
+export default withVideoPlayer({autoPlayTimeout: 500})(SmallMovieCard);

@@ -104,9 +104,10 @@ Array [
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
-              type="button"
+              href="/film/1/player"
+              onClick={[Function]}
             >
               <svg
                 height={19}
@@ -120,7 +121,7 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
               type="button"
@@ -203,6 +204,11 @@ Array [
             <video
               height={175}
               muted={true}
+              onCanPlayThrough={[Function]}
+              onEnded={[Function]}
+              onLoadStart={[Function]}
+              onPause={[Function]}
+              onTimeUpdate={[Function]}
               poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
               preload="none"
               src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
@@ -233,6 +239,11 @@ Array [
             <video
               height={175}
               muted={true}
+              onCanPlayThrough={[Function]}
+              onEnded={[Function]}
+              onLoadStart={[Function]}
+              onPause={[Function]}
+              onTimeUpdate={[Function]}
               poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
               preload="none"
               src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"

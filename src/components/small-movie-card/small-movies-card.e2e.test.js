@@ -25,18 +25,18 @@ describe(`SmallMovieCard`, () => {
     wrapper.simulate(`mouseenter`);
     expect(handlePlay).toBeCalled();
   });
-  it(`should call onPlayerPause on card mouse leave`, () => {
-    const handlePause = jest.fn();
+  it(`should call onPlayerStop on card mouse leave`, () => {
+    const handleStop = jest.fn();
     const wrapper = mount(
         <MemoryRouter
           initialEntries = {[`/`]}>
           <SmallMovieCard
             card={card}
-            onPlayerPause={handlePause}/>
+            onPlayerStop={handleStop}/>
         </MemoryRouter>
     );
 
     wrapper.simulate(`mouseleave`);
-    expect(handlePause).toBeCalled();
+    expect(handleStop).toBeCalled();
   });
 });

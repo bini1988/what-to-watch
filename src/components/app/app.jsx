@@ -8,6 +8,7 @@ import SignInPage from "../sign-in-page/sign-in-page";
 import MyListPage from "../my-list-page/my-list-page";
 import AddReviewPage from "../add-review-page/add-review-page";
 import MoviePage from "../movie-page/movie-page";
+import VideoPlayerPage from "../video-player-page/video-player-page";
 
 const AuthRoute = withRouteAuth(Route);
 
@@ -32,6 +33,9 @@ function App() {
         <AuthRoute
           path="/film/:id/review"
           component={AddReviewPage}/>
+        <Route
+          path="/film/:id/player"
+          component={VideoPlayerPage}/>
         <Route
           render={() => <Redirect to="/"/>}/>
       </Switch>

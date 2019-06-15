@@ -13,6 +13,11 @@ exports[`SmallMovieCard correctly renders default markup 1`] = `
     <video
       height={175}
       muted={true}
+      onCanPlayThrough={[Function]}
+      onEnded={[Function]}
+      onLoadStart={[Function]}
+      onPause={[Function]}
+      onTimeUpdate={[Function]}
       poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
       preload="none"
       src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"

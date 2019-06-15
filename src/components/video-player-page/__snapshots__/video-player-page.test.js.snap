@@ -8,6 +8,8 @@ exports[`VideoPlayerPage correctly renders default markup 1`] = `
     className="player__video"
     onCanPlayThrough={[Function]}
     onEnded={[Function]}
+    onLoadStart={[Function]}
+    onPause={[Function]}
     onTimeUpdate={[Function]}
   />
   <button
