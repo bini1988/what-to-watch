@@ -19,7 +19,9 @@ it(`MoviePage correctly renders default markup`, () => {
             movie={card}
             movies={genreGroupsMock[`All Genres`]}
             onMovieFetch={() => {}}
-            onMovieReviewsFetch={() => {}}/>
+            onMovieReviewsFetch={() => {}}
+            onToMyListAdd={() => {}}
+          />
         </MemoryRouter>
       </Provider>
   ).toJSON();
