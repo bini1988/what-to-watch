@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {MovieCardPropTypes} from "../../../prop-types";
 
-function ReviewButton({card = {}, ...props}) {
+function ReviewButton({card = {}}) {
   return (
-    <Link {...props}
+    <Link
       to={`/film/${card.id}/review`}
       className="btn movie-card__button">
       {`Add review`}

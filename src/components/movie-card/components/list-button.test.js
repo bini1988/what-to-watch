@@ -9,7 +9,7 @@ it(`ListButton correctly renders default markup`, () => {
   const tree = renderer.create(
       <ListButton
         card={card}
-        onClick={Nop}/>
+        onToMyListAdd={Nop}/>
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
@@ -18,7 +18,7 @@ it(`ListButton correctly renders in list markup`, () => {
   const tree = renderer.create(
       <ListButton
         card={{...card, isInList: true}}
-        onClick={Nop}/>
+        onToMyListAdd={Nop}/>
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });

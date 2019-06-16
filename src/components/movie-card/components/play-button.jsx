@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {MovieCardPropTypes} from "../../../prop-types";
 
-function PlayButton({card = {}, ...props}) {
+function PlayButton({card = {}}) {
   return (
-    <Link {...props}
+    <Link
       to={`/film/${card.id}/player`}
       className="btn btn--play movie-card__button">
       <svg
@@ -22,8 +21,6 @@ function PlayButton({card = {}, ...props}) {
 PlayButton.propTypes = {
   /** Карточка фильма */
   card: MovieCardPropTypes,
-  /** Обработчик события клика */
-  onClick: PropTypes.any,
 };
 
 export default PlayButton;

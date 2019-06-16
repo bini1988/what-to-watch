@@ -17,7 +17,8 @@ import ListButton from "./components/list-button";
 import ReviewButton from "./components/review-button";
 import About from "./components/about";
 
-function MovieCard({card = {}, full, children}) {
+function MovieCard(props) {
+  const {card = {}, full, children} = props;
   const {images = {}} = card;
   const style = {background: images.backgroundColor};
 
@@ -28,7 +29,7 @@ function MovieCard({card = {}, full, children}) {
           `movie-card`,
           {"movie-card--full": full}
       )}>
-      <MovieCardContext.Provider value={card}>
+      <MovieCardContext.Provider value={props}>
         {children}
       </MovieCardContext.Provider>
     </section>
@@ -57,6 +58,8 @@ MovieCard.propTypes = {
   card: MovieCardPropTypes,
   /** Модификатор карточки */
   full: PropTypes.bool,
+  /** Добавить фильм в список «к просмотру» */
+  onToMyListAdd: PropTypes.func,
   /** Вложенные элементы */
   children: PropTypes.any,
 };

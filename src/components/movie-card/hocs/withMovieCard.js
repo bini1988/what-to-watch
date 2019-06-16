@@ -6,8 +6,11 @@ const withMovieCard = (Component) => {
   function WithMovieCard(props) {
     return (
       <MovieCardContext.Consumer>
-        {(card) => (
-          <Component {...props} card={card}/>
+        {({card, onToMyListAdd}) => (
+          <Component
+            {...props}
+            card={card}
+            onToMyListAdd={onToMyListAdd}/>
         )}
       </MovieCardContext.Consumer>
     );
