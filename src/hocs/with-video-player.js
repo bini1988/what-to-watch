@@ -12,8 +12,6 @@ const withVideoPlayer = (options = {}) => (Component) => {
 
       this._renderPlayer = this._renderPlayer.bind(this);
       this._handlePlayerPlay = this._handlePlayerPlay.bind(this);
-      this._handlePlayerPause = this._handlePlayerPause.bind(this);
-      this._handlePlayerStop = this._handlePlayerStop.bind(this);
 
       this._handlePlay = this._handlePlay.bind(this);
       this._handlePause = this._handlePause.bind(this);
@@ -55,8 +53,8 @@ const withVideoPlayer = (options = {}) => (Component) => {
         playerTotalTime={totalTime}
         playerTime={currentTime}
         onPlayerPlay={this._handlePlayerPlay}
-        onPlayerPause={this._handlePlayerPause}
-        onPlayerStop={this._handlePlayerStop}
+        onPlayerPause={this._pause}
+        onPlayerStop={this._stop}
         onPlayerFullScreen={this._handleFullScreen}
         onPlayerFullScreenExit={this._handleFullScreenExit}/>;
     }
@@ -134,18 +132,6 @@ const withVideoPlayer = (options = {}) => (Component) => {
         });
       }
       return this._play();
-    }
-
-    _handlePlayerPause() {
-      if (this.state.isPlaying) {
-        this._pause();
-      }
-    }
-
-    _handlePlayerStop() {
-      if (this.state.isPlaying) {
-        this._stop();
-      }
     }
 
     _handlePlay() {
