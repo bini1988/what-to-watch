@@ -14,11 +14,13 @@ import MoviesCatalog from "../movies-catalog/movies-catalog";
 
 class MainPage extends PureComponent {
   render() {
-    const {promoMovieCard, movies, moviesGenres, activeGenre, onGenreChange} = this.props;
+    const {promoMovieCard = {}, movies, moviesGenres, activeGenre, onGenreChange, onToMyListAdd} = this.props;
 
     return (
       <React.Fragment>
-        <MovieCard card={promoMovieCard}>
+        <MovieCard
+          card={promoMovieCard}
+          onToMyListAdd={onToMyListAdd}>
           <MovieCard.Header component={PageHeader}>
             <PageTitle hidden>{`WTW`}</PageTitle>
             <UserBlock/>
@@ -64,6 +66,8 @@ MainPage.propTypes = {
   onMoviesFetch: PropTypes.func,
   /** Получить текущий промо фильм */
   onPromoMovieFetch: PropTypes.func,
+  /** Добавить фильм в список «к просмотру» */
+  onToMyListAdd: PropTypes.func,
   /** Вложенные элементы */
   children: PropTypes.any,
 };
@@ -79,9 +83,10 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = {
+  onGenreChange: ActionCreator.changeActiveGenre,
   onMoviesFetch: Operation.fetchMovies,
   onPromoMovieFetch: Operation.fetchPromoMovie,
-  onGenreChange: ActionCreator.changeActiveGenre,
+  onToMyListAdd: Operation.addMovieToMyList,
 };
 
 export {MainPage};
