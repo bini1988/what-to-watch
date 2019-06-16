@@ -8,7 +8,7 @@ import MovieOverview from "./movie-overview";
 import MovieDetails from "./movie-details";
 import MovieReviews from "./movie-reviews";
 
-const AboutPages = {
+const AboutTabs = {
   Overview: {
     label: `Overview`,
     component: MovieOverview,
@@ -23,33 +23,30 @@ const AboutPages = {
   },
 };
 
-function About({card = {}, page}) {
-  const PageComponent = AboutPages[page];
+function About({card = {}, tab}) {
+  const tabName = AboutTabs[tab] ? tab : `Overview`;
+  const Tab = AboutTabs[tabName];
 
   return (
     <div className="movie-card__desc">
       <MovieNav className="movie-card__nav">
-        {Object.entries(AboutPages).map(([name, {label}]) => (
+        {Object.entries(AboutTabs).map(([name, {label}]) => (
           <MovieNav.Item
             key={name}
             label={label}
             href={`#${name}`}
-            active={name === page}/>
+            active={name === tabName}/>
         ))}
       </MovieNav>
-      {PageComponent ? (
-        <PageComponent.component card={card}/>
-      ) : (
-        <MovieOverview card={card}/>
-      )}
+      <Tab.component card={card}/>
     </div>
   );
 }
 
 About.propTypes = {
-  /** Имя отображемой страницы */
-  page: PropTypes.oneOf(
-      Object.keys(AboutPages),
+  /** Имя отображемой вкладки */
+  tab: PropTypes.oneOf(
+      Object.keys(AboutTabs),
   ),
   /** Карточка фильма */
   card: MovieCardPropTypes,

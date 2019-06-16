@@ -1,15 +1,29 @@
 import React from "react";
 import {MovieCardPropTypes} from "../../../prop-types";
+import Review from "../../review/review";
 
 function MovieReviews({card = {}}) {
+  const {reviews = []} = card;
+  const COLUMNS_COUNT = 2;
+  const firstCount = Math.ceil(reviews.length / COLUMNS_COUNT);
+  const renderRview = (review, index) => (
+    <Review key={index} review={review}/>
+  );
+
   return (
     <div className="movie-card__reviews movie-card__row">
-      <div className="movie-card__reviews-col">
-        {`Col1 ${card.title}`}
-      </div>
-      <div className="movie-card__reviews-col">
-        {`Col2`}
-      </div>
+      {(reviews.length > 1) ? (
+        <React.Fragment>
+          <div className="movie-card__reviews-col">
+            {reviews.slice(0, firstCount).map(renderRview)}
+          </div>
+          <div className="movie-card__reviews-col">
+            {reviews.slice(firstCount).map(renderRview)}
+          </div>
+        </React.Fragment>
+      ) : (
+        reviews.map(renderRview)
+      )}
     </div>
   );
 }

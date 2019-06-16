@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header correctly renders default markup 1`] = `
+<div
+  className="movie-card__header new-class"
+>
+  <div
+    className="movie-card__bg"
+  >
+    <img
+      alt="War of the Worlds"
+      src="https://es31-server.appspot.com/wtw/static/film/background/War_of_the_Worlds.jpg"
+    />
+  </div>
+  Childs elements
+</div>
+`;
+
+exports[`Header correctly renders markup with component prop 1`] = `
+<div
+  className="movie-card__head new-class"
+>
+  <div
+    className="movie-card__bg"
+  >
+    <img
+      alt="War of the Worlds"
+      src="https://es31-server.appspot.com/wtw/static/film/background/War_of_the_Worlds.jpg"
+    />
+  </div>
+  Childs elements
+</div>
+`;

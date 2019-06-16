@@ -1,0 +1,268 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About correctly renders Details tab markup 1`] = `
+<div
+  className="movie-card__desc"
+>
+  <nav
+    className="movie-nav movie-card__nav"
+  >
+    <ul
+      className="movie-nav__list"
+    >
+      <li
+        className="movie-nav__item"
+      >
+        <a
+          className="movie-nav__link"
+          href="#Overview"
+        >
+          Overview
+        </a>
+      </li>
+      <li
+        className="movie-nav__item movie-nav__item--active"
+      >
+        <a
+          className="movie-nav__link"
+          href="#Details"
+        >
+          Details
+        </a>
+      </li>
+      <li
+        className="movie-nav__item"
+      >
+        <a
+          className="movie-nav__link"
+          href="#Reviews"
+        >
+          Reviews
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div
+    className="movie-card__text movie-card__row"
+  >
+    <div
+      className="movie-card__text-col"
+    >
+      <p
+        className="movie-card__details-item"
+      >
+        <strong
+          className="movie-card__details-name"
+        >
+          Director
+        </strong>
+        <span
+          className="movie-card__details-value"
+        >
+          Steven Spielberg
+        </span>
+      </p>
+      <p
+        className="movie-card__details-item"
+      >
+        <strong
+          className="movie-card__details-name"
+        >
+          Starring
+        </strong>
+        <span
+          className="movie-card__details-value"
+        >
+          Tom Cruise,
+          <br />
+          Dakota Fanning,
+          <br />
+          Tim Robbintrue
+          <br />
+        </span>
+      </p>
+    </div>
+    <div
+      className="movie-card__text-col"
+    >
+      <p
+        className="movie-card__details-item"
+      >
+        <strong
+          className="movie-card__details-name"
+        >
+          Run Time
+        </strong>
+        <span
+          className="movie-card__details-value"
+        >
+          1h 56m
+        </span>
+      </p>
+      <p
+        className="movie-card__details-item"
+      >
+        <strong
+          className="movie-card__details-name"
+        >
+          Genre
+        </strong>
+        <span
+          className="movie-card__details-value"
+        >
+          Adventure
+        </span>
+      </p>
+      <p
+        className="movie-card__details-item"
+      >
+        <strong
+          className="movie-card__details-name"
+        >
+          Released
+        </strong>
+        <span
+          className="movie-card__details-value"
+        >
+          2005
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`About correctly renders Reviews tab markup 1`] = `
+<div
+  className="movie-card__desc"
+>
+  <nav
+    className="movie-nav movie-card__nav"
+  >
+    <ul
+      className="movie-nav__list"
+    >
+      <li
+        className="movie-nav__item"
+      >
+        <a
+          className="movie-nav__link"
+          href="#Overview"
+        >
+          Overview
+        </a>
+      </li>
+      <li
+        className="movie-nav__item"
+      >
+        <a
+          className="movie-nav__link"
+          href="#Details"
+        >
+          Details
+        </a>
+      </li>
+      <li
+        className="movie-nav__item movie-nav__item--active"
+      >
+        <a
+          className="movie-nav__link"
+          href="#Reviews"
+        >
+          Reviews
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div
+    className="movie-card__reviews movie-card__row"
+  />
+</div>
+`;
+
+exports[`About correctly renders default markup 1`] = `
+<div
+  className="movie-card__desc"
+>
+  <nav
+    className="movie-nav movie-card__nav"
+  >
+    <ul
+      className="movie-nav__list"
+    >
+      <li
+        className="movie-nav__item movie-nav__item--active"
+      >
+        <a
+          className="movie-nav__link"
+          href="#Overview"
+        >
+          Overview
+        </a>
+      </li>
+      <li
+        className="movie-nav__item"
+      >
+        <a
+          className="movie-nav__link"
+          href="#Details"
+        >
+          Details
+        </a>
+      </li>
+      <li
+        className="movie-nav__item"
+      >
+        <a
+          className="movie-nav__link"
+          href="#Reviews"
+        >
+          Reviews
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div
+    className="movie-rating"
+  >
+    <div
+      className="movie-rating__score"
+    >
+      6.5
+    </div>
+    <p
+      className="movie-rating__meta"
+    >
+      <span
+        className="movie-rating__level"
+      >
+        Good
+      </span>
+      <span
+        className="movie-rating__count"
+      >
+        386834 ratings
+      </span>
+    </p>
+  </div>
+  <div
+    className="movie-card__text"
+  >
+    As Earth is invaded by alien tripod fighting machines, one family fights for survival.
+    <p
+      className="movie-card__director"
+    >
+      <strong>
+        Director: Steven Spielberg
+      </strong>
+    </p>
+    <p
+      className="movie-card__starring"
+    >
+      <strong>
+        Starring: Tom Cruise, Dakota Fanning, Tim Robbin and other
+      </strong>
+    </p>
+  </div>
+</div>
+`;

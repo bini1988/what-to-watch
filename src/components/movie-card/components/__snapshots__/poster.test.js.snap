@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Poster correctly renders big mode markup 1`] = `
+<div
+  className="movie-card__poster movie-card__poster--big"
+>
+  <img
+    alt="War of the Worlds"
+    height="327"
+    src="https://es31-server.appspot.com/wtw/static/film/poster/War_of_the_Worlds.jpg"
+    width="218"
+  />
+</div>
+`;
+
+exports[`Poster correctly renders default markup 1`] = `
+<div
+  className="movie-card__poster"
+>
+  <img
+    alt="War of the Worlds"
+    height="327"
+    src="https://es31-server.appspot.com/wtw/static/film/poster/War_of_the_Worlds.jpg"
+    width="218"
+  />
+</div>
+`;
+
+exports[`Poster correctly renders small mode markup 1`] = `
+<div
+  className="movie-card__poster movie-card__poster--small"
+>
+  <img
+    alt="War of the Worlds"
+    height="327"
+    src="https://es31-server.appspot.com/wtw/static/film/poster/War_of_the_Worlds.jpg"
+    width="218"
+  />
+</div>
+`;

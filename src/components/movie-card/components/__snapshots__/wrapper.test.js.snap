@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Wrapper correctly renders default markup 1`] = `
+<div
+  className="movie-card__wrap"
+>
+  Childs elements
+</div>
+`;
+
+exports[`Wrapper correctly renders main markup 1`] = `
+<div
+  className="movie-card__hero"
+>
+  Childs elements
+</div>
+`;
