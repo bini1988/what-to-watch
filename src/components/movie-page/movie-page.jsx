@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import {MovieCardPropTypes} from "../../prop-types";
 import {Operation as MoviesOperation} from "../../reducer/movies/movies";
-import {getMovieWithReviewsById} from "../../reducer/movies/selectors";
+import {getMovieWithReviewsById, getMoviesLike} from "../../reducer/movies/selectors";
 import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews";
 
 import MovieCard from "../movie-card/movie-card";
@@ -16,7 +16,7 @@ import MoviesCatalog from "../movies-catalog/movies-catalog";
 
 class MoviePage extends PureComponent {
   render() {
-    const {movie, location = {}} = this.props;
+    const {movie, movies, location = {}} = this.props;
     const {hash = ``} = location;
     const tab = hash.slice(1) || undefined;
 
@@ -42,7 +42,11 @@ class MoviePage extends PureComponent {
           </MovieCard.InfoWrapper>
         </MovieCard>
         <div className="page-content">
-          <MoviesCatalog/>
+          <MoviesCatalog
+            likeThis
+            title="More like this"
+            movies={movies}
+            limit={4}/>
           <PageFooter/>
         </div>
       </React.Fragment>
@@ -58,6 +62,8 @@ class MoviePage extends PureComponent {
 MoviePage.propTypes = {
   /** Карточка фильма */
   movie: MovieCardPropTypes,
+  /** Список похожих фильмов */
+  movies: MoviesCatalog.propTypes.movies,
   /** React Router location */
   location: PropTypes.object,
   /** Получить фильм */
@@ -71,7 +77,9 @@ MoviePage.propTypes = {
 const mapStateToProps = (state, {match}) => {
   const id = match && match.params.id;
   const movie = getMovieWithReviewsById(state, id);
-  return {movie};
+  const movies = getMoviesLike(state, id);
+
+  return {movie, movies};
 };
 const mapDispatchToProps = (dispatch, {match}) => {
   const id = match && match.params.id;
