@@ -2,38 +2,38 @@
 
 exports[`SmallMovieCard correctly renders default markup 1`] = `
 <article
-  className="small-movie-card catalog__movies-card"
+  className="small-movie-card"
   id="movie-1"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <div
-    className="small-movie-card__image"
+  <a
+    className="small-movie-card__link"
+    href="/film/1"
+    onClick={[Function]}
   >
-    <video
-      height={175}
-      muted={true}
-      onCanPlayThrough={[Function]}
-      onEnded={[Function]}
-      onLoadStart={[Function]}
-      onPause={[Function]}
-      onTimeUpdate={[Function]}
-      poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
-      preload="none"
-      src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
-      width={280}
-    />
-  </div>
-  <h3
-    className="small-movie-card__title"
-  >
-    <a
-      className="small-movie-card__link"
-      href="/film/1"
-      onClick={[Function]}
+    <div
+      className="small-movie-card__image"
+    >
+      <video
+        height={175}
+        muted={true}
+        onCanPlayThrough={[Function]}
+        onEnded={[Function]}
+        onLoadStart={[Function]}
+        onPause={[Function]}
+        onTimeUpdate={[Function]}
+        poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
+        preload="none"
+        src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
+        width={280}
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
     >
       War of the Worlds
-    </a>
-  </h3>
+    </h3>
+  </a>
 </article>
 `;
