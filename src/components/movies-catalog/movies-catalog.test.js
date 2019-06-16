@@ -36,3 +36,21 @@ it(`MoviesCatalog correctly renders default markup with more button`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it(`MoviesCatalog correctly renders default markup in like this mode`, () => {
+  const tree = renderer
+    .create(
+        <MemoryRouter
+          initialEntries = {[`/`]}>
+          <MoviesCatalog
+            likeThis
+            limit={4}
+            title="More like this"
+            movies={genreGroupsMock[`All Genres`]}
+            onGenreChange={() => {}}
+            onMoviesMore={() => {}}/>
+        </MemoryRouter>
+    ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
