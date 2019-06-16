@@ -166,7 +166,7 @@ Array [
               className="movie-nav__list"
             >
               <li
-                className="movie-nav__item"
+                className="movie-nav__item movie-nav__item--active"
               >
                 <a
                   className="movie-nav__link"
