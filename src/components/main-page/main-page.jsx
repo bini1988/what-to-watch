@@ -13,17 +13,12 @@ import UserBlock from "../user-block/user-block";
 import MoviesCatalog from "../movies-catalog/movies-catalog";
 
 class MainPage extends PureComponent {
-  componentDidMount() {
-    this.props.fetchMovies();
-    this.props.fetchPromoMovie();
-  }
-
   render() {
-    const {promoMovie = {}, movies, moviesGenres, activeGenre, onGenreChange} = this.props;
+    const {promoMovieCard, movies, moviesGenres, activeGenre, onGenreChange} = this.props;
 
     return (
       <React.Fragment>
-        <MovieCard card={promoMovie}>
+        <MovieCard card={promoMovieCard}>
           <MovieCard.Header component={PageHeader}>
             <PageTitle hidden>{`WTW`}</PageTitle>
             <UserBlock/>
@@ -47,11 +42,16 @@ class MainPage extends PureComponent {
       </React.Fragment>
     );
   }
+
+  componentDidMount() {
+    this.props.onMoviesFetch();
+    this.props.onPromoMovieFetch();
+  }
 }
 
 MainPage.propTypes = {
   /** Текущий промо фильм */
-  promoMovie: PropTypes.object,
+  promoMovieCard: PropTypes.object,
   /** Список отображаемых фильмов */
   movies: MoviesCatalog.propTypes.movies,
   /** Список отображаемых жанров фильмов */
@@ -61,9 +61,9 @@ MainPage.propTypes = {
   /** Изменить фильтр списка фильмов по жанру */
   onGenreChange: MoviesCatalog.propTypes.onGenreChange,
   /** Получить список фильмов */
-  fetchMovies: PropTypes.func,
+  onMoviesFetch: PropTypes.func,
   /** Получить текущий промо фильм */
-  fetchPromoMovie: PropTypes.func,
+  onPromoMovieFetch: PropTypes.func,
   /** Вложенные элементы */
   children: PropTypes.any,
 };
@@ -72,15 +72,15 @@ const mapStateToProps = (state) => {
   const activeGenre = getActiveGenre(state);
 
   return {
-    promoMovie: getPromoMovie(state),
+    promoMovieCard: getPromoMovie(state),
     movies: getMoviesByGenre(state, activeGenre),
     moviesGenres: getMoviesGenres(state),
     activeGenre,
   };
 };
 const mapDispatchToProps = {
-  fetchMovies: Operation.fetchMovies,
-  fetchPromoMovie: Operation.fetchPromoMovie,
+  onMoviesFetch: Operation.fetchMovies,
+  onPromoMovieFetch: Operation.fetchPromoMovie,
   onGenreChange: ActionCreator.changeActiveGenre,
 };
 

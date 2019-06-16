@@ -16,12 +16,12 @@ it(`MainPage correctly renders default markup`, () => {
         <MemoryRouter
           initialEntries = {[`/`]}>
           <MainPage
-            promoMovie={promoMovie}
+            promoMovieCard={promoMovie}
             movies={genreGroupsMock[`All Genres`]}
             moviesGenres={Object.keys(genreGroupsMock)}
             onGenreChange={() => {}}
-            fetchMovies={() => {}}
-            fetchPromoMovie={() => {}}
+            onMoviesFetch={() => {}}
+            onPromoMovieFetch={() => {}}
           />
         </MemoryRouter>
       </Provider>
