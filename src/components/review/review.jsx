@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
+function isNumeric(value) {
+  return !isNaN(parseFloat(value)) && isFinite(value);
+}
+
 function Review({className, review = {}}) {
   const {id, text, author, date, rating} = review;
 
@@ -17,7 +21,7 @@ function Review({className, review = {}}) {
         </footer>
       </blockquote>
       <div className="review__rating">
-        {rating}
+        {isNumeric(rating) ? rating.toFixed(1) : rating}
       </div>
     </div>
   );
