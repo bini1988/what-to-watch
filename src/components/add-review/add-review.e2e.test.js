@@ -20,9 +20,9 @@ describe(`AddReview`, () => {
       const ratingInput = wrapper.find(`.rating__input[id='star-${rating}']`);
       ratingInput.at(0).instance().checked = true;
 
-      const text = `some text`;
+      const comment = `some text`;
       const textInput = wrapper.find(`.add-review__textarea`);
-      textInput.at(0).instance().value = text;
+      textInput.at(0).instance().value = comment;
 
       const form = wrapper.find(`.add-review__form`);
       const target = form.at(0).getDOMNode();
@@ -30,7 +30,7 @@ describe(`AddReview`, () => {
       form.simulate(`submit`, {preventDefault, target});
 
       expect(preventDefault).toHaveBeenCalled();
-      expect(handleSubmit).toHaveBeenCalledWith({rating, text});
+      expect(handleSubmit).toHaveBeenCalledWith({rating, comment});
     }
   });
 });

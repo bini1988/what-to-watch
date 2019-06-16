@@ -15,10 +15,10 @@ function AddReview({maxRating, defaultRating, onSubmit}) {
           const form = event.target;
           const isRatingChecked = (it) => form.elements[`star-${it}`].checked;
           const rating = ratings.find(isRatingChecked);
-          const text = form.elements[`review-text`].value;
+          const comment = form.elements[`review-text`].value;
 
           if (onSubmit) {
-            onSubmit({rating, text});
+            onSubmit({rating, comment});
           }
         }}>
         <div className="rating">
