@@ -1,6 +1,23 @@
 import PropTypes from "prop-types";
 
 /**
+ * Отзыв к фильму
+ */
+export const MovieReviewPropTypes = PropTypes.shape({
+  id: PropTypes.number,
+  /** Текст отзыва */
+  comment: PropTypes.string,
+  /** Автор */
+  author: PropTypes.string,
+  /** Отформатированная дата */
+  date: PropTypes.string,
+  /** Дата */
+  datetime: PropTypes.string,
+  /** Рейтинг */
+  rating: PropTypes.number,
+});
+
+/**
  * Рейтинг фильма
  */
 export const MovieRatingPropTypes = PropTypes.shape({
@@ -51,5 +68,9 @@ export const MovieCardPropTypes = PropTypes.shape({
   trailer: PropTypes.string,
   /** Рейтинг фильма */
   rating: MovieRatingPropTypes,
+  /** Отзывы к фильму */
+  reviews: PropTypes.arrayOf(
+      MovieReviewPropTypes,
+  ),
 });
 
