@@ -1,16 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {Operation} from "../../reducer/user/user";
-import {getAuthError} from "../../reducer/user/selectors";
+import {getAuthError, isAuthenticated} from "../../reducer/user/selectors";
 
 import PageTitle from "../page-title/page-title";
 import PageHeader from "../page-header/page-header";
 import PageFooter from "../page-footer/page-footer";
 import SignIn from "../sign-in/sign-in";
 
-function SignInPage({error, onUserLogin, location, history}) {
+function SignInPage({hasAuth, error, onUserLogin, location, history}) {
   const {state} = location;
   const handleSubmit = (user) => {
     return onUserLogin(user).then(() => {
@@ -19,6 +20,12 @@ function SignInPage({error, onUserLogin, location, history}) {
       }
     });
   };
+
+  if (hasAuth) {
+    return (
+      <Redirect to="/"/>
+    );
+  }
 
   return (
     <div className="user-page">
@@ -43,6 +50,8 @@ SignInPage.propTypes = {
   location: PropTypes.object.isRequired,
   /** Объект history React-Router */
   history: PropTypes.object.isRequired,
+  /** Авторизован ли текущий пользователь */
+  hasAuth: PropTypes.bool,
   /** Ошибка авторизации пользователя */
   error: PropTypes.string,
   /** Авторизовать пользователя */
@@ -52,6 +61,7 @@ SignInPage.propTypes = {
 const mapStateToProps = (state) => {
   return {
     error: getAuthError(state),
+    hasAuth: isAuthenticated(state),
   };
 };
 const mapDispatchToProps = {

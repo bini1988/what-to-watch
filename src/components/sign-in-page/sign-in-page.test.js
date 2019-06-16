@@ -9,6 +9,7 @@ it(`SignInPage correctly renders default markup`, () => {
         initialEntries = {[`/`]}>
         <SignInPage
           location={{state: {referrer: `/mylist`}}}
+          hasAuth={false}
           history={{}}
           onUserLogin={() => {}}/>
       </MemoryRouter>
