@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
-import withActiveElement, {withActiveElementPropTypes} from "../../hocs/with-active-element";
 
 function MoviesCatalog(props) {
   const {movies, moviesGenres, activeGenre, onGenreChange, onMoviesMore} = props;
@@ -21,8 +20,7 @@ function MoviesCatalog(props) {
           <SmallMovieCard
             key={it.id}
             card={it}
-            onMouseEnter={props.setActiveElement}
-            onMouseLeave={props.resetActiveElement}/>
+            className="catalog__movies-card"/>
         ))}
       </div>
       {(typeof onMoviesMore === `function`) && (
@@ -59,9 +57,6 @@ MoviesCatalog.propTypes = {
   onGenreChange: PropTypes.func,
   /** Получить следующие элементы списка */
   onMoviesMore: PropTypes.func,
-  /** HOC пропсы */
-  ...withActiveElementPropTypes,
 };
 
-export {MoviesCatalog};
-export default withActiveElement(MoviesCatalog);
+export default MoviesCatalog;
