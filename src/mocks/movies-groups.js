@@ -1,16 +1,18 @@
-import card from "./movie-card";
+import movies from "./movies";
 
 export default {
-  "All Genres": [
-    {...card, id: 11},
-    {...card, id: 22},
+  "All Genres": movies,
+  "Action": [
+    movies[0],
+    movies[2],
   ],
-  "Genre #1": [
-    {...card, id: 11},
-    {...card, id: 22},
+  "Crime": [
+    movies[1],
   ],
-  "Genre #2": [
-    {...card, id: 11},
-    {...card, id: 22},
+  "Comedy": [
+    movies[3],
+  ],
+  "Fantasy": [
+    movies[4],
   ],
 };
