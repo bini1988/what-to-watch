@@ -1,7 +1,15 @@
 
+
+export const UserData = {
+  "id": 1,
+  "email": `rus.nick@mail.ru`,
+  "name": `rus.nick`,
+  "avatar_url": `/wtw/static/avatar/9.jpg`,
+};
+
 export default {
   id: 1,
-  name: `Nicolas Cage`,
-  email: `NicolasCage@gmail.com`,
-  avatar: `https://s3.amazonaws.com/uifaces/faces/twitter/wim1k/128.jpg`
+  name: `rus.nick`,
+  email: `rus.nick@mail.ru`,
+  avatar: `https://es31-server.appspot.com//wtw/static/avatar/9.jpg`
 };
