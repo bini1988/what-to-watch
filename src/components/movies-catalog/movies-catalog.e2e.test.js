@@ -9,14 +9,18 @@ configure({adapter: new Adapter()});
 
 describe(`MoviesCatalog`, () => {
   it(`Should call onMoviesMore method on more button click`, () => {
+    const moviesGenres = Object.keys(genreGroupsMock);
+    const activeGenre = moviesGenres[0];
+    const movies = genreGroupsMock[activeGenre];
     const handleMoviesMore = jest.fn();
     const wrapper = mount(
         <MemoryRouter
           initialEntries = {[`/`]}>
           <MoviesCatalog
-            movies={genreGroupsMock[`All Genres`]}
-            moviesGenres={Object.keys(genreGroupsMock)}
-            activeGenre="All Genres"
+            limit={movies.length - 5}
+            movies={movies}
+            moviesGenres={moviesGenres}
+            activeGenre={activeGenre}
             onMoviesMore={handleMoviesMore}/>
         </MemoryRouter>
     );

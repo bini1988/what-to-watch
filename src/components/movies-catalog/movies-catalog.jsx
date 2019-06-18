@@ -6,8 +6,9 @@ import GenresList from "../genres-list/genres-list.jsx";
 
 function MoviesCatalog(props) {
   const {title, likeThis, movies, moviesGenres, activeGenre, limit, onGenreChange, onMoviesMore} = props;
-  const limitedMovies = (limit > 0)
+  const items = (limit > 0)
     ? movies.slice(0, limit) : movies;
+  const hasMoreItems = limit < movies.length;
 
   return (
     <section className={cn(`catalog`, {"catalog--like-this": likeThis})}>
@@ -19,19 +20,19 @@ function MoviesCatalog(props) {
         activeGenre={activeGenre}
         onGenreChange={onGenreChange}/>
       <div className="catalog__movies-list">
-        {limitedMovies.map((it = {}) => (
+        {items.map((it = {}) => (
           <SmallMovieCard
             key={it.id}
             card={it}
             className="catalog__movies-card"/>
         ))}
       </div>
-      {(typeof onMoviesMore === `function`) && (
+      {hasMoreItems && (
         <div className="catalog__more">
           <button
             className="catalog__button"
             type="button"
-            onClick={onMoviesMore}>
+            onClick={() => onMoviesMore(activeGenre)}>
             {`Show more`}
           </button>
         </div>
