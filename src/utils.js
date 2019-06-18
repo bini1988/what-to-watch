@@ -1,7 +1,7 @@
 
 /**
- * Норамализовать массив фильмов
- * @param {Object[]} items Массив объектов
+ * Норамализовать массив элементов
+ * @param {Object[]} items Массив элементов
  * @return {Object}
  */
 export function normalizeItems(items = []) {
