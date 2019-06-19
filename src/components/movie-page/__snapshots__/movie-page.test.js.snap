@@ -398,6 +398,41 @@ Array [
             </h3>
           </a>
         </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          id="movie-5"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <a
+            className="small-movie-card__link"
+            href="/film/5"
+            onClick={[Function]}
+          >
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                height={175}
+                muted={true}
+                onCanPlayThrough={[Function]}
+                onEnded={[Function]}
+                onLoadStart={[Function]}
+                onPause={[Function]}
+                onTimeUpdate={[Function]}
+                poster="https://es31-server.appspot.com/wtw/static/film/preview/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+                preload="none"
+                src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
+                width={280}
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
+            >
+              Fantastic Beasts: The Crimes of Grindelwald
+            </h3>
+          </a>
+        </article>
       </div>
     </section>
     <footer

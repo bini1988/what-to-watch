@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 
 import {MovieCardPropTypes} from "../../prop-types";
 import {Operation as MoviesOperation} from "../../reducer/movies/movies";
-import {getMovieWithReviewsById, getMoviesLike} from "../../reducer/movies/selectors";
+import {getMovieWithReviewsById} from "../../reducer/movies/selectors";
+import {getMoviesGenreLike} from "../../reducer/genres/selectors";
 import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews";
 
 import MovieCard from "../movie-card/movie-card";
@@ -48,8 +49,7 @@ class MoviePage extends PureComponent {
           <MoviesCatalog
             likeThis
             title="More like this"
-            movies={movies}
-            limit={4}/>
+            movies={movies}/>
           <PageFooter/>
         </div>
       </React.Fragment>
@@ -82,7 +82,7 @@ MoviePage.propTypes = {
 const mapStateToProps = (state, {match}) => {
   const id = match && match.params.id;
   const movie = getMovieWithReviewsById(state, id);
-  const movies = getMoviesLike(state, id);
+  const movies = getMoviesGenreLike(state, id);
 
   return {movie, movies};
 };
