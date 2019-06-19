@@ -66,34 +66,34 @@ exports[`MyListPage correctly renders default markup 1`] = `
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
-        <div
-          className="small-movie-card__image"
+        <a
+          className="small-movie-card__link"
+          href="/film/1"
+          onClick={[Function]}
         >
-          <video
-            height={175}
-            muted={true}
-            onCanPlayThrough={[Function]}
-            onEnded={[Function]}
-            onLoadStart={[Function]}
-            onPause={[Function]}
-            onTimeUpdate={[Function]}
-            poster="https://es31-server.appspot.com/wtw/static/film/preview/midnight-special.jpg"
-            preload="none"
-            src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
-            width={280}
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="/film/1"
-            onClick={[Function]}
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              height={175}
+              muted={true}
+              onCanPlayThrough={[Function]}
+              onEnded={[Function]}
+              onLoadStart={[Function]}
+              onPause={[Function]}
+              onTimeUpdate={[Function]}
+              poster="https://es31-server.appspot.com/wtw/static/film/preview/midnight-special.jpg"
+              preload="none"
+              src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
           >
             Midnight Special
-          </a>
-        </h3>
+          </h3>
+        </a>
       </article>
       <article
         className="small-movie-card catalog__movies-card"
@@ -101,34 +101,34 @@ exports[`MyListPage correctly renders default markup 1`] = `
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
-        <div
-          className="small-movie-card__image"
+        <a
+          className="small-movie-card__link"
+          href="/film/2"
+          onClick={[Function]}
         >
-          <video
-            height={175}
-            muted={true}
-            onCanPlayThrough={[Function]}
-            onEnded={[Function]}
-            onLoadStart={[Function]}
-            onPause={[Function]}
-            onTimeUpdate={[Function]}
-            poster="https://es31-server.appspot.com/wtw/static/film/preview/pulp-fiction.jpg"
-            preload="none"
-            src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
-            width={280}
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="/film/2"
-            onClick={[Function]}
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              height={175}
+              muted={true}
+              onCanPlayThrough={[Function]}
+              onEnded={[Function]}
+              onLoadStart={[Function]}
+              onPause={[Function]}
+              onTimeUpdate={[Function]}
+              poster="https://es31-server.appspot.com/wtw/static/film/preview/pulp-fiction.jpg"
+              preload="none"
+              src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
           >
             Pulp Fiction
-          </a>
-        </h3>
+          </h3>
+        </a>
       </article>
       <article
         className="small-movie-card catalog__movies-card"
@@ -136,34 +136,34 @@ exports[`MyListPage correctly renders default markup 1`] = `
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
-        <div
-          className="small-movie-card__image"
+        <a
+          className="small-movie-card__link"
+          href="/film/3"
+          onClick={[Function]}
         >
-          <video
-            height={175}
-            muted={true}
-            onCanPlayThrough={[Function]}
-            onEnded={[Function]}
-            onLoadStart={[Function]}
-            onPause={[Function]}
-            onTimeUpdate={[Function]}
-            poster="https://es31-server.appspot.com/wtw/static/film/preview/bronson.jpg"
-            preload="none"
-            src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
-            width={280}
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="/film/3"
-            onClick={[Function]}
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              height={175}
+              muted={true}
+              onCanPlayThrough={[Function]}
+              onEnded={[Function]}
+              onLoadStart={[Function]}
+              onPause={[Function]}
+              onTimeUpdate={[Function]}
+              poster="https://es31-server.appspot.com/wtw/static/film/preview/bronson.jpg"
+              preload="none"
+              src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
           >
             Bronson
-          </a>
-        </h3>
+          </h3>
+        </a>
       </article>
       <article
         className="small-movie-card catalog__movies-card"
@@ -171,34 +171,34 @@ exports[`MyListPage correctly renders default markup 1`] = `
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
-        <div
-          className="small-movie-card__image"
+        <a
+          className="small-movie-card__link"
+          href="/film/4"
+          onClick={[Function]}
         >
-          <video
-            height={175}
-            muted={true}
-            onCanPlayThrough={[Function]}
-            onEnded={[Function]}
-            onLoadStart={[Function]}
-            onPause={[Function]}
-            onTimeUpdate={[Function]}
-            poster="https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg"
-            preload="none"
-            src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
-            width={280}
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="/film/4"
-            onClick={[Function]}
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              height={175}
+              muted={true}
+              onCanPlayThrough={[Function]}
+              onEnded={[Function]}
+              onLoadStart={[Function]}
+              onPause={[Function]}
+              onTimeUpdate={[Function]}
+              poster="https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg"
+              preload="none"
+              src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
           >
             What We Do in the Shadows
-          </a>
-        </h3>
+          </h3>
+        </a>
       </article>
       <article
         className="small-movie-card catalog__movies-card"
@@ -206,34 +206,34 @@ exports[`MyListPage correctly renders default markup 1`] = `
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
-        <div
-          className="small-movie-card__image"
+        <a
+          className="small-movie-card__link"
+          href="/film/5"
+          onClick={[Function]}
         >
-          <video
-            height={175}
-            muted={true}
-            onCanPlayThrough={[Function]}
-            onEnded={[Function]}
-            onLoadStart={[Function]}
-            onPause={[Function]}
-            onTimeUpdate={[Function]}
-            poster="https://es31-server.appspot.com/wtw/static/film/preview/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            preload="none"
-            src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
-            width={280}
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="/film/5"
-            onClick={[Function]}
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              height={175}
+              muted={true}
+              onCanPlayThrough={[Function]}
+              onEnded={[Function]}
+              onLoadStart={[Function]}
+              onPause={[Function]}
+              onTimeUpdate={[Function]}
+              poster="https://es31-server.appspot.com/wtw/static/film/preview/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              preload="none"
+              src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
+              width={280}
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
           >
             Fantastic Beasts: The Crimes of Grindelwald
-          </a>
-        </h3>
+          </h3>
+        </a>
       </article>
     </div>
   </section>
