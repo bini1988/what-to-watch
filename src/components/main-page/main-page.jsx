@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {Operation, ActionCreator} from "../../reducer/movies/movies";
-import {getPromoMovie, getMoviesByGenre, getMoviesGenres, getActiveGenre} from "../../reducer/movies/selectors";
+import {getPromoMovie} from "../../reducer/movies/selectors";
+
+import {ActionCreator as GenresActionCreator} from "../../reducer/genres/genres";
+import {getActiveGenre, getMoviesGenresList, getMoviesByGenre, getLimitByGenre} from "../../reducer/genres/selectors";
 
 import MovieCard from "../movie-card/movie-card";
 import PageHeader from "../page-header/page-header";
@@ -14,7 +17,16 @@ import MoviesCatalog from "../movies-catalog/movies-catalog";
 
 class MainPage extends PureComponent {
   render() {
-    const {promoMovieCard = {}, movies, moviesGenres, activeGenre, onGenreChange, onToMyListAdd} = this.props;
+    const {
+      promoMovieCard = {},
+      movies,
+      moviesGenres,
+      activeGenre,
+      moviesLimit,
+      onGenreChange,
+      onMoviesMore,
+      onToMyListAdd
+    } = this.props;
 
     return (
       <React.Fragment>
@@ -38,7 +50,9 @@ class MainPage extends PureComponent {
             movies={movies}
             moviesGenres={moviesGenres}
             activeGenre={activeGenre}
-            onGenreChange={onGenreChange}/>
+            onGenreChange={onGenreChange}
+            onMoviesMore={onMoviesMore}
+            limit={moviesLimit}/>
           <PageFooter/>
         </div>
       </React.Fragment>
@@ -62,8 +76,12 @@ MainPage.propTypes = {
   activeGenre: MoviesCatalog.propTypes.activeGenre,
   /** Изменить фильтр списка фильмов по жанру */
   onGenreChange: MoviesCatalog.propTypes.onGenreChange,
+  /** Количество отображаемых фильмов */
+  moviesLimit: PropTypes.number,
   /** Получить список фильмов */
   onMoviesFetch: PropTypes.func,
+  /** Получить следующий набор фильмов соответвующего жанра */
+  onMoviesMore: PropTypes.func,
   /** Получить текущий промо фильм */
   onPromoMovieFetch: PropTypes.func,
   /** Добавить фильм в список «к просмотру» */
@@ -78,12 +96,14 @@ const mapStateToProps = (state) => {
   return {
     promoMovieCard: getPromoMovie(state),
     movies: getMoviesByGenre(state, activeGenre),
-    moviesGenres: getMoviesGenres(state),
+    moviesGenres: getMoviesGenresList(state),
+    moviesLimit: getLimitByGenre(state, activeGenre),
     activeGenre,
   };
 };
 const mapDispatchToProps = {
   onGenreChange: ActionCreator.changeActiveGenre,
+  onMoviesMore: GenresActionCreator.increaseGenreLimit,
   onMoviesFetch: Operation.fetchMovies,
   onPromoMovieFetch: Operation.fetchPromoMovie,
   onToMyListAdd: Operation.addMovieToMyList,
