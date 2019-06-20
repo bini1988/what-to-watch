@@ -2,10 +2,10 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {Operation, ActionCreator} from "../../reducer/movies/movies";
+import {Operation} from "../../reducer/movies/movies";
 import {getPromoMovie} from "../../reducer/movies/selectors";
 
-import {ActionCreator as GenresActionCreator} from "../../reducer/genres/genres";
+import {Operation as GenresOperation, ActionCreator as GenresActionCreator} from "../../reducer/genres/genres";
 import {getActiveGenre, getMoviesGenresList, getMoviesByGenre, getLimitByGenre} from "../../reducer/genres/selectors";
 
 import MovieCard from "../movie-card/movie-card";
@@ -102,8 +102,8 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = {
-  onGenreChange: ActionCreator.changeActiveGenre,
-  onMoviesMore: GenresActionCreator.increaseGenreLimit,
+  onGenreChange: GenresActionCreator.changeActiveGenre,
+  onMoviesMore: GenresOperation.increaseGenreLimit,
   onMoviesFetch: Operation.fetchMovies,
   onPromoMovieFetch: Operation.fetchPromoMovie,
   onToMyListAdd: Operation.addMovieToMyList,

@@ -1,13 +1,12 @@
 import {groupItemsBy} from "../../utils";
-import {ActionTypes as MoviesActionTypes} from "../movies/movies";
+import {MAX_ITEMS_PER_PAGE, getGenres} from "./selectors";
 
-export const MAX_ITEMS_PER_PAGE = 20;
 export const ALL_GENRES_GROUP = `All genres`;
 
 export const ActionTypes = {
   STORE_GENRES: `STORE_GENRES`,
   CHANGE_ACTIVE_GENRE: `CHANGE_ACTIVE_GENRE`,
-  INCREASE_GENRE_LIMIT: `INCREASE_GENRE_LIMIT`,
+  CHANGE_GENRE_LIMIT: `CHANGE_GENRE_LIMIT`,
 };
 
 export const ActionCreator = {
@@ -28,12 +27,13 @@ export const ActionCreator = {
     return {type: ActionTypes.CHANGE_ACTIVE_GENRE, payload: genre};
   },
   /**
-   * Увеличить максимальное ко-во возвращемых для заданного жанра фильмов
+   * Задать максимальное кол-во возвращемых для заданного жанра фильмов
    * @param {string} genre Жанр фильма
+   * @param {number} limit Кол-во элементов
    * @return {Object}
    */
-  increaseGenreLimit: (genre) => {
-    return {type: ActionTypes.INCREASE_GENRE_LIMIT, payload: genre};
+  changeGenreLimit: (genre, limit) => {
+    return {type: ActionTypes.CHANGE_GENRE_LIMIT, meta: {genre}, payload: limit};
   },
 };
 
@@ -55,6 +55,26 @@ export const Operation = {
       dispath(ActionCreator.storeGenres(genres));
     };
   },
+  /**
+   * Увеличить максимальное ко-во возвращемых для заданного жанра фильмов
+   * @param {string} genre Жанр фильма
+   * @return {Object}
+   */
+  increaseGenreLimit: (genre) => {
+    return (dispath, getState) => {
+      const state = getState();
+      const {items, limits} = getGenres(state);
+
+      if (items[genre]) {
+        const {[genre]: prevLimit = MAX_ITEMS_PER_PAGE} = limits;
+        const limit = Math.min(
+            items[genre].length,
+            prevLimit + MAX_ITEMS_PER_PAGE,
+        );
+        dispath(ActionCreator.changeGenreLimit(genre, limit));
+      }
+    };
+  },
 };
 
 export const initialState = {
@@ -74,17 +94,8 @@ export default (state = initialState, action = {}) => {
       return {...initialState, items: payload};
     case ActionTypes.CHANGE_ACTIVE_GENRE:
       return {...state, activeGenre: payload};
-    case ActionTypes.INCREASE_GENRE_LIMIT:
-      return {
-        ...state,
-        limits: {
-          ...state.limits,
-          [payload]: Math.min(
-              state.items[payload].length,
-              (state.limits[payload] || MAX_ITEMS_PER_PAGE) + MAX_ITEMS_PER_PAGE,
-          ),
-        },
-      };
+    case ActionTypes.CHANGE_GENRE_LIMIT:
+      return {...state, limits: {...state.limits, [meta.genre]: payload}};
     default:
       return state;
   }

@@ -95,10 +95,8 @@ export const getLimitByGenre = (state, genre) => {
   const {items, limits} = getGenres(state);
 
   if (items[genre]) {
-    const count = items[genre].length;
-    const {[genre]: limit = 0} = limits;
-
-    return (limit > 0) ? limit : Math.min(count, MAX_ITEMS_PER_PAGE);
+    const {[genre]: limit = MAX_ITEMS_PER_PAGE} = limits;
+    return limit;
   }
-  return 0;
+  return MAX_ITEMS_PER_PAGE;
 };
