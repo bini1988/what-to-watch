@@ -1,8 +1,8 @@
-import {normalizeItems, groupItemsBy} from "../../utils";
+import {normalizeItems} from "../../utils";
+import {Operation as GenresOperation} from "../genres/genres";
 import {getMovieById} from "./selectors";
 
 export const ActionTypes = {
-  CHANGE_ACTIVE_GENRE: `CHANGE_ACTIVE_GENRE`,
   STORE_MOVIES: `STORE_MOVIES`,
   STORE_MY_LIST_MOVIES: `STORE_MY_LIST_MOVIES`,
   STORE_MOVIE: `STORE_MOVIE`,
@@ -10,25 +10,15 @@ export const ActionTypes = {
 
 export const ActionCreator = {
   /**
-   * Изменить фильтр списка фильмов по жанру
-   * @param {string} genre Жанр фильма
-   * @return {Object}
-   */
-  changeActiveGenre: (genre) => {
-    return {type: ActionTypes.CHANGE_ACTIVE_GENRE, payload: genre};
-  },
-  /**
    * Сохранить список фильмов
-   * @param {Object[]} movies Список фильмов
+   * @param {Object} items Map-объект фильмов
+   * @param {string[]} itemsIds Список ids фильмов
    * @return {Object}
    */
-  storeMovies: (movies) => {
-    const {items, itemsIds} = normalizeItems(movies);
-    const itemsByGenre = groupItemsBy(movies, `genre`, ({id}) => id);
-
+  storeMovies: (items, itemsIds) => {
     return {
       type: ActionTypes.STORE_MOVIES,
-      meta: {itemsIds, itemsByGenre},
+      meta: {itemsIds},
       payload: items
     };
   },
@@ -38,17 +28,20 @@ export const ActionCreator = {
    * @param {Object} [isPromo] Является ли фильм промо
    * @return {Object}
    */
-  storeMovie: (movie, isPromo = false) => {
-    const id = movie && movie.id;
-    return {type: ActionTypes.STORE_MOVIE, meta: {id, isPromo}, payload: movie};
+  storeMovie: (movie = {}, isPromo = false) => {
+    return {
+      type: ActionTypes.STORE_MOVIE,
+      meta: {id: movie.id, isPromo},
+      payload: movie
+    };
   },
   /**
    * Сохранить список фильмов «к просмотру»
-   * @param {Object[]} movies Список фильмов
+   * @param {Object} items Map-объект фильмов
+   * @param {string[]} itemsIds Список ids фильмов
    * @return {Object}
    */
-  storeMyListMovies: (movies) => {
-    const {items, itemsIds} = normalizeItems(movies);
+  storeMyListMovies: (items, itemsIds) => {
     return {
       type: ActionTypes.STORE_MY_LIST_MOVIES,
       meta: {itemsIds},
@@ -65,7 +58,10 @@ export const Operation = {
   fetchMovies: () => {
     return (dispath, getState, api) => {
       return api.fetchMovies().then((movies) => {
-        dispath(ActionCreator.storeMovies(movies));
+        const {items, itemsIds} = normalizeItems(movies);
+
+        dispath(ActionCreator.storeMovies(items, itemsIds));
+        dispath(GenresOperation.storeMoviesGenres(movies));
       });
     };
   },
@@ -104,20 +100,35 @@ export const Operation = {
   fetchMyListMovies: () => {
     return (dispath, getState, api) => {
       return api.fetchMyListMovies().then((movies) => {
-        return dispath(ActionCreator.storeMyListMovies(movies));
+        const {items, itemsIds} = normalizeItems(movies);
+
+        return dispath(
+            ActionCreator.storeMyListMovies(items, itemsIds)
+        );
       });
     };
   },
   /**
-   * Добавить фильм в список «к просмотру»
-   * @param {number} id ID фильма
+   * Добавить/удалить фильм из списка «к просмотру»
+   * @param {number} id Индентификатор фильма
    * @return {MovieCard}
    */
-  addMovieToMyList: (id) => {
+  toggleMovieToMyList: (id) => {
     return (dispath, getState, api) => {
-      return api.addMovieToMyList(id).then((movie) => {
-        return dispath(ActionCreator.storeMovie(movie));
-      });
+      const state = getState();
+      const item = getMovieById(state, id);
+
+      if (item && item.id) {
+        const methodName = item.isInList
+          ? `deleteMovieFromMyList`
+          : `addMovieToMyList`;
+
+        return api[methodName](id).then((movie) => {
+          return dispath(ActionCreator.storeMovie(movie));
+        });
+      }
+
+      return Promise.reject(`Unknown movie id`);
     };
   },
 };
@@ -137,8 +148,6 @@ export default (state = initialState, action = {}) => {
   const {type, meta, payload} = action;
 
   switch (type) {
-    case ActionTypes.CHANGE_ACTIVE_GENRE:
-      return {...state, activeGenre: payload};
     case ActionTypes.STORE_MOVIES:
       return {
         ...state,
