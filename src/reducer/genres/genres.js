@@ -1,16 +1,26 @@
+import {groupItemsBy} from "../../utils";
 import {ActionTypes as MoviesActionTypes} from "../movies/movies";
 
 export const MAX_ITEMS_PER_PAGE = 20;
 export const ALL_GENRES_GROUP = `All genres`;
 
 export const ActionTypes = {
+  STORE_GENRES: `STORE_GENRES`,
   CHANGE_ACTIVE_GENRE: `CHANGE_ACTIVE_GENRE`,
   INCREASE_GENRE_LIMIT: `INCREASE_GENRE_LIMIT`,
 };
 
 export const ActionCreator = {
   /**
-   * Изменить фильтр списка фильмов по жанру
+   * Сохранить набор жанров
+   * @param {Object} genres Набор жанров
+   * @return {Object}
+   */
+  storeGenres: (genres) => {
+    return {type: ActionTypes.STORE_GENRES, payload: genres};
+  },
+  /**
+   * Изменить фильтр по жанру
    * @param {string} genre Жанр фильма
    * @return {Object}
    */
@@ -18,12 +28,32 @@ export const ActionCreator = {
     return {type: ActionTypes.CHANGE_ACTIVE_GENRE, payload: genre};
   },
   /**
-   * Получить следующий набор фильмов соответвующего жанра
+   * Увеличить максимальное ко-во возвращемых для заданного жанра фильмов
    * @param {string} genre Жанр фильма
    * @return {Object}
    */
   increaseGenreLimit: (genre) => {
     return {type: ActionTypes.INCREASE_GENRE_LIMIT, payload: genre};
+  },
+};
+
+export const Operation = {
+  /**
+   * Сохранить набор жанров переданных фильмов
+   * @param {Object[]} movies Список фильмов
+   * @return {Object}
+   */
+  storeMoviesGenres: (movies) => {
+    return (dispath) => {
+      const toId = (it) => it.id;
+      const moviesIds = movies.map(toId);
+      const moviesIdsByGenres = groupItemsBy(movies, `genre`, toId);
+      const genres = {
+        [ALL_GENRES_GROUP]: moviesIds, ...moviesIdsByGenres,
+      };
+
+      dispath(ActionCreator.storeGenres(genres));
+    };
   },
 };
 
@@ -40,14 +70,8 @@ export default (state = initialState, action = {}) => {
   const {type, meta, payload} = action;
 
   switch (type) {
-    case MoviesActionTypes.STORE_MOVIES:
-      return {
-        ...state,
-        items: {
-          [ALL_GENRES_GROUP]: meta.itemsIds,
-          ...meta.itemsByGenre,
-        },
-      };
+    case ActionTypes.STORE_GENRES:
+      return {...initialState, items: payload};
     case ActionTypes.CHANGE_ACTIVE_GENRE:
       return {...state, activeGenre: payload};
     case ActionTypes.INCREASE_GENRE_LIMIT:
