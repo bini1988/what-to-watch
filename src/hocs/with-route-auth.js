@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {compose} from "redux";
 import {Redirect} from "react-router-dom";
 import {isAuthenticated} from "../reducer/user/selectors";
 
@@ -21,11 +22,15 @@ const withRouteAuth = (Component) => {
 
   WithRouteAuth.propTypes = Component.propTypes;
 
-  const mapStateToProps = (state) => {
-    return {hasAuth: isAuthenticated(state)};
-  };
-
-  return connect(mapStateToProps)(WithRouteAuth);
+  return WithRouteAuth;
 };
 
-export default withRouteAuth;
+const mapStateToProps = (state) => {
+  return {hasAuth: isAuthenticated(state)};
+};
+
+export {withRouteAuth};
+export default compose(
+    connect(mapStateToProps),
+    withRouteAuth
+);
