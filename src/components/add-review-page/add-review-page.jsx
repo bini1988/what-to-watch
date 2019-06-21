@@ -12,9 +12,10 @@ import PageTitle from "../page-title/page-title";
 import UserBlock from "../user-block/user-block";
 import AddReview from "../add-review/add-review";
 
-function AddReviewPage({movie = {}, onReviewSubmit}) {
+function AddReviewPage({movie = {}, history, onReviewSubmit}) {
   const handleRevieSubmit = (review) => {
     onReviewSubmit(movie.id, review);
+    history.push(`/film/${movie.id}#Reviews`);
   };
 
   return (
@@ -35,6 +36,8 @@ function AddReviewPage({movie = {}, onReviewSubmit}) {
 }
 
 AddReviewPage.propTypes = {
+  /** Объект history React-Router */
+  history: PropTypes.object,
   /** Карточка фильма */
   movie: MovieCardPropTypes,
   /** Обработчик события отправки формы */
@@ -53,4 +56,3 @@ const mapDispatchToProps = {
 
 export {AddReviewPage};
 export default connect(mapStateToProps, mapDispatchToProps)(AddReviewPage);
-
