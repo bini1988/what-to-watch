@@ -1,9 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
+import withReviewForm, {withReviewFormPropTypes} from "../../hocs/with-review-form";
 
-function AddReview({maxRating, defaultRating, onSubmit}) {
-  const toIndex = (it, index) => index + 1;
-  const ratings = Array.from({length: maxRating}, toIndex);
+const MAX_RATING = 5;
+const toIndex = (it, index) => index + 1;
+
+function AddReview(props) {
+  const {rating, comment, invalid, onRatingChange, onCommentChange, handleSubmit} = props;
+  const ratings = Array.from({length: MAX_RATING}, toIndex);
 
   return (
     <div className="add-review">
@@ -11,31 +14,26 @@ function AddReview({maxRating, defaultRating, onSubmit}) {
         className="add-review__form"
         onSubmit={(event) => {
           event.preventDefault();
-
-          const form = event.target;
-          const isRatingChecked = (it) => form.elements[`star-${it}`].checked;
-          const rating = ratings.find(isRatingChecked);
-          const comment = form.elements[`review-text`].value;
-
-          if (onSubmit) {
-            onSubmit({rating, comment});
+          if (handleSubmit) {
+            handleSubmit();
           }
         }}>
         <div className="rating">
           <div className="rating__stars">
-            {ratings.map((rating) => (
-              <React.Fragment key={rating}>
+            {ratings.map((it) => (
+              <React.Fragment key={it}>
                 <input
                   className="rating__input"
-                  id={`star-${rating}`}
+                  id={`star-${it}`}
                   name="rating"
                   type="radio"
-                  value={rating}
-                  defaultChecked={rating === defaultRating}/>
+                  value={it}
+                  checked={it === rating}
+                  onChange={() => onRatingChange(it)}/>
                 <label
                   className="rating__label"
-                  htmlFor={`star-${rating}`}>
-                  {`Rating ${rating}`}
+                  htmlFor={`star-${it}`}>
+                  {`Rating ${it}`}
                 </label>
               </React.Fragment>
             ))}
@@ -46,9 +44,16 @@ function AddReview({maxRating, defaultRating, onSubmit}) {
             className="add-review__textarea"
             id="review-text"
             name="review-text"
-            placeholder="Review text"/>
+            placeholder="Review text"
+            value={comment}
+            onChange={({target}) => {
+              onCommentChange(target.value);
+            }}/>
           <div className="add-review__submit">
-            <button className="add-review__btn" type="submit">
+            <button
+              className="add-review__btn"
+              type="submit"
+              disabled={invalid}>
               {`Post`}
             </button>
           </div>
@@ -58,17 +63,10 @@ function AddReview({maxRating, defaultRating, onSubmit}) {
   );
 }
 
-AddReview.defaultProps = {
-  maxRating: 5,
-  defaultRating: 3,
-};
 AddReview.propTypes = {
-  /** Максимальный рейтинг */
-  maxRating: PropTypes.number,
-  /** Рейтинг по умолчанию */
-  defaultRating: PropTypes.number,
-  /** Отправить форму */
-  onSubmit: PropTypes.func,
+  /** withReviewForm HOC */
+  ...withReviewFormPropTypes,
 };
 
-export default AddReview;
+export {AddReview};
+export default withReviewForm(AddReview);
