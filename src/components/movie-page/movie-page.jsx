@@ -2,11 +2,12 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {MovieCardPropTypes} from "../../prop-types";
+import {MovieReviewPropTypes, MovieCardPropTypes} from "../../prop-types";
 import {Operation as MoviesOperation} from "../../reducer/movies/movies";
-import {getMovieWithReviewsById} from "../../reducer/movies/selectors";
+import {getMovieById} from "../../reducer/movies/selectors";
 import {getMoviesGenreLike} from "../../reducer/genres/selectors";
 import {Operation as ReviewsOperation} from "../../reducer/reviews/reviews";
+import {getMovieReviewsById} from "../../reducer/reviews/selectors";
 
 import MovieCard from "../movie-card/movie-card";
 import PageHeader from "../page-header/page-header";
@@ -17,7 +18,7 @@ import MoviesCatalog from "../movies-catalog/movies-catalog";
 
 class MoviePage extends PureComponent {
   render() {
-    const {movie, movies, location = {}, onToMyListToggle} = this.props;
+    const {movie, movies, reviews, location = {}, onToMyListToggle} = this.props;
     const {hash = ``} = location;
     const tab = hash.slice(1) || undefined;
 
@@ -42,7 +43,9 @@ class MoviePage extends PureComponent {
           </MovieCard.Wrapper>
           <MovieCard.InfoWrapper translate>
             <MovieCard.Poster mode="big"/>
-            <MovieCard.About tab={tab}/>
+            <MovieCard.About
+              reviews={reviews}
+              tab={tab}/>
           </MovieCard.InfoWrapper>
         </MovieCard>
         <div className="page-content">
@@ -67,6 +70,10 @@ MoviePage.propTypes = {
   movie: MovieCardPropTypes,
   /** Список похожих фильмов */
   movies: MoviesCatalog.propTypes.movies,
+  /** Отзывы к фильму */
+  reviews: PropTypes.arrayOf(
+      MovieReviewPropTypes,
+  ),
   /** React Router location */
   location: PropTypes.object,
   /** Получить фильм */
@@ -81,10 +88,11 @@ MoviePage.propTypes = {
 
 const mapStateToProps = (state, {match}) => {
   const id = match && match.params.id;
-  const movie = getMovieWithReviewsById(state, id);
+  const movie = getMovieById(state, id);
+  const reviews = getMovieReviewsById(state, id);
   const movies = getMoviesGenreLike(state, id);
 
-  return {movie, movies};
+  return {movie, reviews, movies};
 };
 const mapDispatchToProps = (dispatch, {match}) => {
   const id = match && match.params.id;

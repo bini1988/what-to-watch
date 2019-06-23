@@ -6,6 +6,7 @@ import renderer from "react-test-renderer";
 import {MoviePage} from "./movie-page";
 import movies from "../../mocks/movies";
 import card from "../../mocks/movie-card";
+import reviews from "../../mocks/reviews";
 
 const initialState = {};
 const mockStore = configureStore();
@@ -18,6 +19,7 @@ it(`MoviePage correctly renders default markup`, () => {
           <MoviePage
             movie={card}
             movies={movies}
+            reviews={reviews}
             onMovieFetch={() => {}}
             onMovieReviewsFetch={() => {}}
             onToMyListToggle={() => {}}
