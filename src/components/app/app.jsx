@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
-import {NotificationContainer} from "react-notifications";
 
 import {Operation} from "../../reducer/user/user";
 import withRouteAuth from "../../hocs/with-route-auth";
@@ -44,7 +43,6 @@ class App extends PureComponent {
           <Route
             render={() => <Redirect to="/"/>}/>
         </Switch>
-        <NotificationContainer/>
       </BrowserRouter>
     );
   }

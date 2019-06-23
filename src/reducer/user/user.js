@@ -43,6 +43,8 @@ export const Operation = {
     return (dispath, getState, api) => {
       return api.loginUser(params).then((user) => {
         return dispath(ActionCreator.login(user));
+      }).catch((error) => {
+        ActionCreator.loginError(error.message);
       });
     };
   },
@@ -54,6 +56,8 @@ export const Operation = {
     return (dispath, getState, api) => {
       return api.echoUser().then((user) => {
         return dispath(ActionCreator.login(user));
+      }).catch(() => {
+        dispath(ActionCreator.logout());
       });
     };
   }

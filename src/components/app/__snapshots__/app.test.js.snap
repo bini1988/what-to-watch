@@ -186,10 +186,5 @@ Array [
       </div>
     </footer>
   </div>,
-  <div
-    className="notification-container notification-container-empty"
-  >
-    <span />
-  </div>,
 ]
 `;

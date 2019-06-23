@@ -19,7 +19,7 @@ exports[`MoviesCatalog correctly renders default markup 1`] = `
         className="catalog__genres-link"
         onClick={[Function]}
       >
-        All Genres
+        All genres
       </a>
     </li>
     <li
@@ -264,7 +264,7 @@ exports[`MoviesCatalog correctly renders default markup if limit more or equal t
         className="catalog__genres-link"
         onClick={[Function]}
       >
-        All Genres
+        All genres
       </a>
     </li>
     <li
@@ -665,7 +665,7 @@ exports[`MoviesCatalog correctly renders more button if limit less than movies c
         className="catalog__genres-link"
         onClick={[Function]}
       >
-        All Genres
+        All genres
       </a>
     </li>
     <li

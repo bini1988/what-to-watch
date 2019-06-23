@@ -1,3 +1,4 @@
+import {NotificationManager} from "react-notifications";
 import {normalizeItems} from "../../utils";
 
 export const ActionTypes = {
@@ -29,6 +30,8 @@ export const Operation = {
         .then((reviews) => {
           const {items, itemsIds} = normalizeItems(reviews);
           dispath(ActionCreator.storeReviews(id, items, itemsIds));
+        }).catch((error) => {
+          NotificationManager.error(error.message);
         });
     };
   },
@@ -46,6 +49,8 @@ export const Operation = {
         .then((reviews) => {
           const {items, itemsIds} = normalizeItems(reviews);
           dispath(ActionCreator.storeReviews(id, items, itemsIds));
+        }).catch((error) => {
+          NotificationManager.error(error.message);
         });
     };
   },

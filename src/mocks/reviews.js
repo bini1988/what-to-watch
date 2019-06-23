@@ -50,4 +50,6 @@ export default [
     datetime: `2019-05-27T06:39:07.535Z`,
     date: `May 27, 2019`
   }
-];
+].sort((a, b) => {
+  return new Date(b.datetime) - new Date(a.datetime);
+});

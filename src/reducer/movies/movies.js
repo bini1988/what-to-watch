@@ -1,3 +1,4 @@
+import {NotificationManager} from "react-notifications";
 import {normalizeItems} from "../../utils";
 import {Operation as GenresOperation} from "../genres/genres";
 import {getMovieById} from "./selectors";
@@ -62,6 +63,8 @@ export const Operation = {
 
         dispath(ActionCreator.storeMovies(items, itemsIds));
         dispath(GenresOperation.storeMoviesGenres(movies));
+      }).catch((error) => {
+        NotificationManager.error(error.message);
       });
     };
   },
@@ -90,6 +93,8 @@ export const Operation = {
     return (dispath, getState, api) => {
       return api.fetchPromoMovie().then((movie) => {
         return dispath(ActionCreator.storeMovie(movie, true));
+      }).catch((error) => {
+        NotificationManager.error(error.message);
       });
     };
   },
@@ -105,6 +110,8 @@ export const Operation = {
         return dispath(
             ActionCreator.storeMyListMovies(items, itemsIds)
         );
+      }).catch((error) => {
+        NotificationManager.error(error.message);
       });
     };
   },
@@ -125,6 +132,8 @@ export const Operation = {
 
         return api[methodName](id).then((movie) => {
           return dispath(ActionCreator.storeMovie(movie));
+        }).catch((error) => {
+          NotificationManager.error(error.message);
         });
       }
 
