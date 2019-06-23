@@ -1,11 +1,12 @@
 import React from "react";
-import {MovieCardPropTypes} from "../../../prop-types";
+import PropTypes from "prop-types";
+import {MovieReviewPropTypes} from "../../../prop-types";
 import Review from "../../review/review";
 
-function MovieReviews({card = {}}) {
-  const {reviews = []} = card;
-  const COLUMNS_COUNT = 2;
-  const firstCount = Math.ceil(reviews.length / COLUMNS_COUNT);
+const COLUMNS_COUNT = 2;
+
+function MovieReviews({reviews = []}) {
+  const rowsCount = Math.ceil(reviews.length / COLUMNS_COUNT);
   const renderRview = (review, index) => (
     <Review key={index} review={review}/>
   );
@@ -15,10 +16,10 @@ function MovieReviews({card = {}}) {
       {(reviews.length > 1) ? (
         <React.Fragment>
           <div className="movie-card__reviews-col">
-            {reviews.slice(0, firstCount).map(renderRview)}
+            {reviews.slice(0, rowsCount).map(renderRview)}
           </div>
           <div className="movie-card__reviews-col">
-            {reviews.slice(firstCount).map(renderRview)}
+            {reviews.slice(rowsCount).map(renderRview)}
           </div>
         </React.Fragment>
       ) : (
@@ -29,8 +30,10 @@ function MovieReviews({card = {}}) {
 }
 
 MovieReviews.propTypes = {
-  /** Карточка фильма */
-  card: MovieCardPropTypes,
+  /** Отзывы к фильму */
+  reviews: PropTypes.arrayOf(
+      MovieReviewPropTypes,
+  ),
 };
 
 export default MovieReviews;

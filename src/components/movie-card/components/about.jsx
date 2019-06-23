@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {MovieCardPropTypes} from "../../../prop-types";
+import {MovieReviewPropTypes, MovieCardPropTypes} from "../../../prop-types";
 
 import MovieNav from "../../movie-nav/movie-nav";
 
@@ -23,7 +23,7 @@ const AboutTabs = {
   },
 };
 
-function About({card = {}, tab}) {
+function About({card = {}, reviews, tab}) {
   const tabName = AboutTabs[tab] ? tab : `Overview`;
   const Tab = AboutTabs[tabName];
 
@@ -38,7 +38,9 @@ function About({card = {}, tab}) {
             active={name === tabName}/>
         ))}
       </MovieNav>
-      <Tab.component card={card}/>
+      <Tab.component
+        reviews={reviews}
+        card={card}/>
     </div>
   );
 }
@@ -50,6 +52,10 @@ About.propTypes = {
   ),
   /** Карточка фильма */
   card: MovieCardPropTypes,
+  /** Отзывы к фильму */
+  reviews: PropTypes.arrayOf(
+      MovieReviewPropTypes,
+  ),
 };
 
 export default About;
