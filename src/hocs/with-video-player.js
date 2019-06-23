@@ -26,6 +26,7 @@ const withVideoPlayer = (options = {}) => (Component) => {
       this._handleFullScreenExit = this._handleFullScreenExit.bind(this);
 
       this._timeout = null;
+      this._isMounted = true;
 
       this._videoRef = React.createRef();
 
@@ -61,6 +62,7 @@ const withVideoPlayer = (options = {}) => (Component) => {
 
     componentWillUnmount() {
       this._resetTimeout();
+      this._isMounted = false;
     }
 
     _renderPlayer(props) {
@@ -136,7 +138,9 @@ const withVideoPlayer = (options = {}) => (Component) => {
 
     _handlePlay() {
       this._resetTimeout();
-      this.setState({isPlaying: true});
+      if (this._isMounted) {
+        this.setState({isPlaying: true});
+      }
     }
 
     _handlePause() {
@@ -150,7 +154,9 @@ const withVideoPlayer = (options = {}) => (Component) => {
     }
 
     _handlePlayError() {
-      this.setState({...this.initialState});
+      if (this._isMounted) {
+        this.setState({...this.initialState});
+      }
     }
 
     _handleLoadStart() {
