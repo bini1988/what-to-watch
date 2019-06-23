@@ -44,7 +44,9 @@ export const Operation = {
       return api.loginUser(params).then((user) => {
         return dispath(ActionCreator.login(user));
       }).catch((error) => {
-        ActionCreator.loginError(error.message);
+        dispath(ActionCreator.loginError(`We can’t recognize this email
+        and password combination. Please try again`));
+        throw error;
       });
     };
   },

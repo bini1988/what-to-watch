@@ -18,7 +18,7 @@ function SignInPage({hasAuth, error, onUserLogin, location, history}) {
       if (state && state.referrer) {
         history.push(state.referrer);
       }
-    });
+    }).catch(() => {});
   };
 
   if (hasAuth) {

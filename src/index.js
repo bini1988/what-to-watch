@@ -17,6 +17,9 @@ const api = createApi({
     if (response.status && (response.status === 403)) {
       throw new Error(`Ошибка. Данное действие доступно только для авторизованных пользователей`);
     }
+    if (response.status && (response.status === 400)) {
+      throw new Error(response.data && response.data.error);
+    }
   },
 });
 const store = createStore(
