@@ -1,4 +1,4 @@
-import reducer, {initialState, ActionCreator, Operation} from "./user";
+import reducer, {initialState, ActionCreator, Operation, LOGIN_ERROR_MESSAGE} from "./user";
 
 describe(`User Reducer`, () => {
   it(`should return state`, () => {
@@ -35,26 +35,50 @@ describe(`User Reducer`, () => {
   it(`should make user login operation`, () => {
     const mockUser = {user: `user`};
     const dispatch = jest.fn();
-    const loginUserMock = jest.fn(() => Promise.resolve(mockUser));
+    const loginUser = jest.fn(() => Promise.resolve(mockUser));
     const params = {email: `email`, password: `password`};
     const loginUserThunk = Operation.loginUser(params);
 
-    return loginUserThunk(dispatch, undefined, {loginUser: loginUserMock}).then(() => {
-      expect(loginUserMock).toHaveBeenCalledTimes(1);
+    return loginUserThunk(dispatch, undefined, {loginUser}).then(() => {
+      expect(loginUser).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith(ActionCreator.login(mockUser));
     });
   });
+  it(`should handle user login operation error`, () => {
+    const dispatch = jest.fn();
+    const error = new Error(`Handle error`);
+    const loginUser = jest.fn(() => Promise.reject(error));
+    const params = {email: `email`, password: `password`};
+    const loginUserThunk = Operation.loginUser(params);
+
+    return loginUserThunk(dispatch, undefined, {loginUser}).then(() => {
+      expect(loginUser).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith(ActionCreator.loginError(LOGIN_ERROR_MESSAGE));
+    }).catch(() => {});
+  });
   it(`should make user echo operation`, () => {
     const mockUser = {user: `user`};
     const dispatch = jest.fn();
-    const echoUserMock = jest.fn(() => Promise.resolve(mockUser));
+    const echoUser = jest.fn(() => Promise.resolve(mockUser));
     const echoUserThunk = Operation.echoUser();
 
-    return echoUserThunk(dispatch, undefined, {echoUser: echoUserMock}).then(() => {
-      expect(echoUserMock).toHaveBeenCalledTimes(1);
+    return echoUserThunk(dispatch, undefined, {echoUser}).then(() => {
+      expect(echoUser).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith(ActionCreator.login(mockUser));
+    });
+  });
+  it(`should handle user echo operation error`, () => {
+    const dispatch = jest.fn();
+    const echoUser = jest.fn(() => Promise.reject());
+    const echoUserThunk = Operation.echoUser();
+
+    return echoUserThunk(dispatch, undefined, {echoUser}).then(() => {
+      expect(echoUser).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith(ActionCreator.logout());
     });
   });
 });

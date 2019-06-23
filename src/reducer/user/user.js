@@ -1,4 +1,7 @@
 
+export const LOGIN_ERROR_MESSAGE = `We can’t recognize this email
+and password combination. Please try again`;
+
 export const ActionTypes = {
   LOGIN_USER: `LOGIN_USER`,
   LOGOUT_USER: `LOGOUT_USER`,
@@ -44,8 +47,7 @@ export const Operation = {
       return api.loginUser(params).then((user) => {
         return dispath(ActionCreator.login(user));
       }).catch((error) => {
-        dispath(ActionCreator.loginError(`We can’t recognize this email
-        and password combination. Please try again`));
+        dispath(ActionCreator.loginError(LOGIN_ERROR_MESSAGE));
         throw error;
       });
     };
