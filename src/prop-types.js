@@ -68,9 +68,5 @@ export const MovieCardPropTypes = PropTypes.shape({
   trailer: PropTypes.string,
   /** Рейтинг фильма */
   rating: MovieRatingPropTypes,
-  /** Отзывы к фильму */
-  reviews: PropTypes.arrayOf(
-      MovieReviewPropTypes,
-  ),
 });
 
