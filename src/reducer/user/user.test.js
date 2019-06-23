@@ -1,6 +1,10 @@
 import reducer, {initialState, ActionCreator, Operation} from "./user";
 
 describe(`User Reducer`, () => {
+  it(`should return state`, () => {
+    const action = {type: `UNKNOWN`};
+    expect(reducer(initialState, action)).toEqual(initialState);
+  });
   it(`should login given user`, () => {
     const user = {name: `user-1`};
     const action = ActionCreator.login(user);

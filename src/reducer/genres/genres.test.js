@@ -5,6 +5,10 @@ import {MAX_ITEMS_PER_PAGE} from "./selectors";
 import reducer, {initialState, ActionCreator, Operation} from "./genres";
 
 describe(`Genres Reducer`, () => {
+  it(`should return state`, () => {
+    const action = {type: `UNKNOWN`};
+    expect(reducer(initialState, action)).toEqual(initialState);
+  });
   it(`should store movies by storeGenres`, () => {
     const action = ActionCreator.storeGenres(moviesIdsByGenres);
 

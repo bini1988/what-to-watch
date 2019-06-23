@@ -9,6 +9,10 @@ const itemsIds = reviews.map((it) => it.id);
 
 
 describe(`Reviews Reducer`, () => {
+  it(`should return state`, () => {
+    const action = {type: `UNKNOWN`};
+    expect(reducer(initialState, action)).toEqual(initialState);
+  });
   it(`should store reviews`, () => {
     const [id] = itemsIds;
     const movieToItems = {[id]: itemsIds};

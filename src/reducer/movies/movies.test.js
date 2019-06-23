@@ -12,6 +12,10 @@ const moviesItemsIds = movies.map((it) => it.id);
 
 
 describe(`Movies Reducer`, () => {
+  it(`should return state`, () => {
+    const action = {type: `UNKNOWN`};
+    expect(reducer(initialState, action)).toEqual(initialState);
+  });
   it(`should store movies by storeMovies`, () => {
     const items = {};
     const itemsIds = [`id1`, `id2`];
