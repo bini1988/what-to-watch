@@ -1,3 +1,4 @@
+import {NotificationManager} from "react-notifications";
 import reviews from "../../mocks/reviews";
 import reducer, {initialState, ActionCreator, Operation} from "./reviews";
 
@@ -38,6 +39,24 @@ describe(`Reviews Reducer`, () => {
         );
       });
   });
+  it(`should handle failed reviews API request`, () => {
+    const id = 7;
+    const dispatch = jest.fn();
+    const error = new Error(`Handle error`);
+    const fetchMovieReviews = jest.fn(() => Promise.reject(error));
+    const fetchMovieReviewsThunk = Operation.fetchMovieReviews(id);
+
+    const spy = jest.spyOn(NotificationManager, `error`);
+
+    return fetchMovieReviewsThunk(dispatch, undefined, {fetchMovieReviews})
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(0);
+        expect(NotificationManager.error).toHaveBeenCalledTimes(1);
+        expect(NotificationManager.error).toHaveBeenCalledWith(error.message);
+
+        spy.mockRestore();
+      });
+  });
   it(`should make submit movie review API request and call storeReviews`, () => {
     const id = 7;
     const review = {rating: 3, comment: `comment`};
@@ -54,6 +73,25 @@ describe(`Reviews Reducer`, () => {
         expect(dispatch).toHaveBeenCalledWith(
             ActionCreator.storeReviews(id, items, itemsIds)
         );
+      });
+  });
+  it(`should handle failed submit movie review API request`, () => {
+    const id = 7;
+    const review = {rating: 3, comment: `comment`};
+    const dispatch = jest.fn();
+    const error = new Error(`Handle error`);
+    const submitMovieReview = jest.fn(() => Promise.reject(error));
+    const submitMovieReviewThunk = Operation.submitMovieReview(id, review);
+
+    const spy = jest.spyOn(NotificationManager, `error`);
+
+    return submitMovieReviewThunk(dispatch, undefined, {submitMovieReview})
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(0);
+        expect(NotificationManager.error).toHaveBeenCalledTimes(1);
+        expect(NotificationManager.error).toHaveBeenCalledWith(error.message);
+
+        spy.mockRestore();
       });
   });
 });
