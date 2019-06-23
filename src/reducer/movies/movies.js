@@ -1,52 +1,53 @@
-import {ALL_GENRES_GROUP} from "./selectors";
+import {NotificationManager} from "react-notifications";
+import {normalizeItems} from "../../utils";
+import {Operation as GenresOperation} from "../genres/genres";
+import {getMovieById} from "./selectors";
 
 export const ActionTypes = {
-  CHANGE_ACTIVE_GENRE: `CHANGE_ACTIVE_GENRE`,
   STORE_MOVIES: `STORE_MOVIES`,
   STORE_MY_LIST_MOVIES: `STORE_MY_LIST_MOVIES`,
-  STORE_PROMO_MOVIE: `STORE_PROMO_MOVIE`,
+  STORE_MOVIE: `STORE_MOVIE`,
 };
 
 export const ActionCreator = {
   /**
-   * Изменить фильтр списка фильмов по жанру
-   * @param {string} genre Жанр фильма
-   * @return {Object}
-   */
-  changeActiveGenre: (genre) => {
-    return {type: ActionTypes.CHANGE_ACTIVE_GENRE, payload: genre};
-  },
-  /**
    * Сохранить список фильмов
-   * @param {Object[]} movies Список фильмов
+   * @param {Object} items Map-объект фильмов
+   * @param {string[]} itemsIds Список ids фильмов
    * @return {Object}
    */
-  storeMovies: (movies) => {
-    return {type: ActionTypes.STORE_MOVIES, payload: movies};
+  storeMovies: (items, itemsIds) => {
+    return {
+      type: ActionTypes.STORE_MOVIES,
+      meta: {itemsIds},
+      payload: items
+    };
   },
   /**
-   * Сохранить список фильмов
-   * @param {Object[]} movies Список фильмов
+   * Сохранить фильм
+   * @param {Object} movie Фильм
+   * @param {Object} [isPromo] Является ли фильм промо
    * @return {Object}
    */
-  storeMyMovies: (movies) => {
-    return {type: ActionTypes.STORE_MOVIES, payload: movies};
+  storeMovie: (movie = {}, isPromo = false) => {
+    return {
+      type: ActionTypes.STORE_MOVIE,
+      meta: {id: movie.id, isPromo},
+      payload: movie
+    };
   },
   /**
-   * Сохранить промо фильм
-   * @param {Object} movie Промо фильм
+   * Сохранить список фильмов «к просмотру»
+   * @param {Object} items Map-объект фильмов
+   * @param {string[]} itemsIds Список ids фильмов
    * @return {Object}
    */
-  storePromoMovie: (movie) => {
-    return {type: ActionTypes.STORE_PROMO_MOVIE, payload: movie};
-  },
-  /**
-   * Сохранить фильмы добавленные в список «к просмотру»
-   * @param {Object} movie Промо фильм
-   * @return {Object}
-   */
-  storeMyListMovies: (movie) => {
-    return {type: ActionTypes.STORE_MY_LIST_MOVIES, payload: movie};
+  storeMyListMovies: (items, itemsIds) => {
+    return {
+      type: ActionTypes.STORE_MY_LIST_MOVIES,
+      meta: {itemsIds},
+      payload: items
+    };
   },
 };
 
@@ -58,8 +59,30 @@ export const Operation = {
   fetchMovies: () => {
     return (dispath, getState, api) => {
       return api.fetchMovies().then((movies) => {
-        return dispath(ActionCreator.storeMovies(movies));
+        const {items, itemsIds} = normalizeItems(movies);
+
+        dispath(ActionCreator.storeMovies(items, itemsIds));
+        dispath(GenresOperation.storeMoviesGenres(movies));
+      }).catch((error) => {
+        NotificationManager.error(error.message);
       });
+    };
+  },
+  /**
+   * Получить фильм с указанным id
+   * @param {number} id Индентификатор фильма
+   * @return {Promise}
+   */
+  fetchMovie: (id) => {
+    return (dispath, getState) => {
+      const state = getState();
+      const movie = getMovieById(state, id);
+
+      if (!movie) {
+        return dispath(Operation.fetchMovies());
+      }
+
+      return Promise.resolve(movie);
     };
   },
   /**
@@ -69,7 +92,9 @@ export const Operation = {
   fetchPromoMovie: () => {
     return (dispath, getState, api) => {
       return api.fetchPromoMovie().then((movie) => {
-        return dispath(ActionCreator.storePromoMovie(movie));
+        return dispath(ActionCreator.storeMovie(movie, true));
+      }).catch((error) => {
+        NotificationManager.error(error.message);
       });
     };
   },
@@ -80,33 +105,77 @@ export const Operation = {
   fetchMyListMovies: () => {
     return (dispath, getState, api) => {
       return api.fetchMyListMovies().then((movies) => {
-        return dispath(ActionCreator.storeMyListMovies(movies));
+        const {items, itemsIds} = normalizeItems(movies);
+
+        return dispath(
+            ActionCreator.storeMyListMovies(items, itemsIds)
+        );
+      }).catch((error) => {
+        NotificationManager.error(error.message);
       });
+    };
+  },
+  /**
+   * Добавить/удалить фильм из списка «к просмотру»
+   * @param {number} id Индентификатор фильма
+   * @return {MovieCard}
+   */
+  toggleMovieToMyList: (id) => {
+    return (dispath, getState, api) => {
+      const state = getState();
+      const item = getMovieById(state, id);
+
+      if (item && item.id) {
+        const methodName = item.isInList
+          ? `deleteMovieFromMyList`
+          : `addMovieToMyList`;
+
+        return api[methodName](id).then((movie) => {
+          return dispath(ActionCreator.storeMovie(movie));
+        }).catch((error) => {
+          NotificationManager.error(error.message);
+        });
+      }
+
+      return Promise.reject(`Unknown movie id`);
     };
   },
 };
 
 export const initialState = {
-  /** Промо фильм */
-  promoItem: undefined,
+  /** id промо фильма */
+  promoMovieId: null,
   /** Массив фильмов из списка «к просмотру» */
-  myListItems: [],
-  /** Фильтр списка фильмов по жанру */
-  activeGenre: ALL_GENRES_GROUP,
-  /** Список фильмов */
-  items: [],
+  myListMoviesIds: [],
+  /** Массив id's cписка фильмов */
+  itemsIds: [],
+  /** Map-объект фильмов */
+  items: {},
 };
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case ActionTypes.CHANGE_ACTIVE_GENRE:
-      return {...state, activeGenre: action.payload};
+export default (state = initialState, action = {}) => {
+  const {type, meta, payload} = action;
+
+  switch (type) {
     case ActionTypes.STORE_MOVIES:
-      return {...state, items: action.payload};
-    case ActionTypes.STORE_PROMO_MOVIE:
-      return {...state, promoItem: action.payload};
+      return {
+        ...state,
+        itemsIds: meta.itemsIds,
+        items: {...state.items, ...payload},
+      };
+    case ActionTypes.STORE_MOVIE:
+      return {
+        ...state,
+        promoMovieId: meta.isPromo
+          ? meta.id : state.promoMovieId,
+        items: {...state.items, [meta.id]: payload},
+      };
     case ActionTypes.STORE_MY_LIST_MOVIES:
-      return {...state, myListItems: action.payload};
+      return {
+        ...state,
+        myListMoviesIds: meta.itemsIds,
+        items: {...state.items, ...payload},
+      };
     default:
       return state;
   }

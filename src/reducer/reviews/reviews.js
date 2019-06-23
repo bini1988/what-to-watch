@@ -1,3 +1,5 @@
+import {NotificationManager} from "react-notifications";
+import {normalizeItems} from "../../utils";
 
 export const ActionTypes = {
   STORE_REVIEWS: `STORE_REVIEWS`,
@@ -7,11 +9,12 @@ export const ActionCreator = {
   /**
    * Сохранить список отзывов к фильму
    * @param {number} id ID фильма
-   * @param {Object[]} reviews Список отзывов
+   * @param {Object} items Map-объект отзывов
+   * @param {string[]} itemsIds Список id's отзывов
    * @return {Object}
    */
-  storeReviews: (id, reviews) => {
-    return {type: ActionTypes.STORE_REVIEWS, meta: {id}, payload: reviews};
+  storeReviews: (id, items, itemsIds) => {
+    return {type: ActionTypes.STORE_REVIEWS, meta: {id, itemsIds}, payload: items};
   },
 };
 
@@ -25,7 +28,10 @@ export const Operation = {
     return (dispath, getState, api) => {
       return api.fetchMovieReviews(id)
         .then((reviews) => {
-          dispath(ActionCreator.storeReviews(id, reviews));
+          const {items, itemsIds} = normalizeItems(reviews);
+          dispath(ActionCreator.storeReviews(id, items, itemsIds));
+        }).catch((error) => {
+          NotificationManager.error(error.message);
         });
     };
   },
@@ -41,7 +47,10 @@ export const Operation = {
     return (dispath, getState, api) => {
       return api.submitMovieReview(id, review)
         .then((reviews) => {
-          dispath(ActionCreator.storeReviews(id, reviews));
+          const {items, itemsIds} = normalizeItems(reviews);
+          dispath(ActionCreator.storeReviews(id, items, itemsIds));
+        }).catch((error) => {
+          NotificationManager.error(error.message);
         });
     };
   },
@@ -49,14 +58,26 @@ export const Operation = {
 
 
 export const initialState = {
-  /** Массив отзывов */
-  items: [],
+  /** Map-объект фильм -> массив отзывов */
+  movieToItems: {},
+  /** Map-объект отзывов */
+  items: {},
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.STORE_REVIEWS:
-      return {...state, items: action.payload};
+      return {
+        ...state,
+        movieToItems: {
+          ...state.movieToItems,
+          [action.meta.id]: action.meta.itemsIds,
+        },
+        items: {
+          ...state.items,
+          ...action.payload,
+        },
+      };
     default:
       return state;
   }

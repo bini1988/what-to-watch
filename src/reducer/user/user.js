@@ -43,6 +43,10 @@ export const Operation = {
     return (dispath, getState, api) => {
       return api.loginUser(params).then((user) => {
         return dispath(ActionCreator.login(user));
+      }).catch((error) => {
+        dispath(ActionCreator.loginError(`We can’t recognize this email
+        and password combination. Please try again`));
+        throw error;
       });
     };
   },
@@ -54,6 +58,8 @@ export const Operation = {
     return (dispath, getState, api) => {
       return api.echoUser().then((user) => {
         return dispath(ActionCreator.login(user));
+      }).catch(() => {
+        dispath(ActionCreator.logout());
       });
     };
   }

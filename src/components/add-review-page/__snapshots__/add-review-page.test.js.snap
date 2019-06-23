@@ -120,10 +120,11 @@ exports[`AddReviewPage correctly renders default markup 1`] = `
           className="rating__stars"
         >
           <input
+            checked={false}
             className="rating__input"
-            defaultChecked={false}
             id="star-1"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value={1}
           />
@@ -134,10 +135,11 @@ exports[`AddReviewPage correctly renders default markup 1`] = `
             Rating 1
           </label>
           <input
+            checked={false}
             className="rating__input"
-            defaultChecked={false}
             id="star-2"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value={2}
           />
@@ -148,10 +150,11 @@ exports[`AddReviewPage correctly renders default markup 1`] = `
             Rating 2
           </label>
           <input
+            checked={false}
             className="rating__input"
-            defaultChecked={true}
             id="star-3"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value={3}
           />
@@ -162,10 +165,11 @@ exports[`AddReviewPage correctly renders default markup 1`] = `
             Rating 3
           </label>
           <input
+            checked={false}
             className="rating__input"
-            defaultChecked={false}
             id="star-4"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value={4}
           />
@@ -176,10 +180,11 @@ exports[`AddReviewPage correctly renders default markup 1`] = `
             Rating 4
           </label>
           <input
+            checked={false}
             className="rating__input"
-            defaultChecked={false}
             id="star-5"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value={5}
           />
@@ -198,13 +203,16 @@ exports[`AddReviewPage correctly renders default markup 1`] = `
           className="add-review__textarea"
           id="review-text"
           name="review-text"
+          onChange={[Function]}
           placeholder="Review text"
+          value=""
         />
         <div
           className="add-review__submit"
         >
           <button
             className="add-review__btn"
+            disabled={true}
             type="submit"
           >
             Post

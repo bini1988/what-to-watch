@@ -12,10 +12,6 @@ import UserBlock from "../user-block/user-block";
 import MoviesCatalog from "../movies-catalog/movies-catalog";
 
 class MyListPage extends PureComponent {
-  componentDidMount() {
-    this.props.fetchMyListMovies();
-  }
-
   render() {
     const {movies} = this.props;
 
@@ -33,6 +29,10 @@ class MyListPage extends PureComponent {
       </div>
     );
   }
+
+  componentDidMount() {
+    this.props.onMyListMoviesFetch();
+  }
 }
 
 MyListPage.propTypes = {
@@ -41,9 +41,7 @@ MyListPage.propTypes = {
       PropTypes.object,
   ),
   /** Получить список фильмов добавленных в список «к просмотру» */
-  fetchMyListMovies: PropTypes.func,
-  /** Вложенные элементы */
-  children: PropTypes.any,
+  onMyListMoviesFetch: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -52,7 +50,7 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = {
-  fetchMyListMovies: Operation.fetchMyListMovies,
+  onMyListMoviesFetch: Operation.fetchMyListMovies,
 };
 
 export {MyListPage};

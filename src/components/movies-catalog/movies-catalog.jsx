@@ -1,36 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
-import withActiveElement, {withActiveElementPropTypes} from "../../hocs/with-active-element";
 
 function MoviesCatalog(props) {
-  const {movies, moviesGenres, activeGenre, onGenreChange, onMoviesMore} = props;
+  const {title, likeThis, movies, moviesGenres, activeGenre, limit, onGenreChange, onMoviesMore} = props;
+  const items = (limit > 0)
+    ? movies.slice(0, limit) : movies;
+  const hasMoreItems = limit < movies.length;
 
   return (
-    <section className="catalog">
-      <h2 className="catalog__title visually-hidden">
-        {`Catalog`}
+    <section className={cn(`catalog`, {"catalog--like-this": likeThis})}>
+      <h2 className={cn(`catalog__title`, {"visually-hidden": !title})}>
+        {title || `Catalog`}
       </h2>
       <GenresList
         genres={moviesGenres}
         activeGenre={activeGenre}
         onGenreChange={onGenreChange}/>
       <div className="catalog__movies-list">
-        {movies.map((it = {}) => (
+        {items.map((it = {}) => (
           <SmallMovieCard
             key={it.id}
             card={it}
-            onMouseEnter={props.setActiveElement}
-            onMouseLeave={props.resetActiveElement}/>
+            className="catalog__movies-card"/>
         ))}
       </div>
-      {(typeof onMoviesMore === `function`) && (
+      {hasMoreItems && (
         <div className="catalog__more">
           <button
             className="catalog__button"
             type="button"
-            onClick={onMoviesMore}>
+            onClick={() => onMoviesMore(activeGenre)}>
             {`Show more`}
           </button>
         </div>
@@ -45,6 +47,10 @@ MoviesCatalog.defaultProps = {
   activeGenre: `All genres`,
 };
 MoviesCatalog.propTypes = {
+  /** Отображаемый заголовок */
+  title: PropTypes.string,
+  /** Отображение похожих фильмов */
+  likeThis: PropTypes.bool,
   /** Список отображаемых фильмов */
   movies: PropTypes.arrayOf(
       SmallMovieCard.propTypes.card,
@@ -55,13 +61,12 @@ MoviesCatalog.propTypes = {
   ),
   /** Активный жанр фильмов */
   activeGenre: PropTypes.string,
+  /** Максимальное количество отображаемых фильмов */
+  limit: PropTypes.number,
   /** Изменить фильтр списка фильмов по жанру */
   onGenreChange: PropTypes.func,
   /** Получить следующие элементы списка */
   onMoviesMore: PropTypes.func,
-  /** HOC пропсы */
-  ...withActiveElementPropTypes,
 };
 
-export {MoviesCatalog};
-export default withActiveElement(MoviesCatalog);
+export default MoviesCatalog;

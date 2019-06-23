@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import thunk from "redux-thunk";
+import {NotificationContainer} from "react-notifications";
 import {createStore, applyMiddleware, compose} from "redux";
 import {Provider} from "react-redux";
 
 import reducer from "./reducer/reducer";
-import ActionCreator from "./reducer/user/user";
 import App from "./components/app/app.jsx";
 import {createApi} from "./api";
 
@@ -13,8 +13,12 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const api = createApi({
   url: `https://es31-server.appspot.com/wtw`,
   onError: (error) => {
-    if (error.status && (error.status === 403)) {
-      store.dispatch(ActionCreator.loginError(`Ошибка авторизации`));
+    const {response = {}} = error;
+    if (response.status && (response.status === 403)) {
+      throw new Error(`Ошибка. Данное действие доступно только для авторизованных пользователей`);
+    }
+    if (response.status && (response.status === 400)) {
+      throw new Error(response.data && response.data.error);
     }
   },
 });
@@ -28,6 +32,7 @@ const store = createStore(
 ReactDOM.render(
     <Provider store={store}>
       <App/>
+      <NotificationContainer/>
     </Provider>,
     document.getElementById(`root`)
 );

@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {MovieCardPropTypes} from "../../../prop-types";
 
-function ReviewButton({card = {}, ...props}) {
+function ReviewButton({card = {}}) {
   return (
-    <Link {...props}
-      to={`film/${card.id}/review`}
+    <Link
+      to={`/film/${card.id}/review`}
       className="btn movie-card__button">
       {`Add review`}
     </Link>
@@ -16,8 +16,6 @@ function ReviewButton({card = {}, ...props}) {
 ReviewButton.propTypes = {
   /** Карточка фильма */
   card: MovieCardPropTypes,
-  /** Ссылка на ревью */
-  to: PropTypes.string,
   /** Обработчик события клика */
   onClick: PropTypes.any,
 };

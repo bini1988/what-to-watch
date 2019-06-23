@@ -1,36 +1,61 @@
 import React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import AddReview from "./add-review";
+import {AddReview} from "./add-review";
 
 configure({adapter: new Adapter()});
 
 describe(`AddReview`, () => {
-  it(`Should call onSubmit handler`, () => {
-    const maxRating = 5;
+  it(`Should call handleSubmit handler`, () => {
     const handleSubmit = jest.fn();
     const preventDefault = jest.fn();
     const wrapper = mount(
         <AddReview
-          maxRating={maxRating}
           onSubmit={handleSubmit}/>
     );
 
+    const form = wrapper.find(`.add-review__form`);
+    const target = form.at(0).getDOMNode();
+
+    form.simulate(`submit`, {preventDefault, target});
+
+    expect(preventDefault).toHaveBeenCalled();
+    expect(handleSubmit).toHaveBeenCalled();
+  });
+  it(`Should call onRatingChange handler`, () => {
+    const handleRatingChange = jest.fn();
+    const wrapper = mount(
+        <AddReview
+          onRatingChange={handleRatingChange}/>
+    );
+
+    const maxRating = 5;
+
     for (let rating = 1; rating <= maxRating; rating++) {
-      const ratingInput = wrapper.find(`.rating__input[id='star-${rating}']`);
-      ratingInput.at(0).instance().checked = true;
+      const ratingInput = wrapper.find(
+          `.rating__input[id='star-${rating}']`
+      );
 
-      const text = `some text`;
-      const textInput = wrapper.find(`.add-review__textarea`);
-      textInput.at(0).instance().value = text;
+      ratingInput.simulate(`change`);
 
-      const form = wrapper.find(`.add-review__form`);
-      const target = form.at(0).getDOMNode();
-
-      form.simulate(`submit`, {preventDefault, target});
-
-      expect(preventDefault).toHaveBeenCalled();
-      expect(handleSubmit).toHaveBeenCalledWith({rating, text});
+      expect(handleRatingChange).toHaveBeenCalledWith(rating);
     }
+    expect(handleRatingChange).toHaveBeenCalledTimes(maxRating);
+  });
+  it(`Should call onCommentChange handler`, () => {
+    const handleCommentChange = jest.fn();
+    const wrapper = mount(
+        <AddReview
+          onCommentChange={handleCommentChange}/>
+    );
+
+    const value = `comment value`;
+    const textarea = wrapper.find(`.add-review__textarea`);
+    const target = {value};
+
+    textarea.simulate(`change`, {target});
+
+    expect(handleCommentChange).toHaveBeenCalledTimes(1);
+    expect(handleCommentChange).toHaveBeenCalledWith(value);
   });
 });

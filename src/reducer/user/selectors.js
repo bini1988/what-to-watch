@@ -6,7 +6,7 @@ import NameSpace from "../name-spaces";
  * @return {boolean}
  */
 export const getUser = (state = {}) => {
-  return state[NameSpace.User] || {};
+  return state[NameSpace.USER] || {};
 };
 
 /**

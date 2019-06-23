@@ -2,8 +2,11 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {Operation, ActionCreator} from "../../reducer/movies/movies";
-import {getPromoMovie, getMoviesByGenre, getMoviesGenres, getActiveGenre} from "../../reducer/movies/selectors";
+import {Operation} from "../../reducer/movies/movies";
+import {getPromoMovie} from "../../reducer/movies/selectors";
+
+import {Operation as GenresOperation, ActionCreator as GenresActionCreator} from "../../reducer/genres/genres";
+import {getActiveGenre, getMoviesGenresList, getMoviesByGenre, getLimitByGenre} from "../../reducer/genres/selectors";
 
 import MovieCard from "../movie-card/movie-card";
 import PageHeader from "../page-header/page-header";
@@ -13,17 +16,23 @@ import UserBlock from "../user-block/user-block";
 import MoviesCatalog from "../movies-catalog/movies-catalog";
 
 class MainPage extends PureComponent {
-  componentDidMount() {
-    this.props.fetchMovies();
-    this.props.fetchPromoMovie();
-  }
-
   render() {
-    const {promoMovie = {}, movies, moviesGenres, activeGenre, onGenreChange} = this.props;
+    const {
+      promoMovieCard = {},
+      movies,
+      moviesGenres,
+      activeGenre,
+      moviesLimit,
+      onGenreChange,
+      onMoviesMore,
+      onToMyListToggle
+    } = this.props;
 
     return (
       <React.Fragment>
-        <MovieCard card={promoMovie}>
+        <MovieCard
+          card={promoMovieCard}
+          onToMyListToggle={onToMyListToggle}>
           <MovieCard.Header component={PageHeader}>
             <PageTitle hidden>{`WTW`}</PageTitle>
             <UserBlock/>
@@ -41,17 +50,24 @@ class MainPage extends PureComponent {
             movies={movies}
             moviesGenres={moviesGenres}
             activeGenre={activeGenre}
-            onGenreChange={onGenreChange}/>
+            onGenreChange={onGenreChange}
+            onMoviesMore={onMoviesMore}
+            limit={moviesLimit}/>
           <PageFooter/>
         </div>
       </React.Fragment>
     );
   }
+
+  componentDidMount() {
+    this.props.onMoviesFetch();
+    this.props.onPromoMovieFetch();
+  }
 }
 
 MainPage.propTypes = {
   /** Текущий промо фильм */
-  promoMovie: PropTypes.object,
+  promoMovieCard: PropTypes.object,
   /** Список отображаемых фильмов */
   movies: MoviesCatalog.propTypes.movies,
   /** Список отображаемых жанров фильмов */
@@ -60,10 +76,16 @@ MainPage.propTypes = {
   activeGenre: MoviesCatalog.propTypes.activeGenre,
   /** Изменить фильтр списка фильмов по жанру */
   onGenreChange: MoviesCatalog.propTypes.onGenreChange,
+  /** Количество отображаемых фильмов */
+  moviesLimit: PropTypes.number,
   /** Получить список фильмов */
-  fetchMovies: PropTypes.func,
+  onMoviesFetch: PropTypes.func,
+  /** Получить следующий набор фильмов соответвующего жанра */
+  onMoviesMore: PropTypes.func,
   /** Получить текущий промо фильм */
-  fetchPromoMovie: PropTypes.func,
+  onPromoMovieFetch: PropTypes.func,
+  /** Добавить/удалить фильм из списока «к просмотру» */
+  onToMyListToggle: PropTypes.func,
   /** Вложенные элементы */
   children: PropTypes.any,
 };
@@ -72,16 +94,19 @@ const mapStateToProps = (state) => {
   const activeGenre = getActiveGenre(state);
 
   return {
-    promoMovie: getPromoMovie(state),
+    promoMovieCard: getPromoMovie(state),
     movies: getMoviesByGenre(state, activeGenre),
-    moviesGenres: getMoviesGenres(state),
+    moviesGenres: getMoviesGenresList(state),
+    moviesLimit: getLimitByGenre(state, activeGenre),
     activeGenre,
   };
 };
 const mapDispatchToProps = {
-  fetchMovies: Operation.fetchMovies,
-  fetchPromoMovie: Operation.fetchPromoMovie,
-  onGenreChange: ActionCreator.changeActiveGenre,
+  onGenreChange: GenresActionCreator.changeActiveGenre,
+  onMoviesMore: GenresOperation.increaseGenreLimit,
+  onMoviesFetch: Operation.fetchMovies,
+  onPromoMovieFetch: Operation.fetchPromoMovie,
+  onToMyListToggle: Operation.toggleMovieToMyList,
 };
 
 export {MainPage};

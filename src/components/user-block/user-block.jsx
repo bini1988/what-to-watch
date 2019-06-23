@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {compose} from "redux";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {withRouter} from "react-router";
-import withUser from "../../hocs/with-user";
+import {getUserData} from "../../reducer/user/selectors";
 
 function UserBlock({user, location}) {
   const currentLocation = location && location.pathname;
@@ -49,5 +50,13 @@ UserBlock.propTypes = {
   }),
 };
 
+const mapStateToProps = (state) => {
+  return {user: getUserData(state)};
+};
+
+
 export {UserBlock};
-export default compose(withRouter, withUser)(UserBlock);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {})
+)(UserBlock);

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FullScreenButton correctly renders default markup 1`] = `
+<button
+  className="player__full-screen"
+  onClick={[Function]}
+  type="button"
+>
+  <svg
+    height="27"
+    viewBox="0 0 27 27"
+    width="27"
+  >
+    <use
+      xlinkHref="#full-screen"
+    />
+  </svg>
+  <span>
+    Full screen
+  </span>
+</button>
+`;

@@ -4,7 +4,7 @@ import cn from "classnames";
 
 import {MovieCardPropTypes} from "../../prop-types";
 
-import withMovieCard, {MovieCardContext} from "./hocs/withMovieCard";
+import withMovieCard, {MovieCardContext} from "../../hocs/with-movie-card";
 
 import Header from "./components/header";
 import Poster from "./components/poster";
@@ -17,7 +17,8 @@ import ListButton from "./components/list-button";
 import ReviewButton from "./components/review-button";
 import About from "./components/about";
 
-function MovieCard({card = {}, full, children}) {
+function MovieCard(props) {
+  const {card = {}, full, children} = props;
   const {images = {}} = card;
   const style = {background: images.backgroundColor};
 
@@ -28,7 +29,7 @@ function MovieCard({card = {}, full, children}) {
           `movie-card`,
           {"movie-card--full": full}
       )}>
-      <MovieCardContext.Provider value={card}>
+      <MovieCardContext.Provider value={props}>
         {children}
       </MovieCardContext.Provider>
     </section>
@@ -44,9 +45,9 @@ MovieCard.InfoWrapper = InfoWrapper;
 MovieCard.Wrapper = Wrapper;
 MovieCard.Description = withMovieCard(Description);
 /** Проиграть фильм */
-MovieCard.PlayButton = PlayButton;
+MovieCard.PlayButton = withMovieCard(PlayButton);
 /** Добавить фильм в список «к просмотру» */
-MovieCard.ListButton = ListButton;
+MovieCard.ListButton = withMovieCard(ListButton);
 /** Добавить отзыв к фильму */
 MovieCard.ReviewButton = withMovieCard(ReviewButton);
 /** Расширенная информация о фильме */
@@ -57,6 +58,8 @@ MovieCard.propTypes = {
   card: MovieCardPropTypes,
   /** Модификатор карточки */
   full: PropTypes.bool,
+  /** Добавить/удалить фильм из списока «к просмотру» */
+  onToMyListToggle: PropTypes.func,
   /** Вложенные элементы */
   children: PropTypes.any,
 };

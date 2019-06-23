@@ -1,69 +1,98 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
+import withVideoPlayer, {withVideoPlayerPropTypes} from "../../hocs/with-video-player";
+import {formatPlayerTime} from "./player-utils";
+import PlayButton from "./components/play-button";
+import PauseButton from "./components/pause-button";
+import FullScreenButton from "./components/full-screen-button";
+
 class VideoPlayer extends PureComponent {
   constructor(props) {
     super(props);
-    this._videoRef = React.createRef();
-  }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.isPlaying !== prevProps.isPlaying) {
-      this.toggle();
-    }
+    this._videoRef = React.createRef();
+    this._handleExit = this._handleExit.bind(this);
   }
 
   render() {
-    const {src, poster, width, height, muted} = this.props;
+    const {title, src, poster, isPlayerPlaying, playerProgress = 0, playerTime, playerTotalTime, renderPlayer, onPlayerPlay, onPlayerPause, onPlayerFullScreen} = this.props;
+
+    const progress = playerProgress.toFixed(2);
+    const elapsedTime = formatPlayerTime(
+        playerTotalTime - playerTime, playerTotalTime
+    );
 
     return (
-      <video
-        ref={this._videoRef}
-        src={src}
-        poster={poster}
-        width={width}
-        height={height}
-        muted={muted}
-        preload="none"/>
+      <div className="player">
+        {renderPlayer({className: `player__video`, src, poster})}
+        <button
+          type="button"
+          className="player__exit"
+          onClick={this._handleExit}>
+          {`Exit`}
+        </button>
+        <div className="player__controls">
+          <div className="player__controls-row">
+            <div className="player__time">
+              <progress
+                className="player__progress"
+                value={progress}
+                max="100"/>
+              <div
+                className="player__toggler"
+                style={{left: `${progress}%`}}>
+                {`Toggler`}
+              </div>
+            </div>
+            <div className="player__time-value">
+              {elapsedTime}
+            </div>
+          </div>
+          <div className="player__controls-row">
+            {isPlayerPlaying ? (
+              <PauseButton onClick={onPlayerPause}/>
+            ) : (
+              <PlayButton onClick={onPlayerPlay}/>
+            )}
+            <div className="player__name">
+              {title}
+            </div>
+            <FullScreenButton onClick={onPlayerFullScreen}/>
+          </div>
+        </div>
+      </div>
     );
   }
 
-  toggle() {
-    if (this.props.isPlaying) {
-      this.play();
-    } else {
-      this.stop();
-    }
-  }
+  _handleExit() {
+    const {onPlayerFullScreenExit, onPlayerStop, onExit} = this.props;
 
-  play() {
-    const video = this._videoRef.current;
-    if (video) {
-      video.play();
-    }
-  }
+    onPlayerStop();
+    onPlayerFullScreenExit();
 
-  stop() {
-    const video = this._videoRef.current;
-    if (video) {
-      video.load();
+    if (onExit) {
+      onExit();
     }
   }
 }
 
+VideoPlayer.defaultProps = {
+  renderPlayer: () => null,
+  autoplay: false,
+};
 VideoPlayer.propTypes = {
-  /** Воспроизвести/остановить видеоролик */
-  isPlaying: PropTypes.bool,
+  /** Пропсы withVideoPlayer HOC */
+  ...withVideoPlayerPropTypes,
   /** Указывает путь к воспроизводимому видеоролику */
   src: PropTypes.string,
+  /** Описание воспроизводимого видеоролика */
+  title: PropTypes.string,
   /** Указывает адрес картинки, которая будет отображаться, пока видео не доступно или не воспроизводится */
   poster: PropTypes.string,
-  /** Задает ширину области для воспроизведения видеоролика */
-  width: PropTypes.number,
-  /** Задает высоту области для воспроизведения видеоролика */
-  height: PropTypes.number,
-  /** Не воспроизводить аудио дорожку */
-  muted: PropTypes.bool,
+  /** Обработчик события выхода */
+  onExit: PropTypes.func,
 };
 
-export default VideoPlayer;
+export {VideoPlayer};
+export default withVideoPlayer()(VideoPlayer);

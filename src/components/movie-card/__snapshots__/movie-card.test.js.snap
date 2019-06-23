@@ -52,9 +52,10 @@ exports[`MovieCard correctly renders complex markup 1`] = `
         <div
           className="movie-card__buttons"
         >
-          <button
+          <a
             className="btn btn--play movie-card__button"
-            type="button"
+            href="/film/1/player"
+            onClick={[Function]}
           >
             <svg
               height={19}
@@ -68,9 +69,10 @@ exports[`MovieCard correctly renders complex markup 1`] = `
             <span>
               Play
             </span>
-          </button>
+          </a>
           <button
             className="btn btn--list movie-card__button"
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -123,7 +125,7 @@ exports[`MovieCard correctly renders complex markup 1`] = `
             className="movie-nav__list"
           >
             <li
-              className="movie-nav__item"
+              className="movie-nav__item movie-nav__item--active"
             >
               <a
                 className="movie-nav__link"

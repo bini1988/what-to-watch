@@ -3,7 +3,7 @@ import {MemoryRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
-import genreGroupsMock from "../../mocks/movies-groups";
+import movies from "../../mocks/movies";
 import {MyListPage} from "./my-list-page";
 
 const initialState = {};
@@ -15,10 +15,8 @@ it(`MyListPage correctly renders default markup`, () => {
         <MemoryRouter
           initialEntries = {[`/`]}>
           <MyListPage
-            moviesGenreGroups={genreGroupsMock}
-            myListMovies={[]}
-            fetchMovies={() => {}}
-            fetchMyListMovies={() => {}}
+            movies={movies}
+            onMyListMoviesFetch={() => {}}
           />
         </MemoryRouter>
       </Provider>

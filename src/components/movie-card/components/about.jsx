@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {MovieCardPropTypes} from "../../../prop-types";
+import {MovieReviewPropTypes, MovieCardPropTypes} from "../../../prop-types";
 
 import MovieNav from "../../movie-nav/movie-nav";
 
@@ -8,51 +8,53 @@ import MovieOverview from "./movie-overview";
 import MovieDetails from "./movie-details";
 import MovieReviews from "./movie-reviews";
 
-const AboutPages = {
-  Overview: {
+const AboutTabs = {
+  OVERVIEW: {
     label: `Overview`,
     component: MovieOverview,
   },
-  Details: {
+  DETAILS: {
     label: `Details`,
     component: MovieDetails,
   },
-  Reviews: {
+  REVIEWS: {
     label: `Reviews`,
     component: MovieReviews,
   },
 };
 
-function About({card = {}, page}) {
-  const PageComponent = AboutPages[page];
+function About({card = {}, reviews, tab = ``}) {
+  const tabUpper = tab.toUpperCase();
+  const tabName = AboutTabs[tabUpper] ? tabUpper : `OVERVIEW`;
+  const Tab = AboutTabs[tabName];
 
   return (
     <div className="movie-card__desc">
       <MovieNav className="movie-card__nav">
-        {Object.entries(AboutPages).map(([name, {label}]) => (
+        {Object.entries(AboutTabs).map(([name, {label}]) => (
           <MovieNav.Item
             key={name}
             label={label}
-            href={`#${name}`}
-            active={name === page}/>
+            href={`#${label}`}
+            active={name === tabName}/>
         ))}
       </MovieNav>
-      {PageComponent ? (
-        <PageComponent.component card={card}/>
-      ) : (
-        <MovieOverview card={card}/>
-      )}
+      <Tab.component
+        reviews={reviews}
+        card={card}/>
     </div>
   );
 }
 
 About.propTypes = {
-  /** Имя отображемой страницы */
-  page: PropTypes.oneOf(
-      Object.keys(AboutPages),
-  ),
+  /** Имя отображемой вкладки */
+  tab: PropTypes.oneOf([`Overview`, `Details`, `Reviews`]),
   /** Карточка фильма */
   card: MovieCardPropTypes,
+  /** Отзывы к фильму */
+  reviews: PropTypes.arrayOf(
+      MovieReviewPropTypes,
+  ),
 };
 
 export default About;

@@ -12,9 +12,9 @@ exports[`UserBlock correctly renders default markup 1`] = `
       onClick={[Function]}
     >
       <img
-        alt="Nicolas Cage"
+        alt="rus.nick"
         height="63"
-        src="https://s3.amazonaws.com/uifaces/faces/twitter/wim1k/128.jpg"
+        src="https://es31-server.appspot.com//wtw/static/avatar/9.jpg"
         width="63"
       />
     </a>
