@@ -6,12 +6,10 @@ const withVideoPlayer = (options = {}) => (Component) => {
     constructor(props) {
       super(props);
 
-      this._play = this._play.bind(this);
-      this._handlePlayerPause = this._handlePlayerPause.bind(this);
-      this._stop = this._stop.bind(this);
-
       this._renderPlayer = this._renderPlayer.bind(this);
       this._handlePlayerPlay = this._handlePlayerPlay.bind(this);
+      this._handlePlayerPause = this._handlePlayerPause.bind(this);
+      this._handlePlayerStop = this._handlePlayerStop.bind(this);
 
       this._handlePlay = this._handlePlay.bind(this);
       this._handlePause = this._handlePause.bind(this);
@@ -55,7 +53,7 @@ const withVideoPlayer = (options = {}) => (Component) => {
         playerTime={currentTime}
         onPlayerPlay={this._handlePlayerPlay}
         onPlayerPause={this._handlePlayerPause}
-        onPlayerStop={this._stop}
+        onPlayerStop={this._handlePlayerStop}
         onPlayerFullScreen={this._handleFullScreen}
         onPlayerFullScreenExit={this._handleFullScreenExit}/>;
     }
@@ -79,7 +77,7 @@ const withVideoPlayer = (options = {}) => (Component) => {
       );
     }
 
-    _play() {
+    _handlePlay() {
       return new Promise((resolve, reject) => {
         const video = this._videoRef.current;
 
@@ -88,11 +86,19 @@ const withVideoPlayer = (options = {}) => (Component) => {
         }
 
         resolve(
-            video.play()
-              .then(this._handlePlay)
-              .catch(this._handlePlayError)
+            video.play().then(() => {
+              this._resetTimeout();
+              if (this._isMounted) {
+                this.setState({isPlaying: true});
+              }
+            }).catch(this._handlePlayError)
         );
       });
+    }
+
+    _handlePause() {
+      this._resetTimeout();
+      this.setState({isPlaying: false});
     }
 
     _handlePlayerPause() {
@@ -104,7 +110,7 @@ const withVideoPlayer = (options = {}) => (Component) => {
       }
     }
 
-    _stop() {
+    _handlePlayerStop() {
       const video = this._videoRef.current;
 
       if (video) {
@@ -128,24 +134,12 @@ const withVideoPlayer = (options = {}) => (Component) => {
         return new Promise((resolve) => {
           this._timeout = setTimeout(() => {
             if (this._timeout) {
-              resolve(this._play());
+              resolve(this._handlePlay());
             }
           }, timeout);
         });
       }
-      return this._play();
-    }
-
-    _handlePlay() {
-      this._resetTimeout();
-      if (this._isMounted) {
-        this.setState({isPlaying: true});
-      }
-    }
-
-    _handlePause() {
-      this._resetTimeout();
-      this.setState({isPlaying: false});
+      return this._handlePlay();
     }
 
     _handleEnded() {
@@ -170,7 +164,7 @@ const withVideoPlayer = (options = {}) => (Component) => {
       this.setState({totalTime});
 
       if (this.props.autoplay) {
-        this._play();
+        this._handlePlay();
       }
     }
 
