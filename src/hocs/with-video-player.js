@@ -7,7 +7,7 @@ const withVideoPlayer = (options = {}) => (Component) => {
       super(props);
 
       this._play = this._play.bind(this);
-      this._pause = this._pause.bind(this);
+      this._handlePlayerPause = this._handlePlayerPause.bind(this);
       this._stop = this._stop.bind(this);
 
       this._renderPlayer = this._renderPlayer.bind(this);
@@ -54,7 +54,7 @@ const withVideoPlayer = (options = {}) => (Component) => {
         playerTotalTime={totalTime}
         playerTime={currentTime}
         onPlayerPlay={this._handlePlayerPlay}
-        onPlayerPause={this._pause}
+        onPlayerPause={this._handlePlayerPause}
         onPlayerStop={this._stop}
         onPlayerFullScreen={this._handleFullScreen}
         onPlayerFullScreenExit={this._handleFullScreenExit}/>;
@@ -95,7 +95,7 @@ const withVideoPlayer = (options = {}) => (Component) => {
       });
     }
 
-    _pause() {
+    _handlePlayerPause() {
       const video = this._videoRef.current;
 
       if (video) {
