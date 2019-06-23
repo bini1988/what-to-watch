@@ -9,22 +9,23 @@ import MovieDetails from "./movie-details";
 import MovieReviews from "./movie-reviews";
 
 const AboutTabs = {
-  Overview: {
+  OVERVIEW: {
     label: `Overview`,
     component: MovieOverview,
   },
-  Details: {
+  DETAILS: {
     label: `Details`,
     component: MovieDetails,
   },
-  Reviews: {
+  REVIEWS: {
     label: `Reviews`,
     component: MovieReviews,
   },
 };
 
-function About({card = {}, reviews, tab}) {
-  const tabName = AboutTabs[tab] ? tab : `Overview`;
+function About({card = {}, reviews, tab = ``}) {
+  const tabUpper = tab.toUpperCase();
+  const tabName = AboutTabs[tabUpper] ? tabUpper : `OVERVIEW`;
   const Tab = AboutTabs[tabName];
 
   return (
@@ -34,7 +35,7 @@ function About({card = {}, reviews, tab}) {
           <MovieNav.Item
             key={name}
             label={label}
-            href={`#${name}`}
+            href={`#${label}`}
             active={name === tabName}/>
         ))}
       </MovieNav>
@@ -47,9 +48,7 @@ function About({card = {}, reviews, tab}) {
 
 About.propTypes = {
   /** Имя отображемой вкладки */
-  tab: PropTypes.oneOf(
-      Object.keys(AboutTabs),
-  ),
+  tab: PropTypes.oneOf([`Overview`, `Details`, `Reviews`]),
   /** Карточка фильма */
   card: MovieCardPropTypes,
   /** Отзывы к фильму */
