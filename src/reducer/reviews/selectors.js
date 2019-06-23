@@ -38,7 +38,11 @@ export const getMovieReviewsIds = (state, id) => {
 export const getMovieReviewsById = createSelector(
     [getMovieReviewsIds, getReviewsItems],
     (reviewsIds = [], items) => {
-      return reviewsIds.map((id) => items[id]);
+      return reviewsIds
+        .map((id) => items[id])
+        .sort((a, b) => {
+          return new Date(b.datetime) - new Date(a.datetime);
+        });
     },
 );
 
