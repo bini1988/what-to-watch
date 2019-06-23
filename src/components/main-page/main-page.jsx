@@ -25,14 +25,14 @@ class MainPage extends PureComponent {
       moviesLimit,
       onGenreChange,
       onMoviesMore,
-      onToMyListAdd
+      onToMyListToggle
     } = this.props;
 
     return (
       <React.Fragment>
         <MovieCard
           card={promoMovieCard}
-          onToMyListAdd={onToMyListAdd}>
+          onToMyListToggle={onToMyListToggle}>
           <MovieCard.Header component={PageHeader}>
             <PageTitle hidden>{`WTW`}</PageTitle>
             <UserBlock/>
@@ -84,8 +84,8 @@ MainPage.propTypes = {
   onMoviesMore: PropTypes.func,
   /** Получить текущий промо фильм */
   onPromoMovieFetch: PropTypes.func,
-  /** Добавить фильм в список «к просмотру» */
-  onToMyListAdd: PropTypes.func,
+  /** Добавить/удалить фильм из списока «к просмотру» */
+  onToMyListToggle: PropTypes.func,
   /** Вложенные элементы */
   children: PropTypes.any,
 };
@@ -106,7 +106,7 @@ const mapDispatchToProps = {
   onMoviesMore: GenresOperation.increaseGenreLimit,
   onMoviesFetch: Operation.fetchMovies,
   onPromoMovieFetch: Operation.fetchPromoMovie,
-  onToMyListAdd: Operation.addMovieToMyList,
+  onToMyListToggle: Operation.toggleMovieToMyList,
 };
 
 export {MainPage};

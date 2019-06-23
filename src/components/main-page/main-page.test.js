@@ -22,7 +22,7 @@ it(`MainPage correctly renders default markup`, () => {
             onGenreChange={() => {}}
             onMoviesFetch={() => {}}
             onPromoMovieFetch={() => {}}
-            onToMyListAdd={() => {}}
+            onToMyListToggle={() => {}}
           />
         </MemoryRouter>
       </Provider>
