@@ -1,6 +1,6 @@
 import React from "react";
 
-export const MovieCardContext = React.createContext();
+const MovieCardContext = React.createContext();
 
 const withMovieCard = (Component) => {
   function WithMovieCard(props) {
@@ -19,4 +19,5 @@ const withMovieCard = (Component) => {
   return WithMovieCard;
 };
 
+export {MovieCardContext};
 export default withMovieCard;

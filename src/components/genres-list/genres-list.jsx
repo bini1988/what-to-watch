@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const GenresList = ({genres, activeGenre, onGenreChange}) => {
+function GenresList({genres, activeGenre, onGenreChange}) {
   const withActiveClass = (genre) =>
     genre === activeGenre ? `catalog__genres-item--active` : ``;
   const hanldeClickWith = (genre) => (event) => {
@@ -26,7 +26,7 @@ export const GenresList = ({genres, activeGenre, onGenreChange}) => {
       ))}
     </ul>
   );
-};
+}
 
 GenresList.propTypes = {
   /** Список жаров фильмов */
