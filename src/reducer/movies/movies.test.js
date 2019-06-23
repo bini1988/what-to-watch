@@ -1,3 +1,4 @@
+import {NotificationManager} from "react-notifications";
 import movies from "../../mocks/movies";
 import NameSpace from "../name-spaces";
 import {moviesIdsByGenres} from "../../mocks/movies-genres";
@@ -73,6 +74,23 @@ describe(`Movies Reducer`, () => {
       );
     });
   });
+  it(`should handle failed movies API request`, () => {
+    const dispatch = jest.fn();
+    const error = new Error(`Handle error`);
+    const fetchMovies = jest.fn(() => Promise.reject(error));
+    const fetchMoviesThunk = Operation.fetchMovies();
+
+    const spy = jest.spyOn(NotificationManager, `error`);
+
+    return fetchMoviesThunk(dispatch, undefined, {fetchMovies})
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(0);
+        expect(NotificationManager.error).toHaveBeenCalledTimes(1);
+        expect(NotificationManager.error).toHaveBeenCalledWith(error.message);
+
+        spy.mockRestore();
+      });
+  });
   it(`should make movies API request if movies id is not exist`, () => {
     const id = 17;
     const dispatch = jest.fn((arg) => arg);
@@ -129,6 +147,23 @@ describe(`Movies Reducer`, () => {
         );
       });
   });
+  it(`should handle failed promo movie API request`, () => {
+    const dispatch = jest.fn();
+    const error = new Error(`Handle error`);
+    const fetchPromoMovie = jest.fn(() => Promise.reject(error));
+    const fetchPromoMovieThunk = Operation.fetchPromoMovie();
+
+    const spy = jest.spyOn(NotificationManager, `error`);
+
+    return fetchPromoMovieThunk(dispatch, undefined, {fetchPromoMovie})
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(0);
+        expect(NotificationManager.error).toHaveBeenCalledTimes(1);
+        expect(NotificationManager.error).toHaveBeenCalledWith(error.message);
+
+        spy.mockRestore();
+      });
+  });
   it(`should make my list movies API request and call storeMyListMovies`, () => {
     const dispatch = jest.fn();
     const fetchMyListMovies = jest.fn(() => Promise.resolve(movies));
@@ -140,6 +175,23 @@ describe(`Movies Reducer`, () => {
         expect(dispatch).toHaveBeenCalledWith(
             ActionCreator.storeMyListMovies(moviesItems, moviesItemsIds)
         );
+      });
+  });
+  it(`should handle failed my list movies API request`, () => {
+    const dispatch = jest.fn();
+    const error = new Error(`Handle error`);
+    const fetchMyListMovies = jest.fn(() => Promise.reject(error));
+    const fetchMyListMoviesThunk = Operation.fetchMyListMovies();
+
+    const spy = jest.spyOn(NotificationManager, `error`);
+
+    return fetchMyListMoviesThunk(dispatch, undefined, {fetchMyListMovies})
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(0);
+        expect(NotificationManager.error).toHaveBeenCalledTimes(1);
+        expect(NotificationManager.error).toHaveBeenCalledWith(error.message);
+
+        spy.mockRestore();
       });
   });
   it(`should make add movies in my list API request and call storeMovie`, () => {
@@ -161,6 +213,31 @@ describe(`Movies Reducer`, () => {
         expect(dispatch).toHaveBeenCalledWith(
             ActionCreator.storeMovie(movie)
         );
+      });
+  });
+  it(`should handle failed add movies in my list API request`, () => {
+    const id = 7;
+    const movie = {id, isInList: false};
+    const dispatch = jest.fn();
+    const getState = () => ({
+      [NameSpace.MOVIES]: {
+        ...initialState,
+        items: {[id]: movie}
+      },
+    });
+    const error = new Error(`Handle error`);
+    const addMovieToMyList = jest.fn(() => Promise.reject(error));
+    const toggleMovieToMyListThunk = Operation.toggleMovieToMyList(id);
+
+    const spy = jest.spyOn(NotificationManager, `error`);
+
+    return toggleMovieToMyListThunk(dispatch, getState, {addMovieToMyList})
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(0);
+        expect(NotificationManager.error).toHaveBeenCalledTimes(1);
+        expect(NotificationManager.error).toHaveBeenCalledWith(error.message);
+
+        spy.mockRestore();
       });
   });
   it(`should make remove movies from my list API request and call storeMovie`, () => {
