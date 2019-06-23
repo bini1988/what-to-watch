@@ -60,8 +60,11 @@ class MoviePage extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.onMovieFetch();
-    this.props.onMovieReviewsFetch();
+    const {match} = this.props;
+    const id = match && match.params.id;
+
+    this.props.onMovieFetch(id);
+    this.props.onMovieReviewsFetch(id);
   }
 }
 
@@ -76,6 +79,8 @@ MoviePage.propTypes = {
   ),
   /** React Router location */
   location: PropTypes.object,
+  /** React Router match */
+  match: PropTypes.object,
   /** Получить фильм */
   onMovieFetch: PropTypes.func,
   /** Получить список отзывов к фильму */
@@ -94,19 +99,10 @@ const mapStateToProps = (state, {match}) => {
 
   return {movie, reviews, movies};
 };
-const mapDispatchToProps = (dispatch, {match}) => {
-  const id = match && match.params.id;
-  return {
-    onMovieFetch() {
-      return dispatch(MoviesOperation.fetchMovie(id));
-    },
-    onMovieReviewsFetch() {
-      return dispatch(ReviewsOperation.fetchMovieReviews(id));
-    },
-    onToMyListToggle(...params) {
-      return dispatch(MoviesOperation.toggleMovieToMyList(...params));
-    }
-  };
+const mapDispatchToProps = {
+  onMovieFetch: MoviesOperation.fetchMovie,
+  onMovieReviewsFetch: ReviewsOperation.fetchMovieReviews,
+  onToMyListToggle: MoviesOperation.toggleMovieToMyList,
 };
 
 export {MoviePage};
