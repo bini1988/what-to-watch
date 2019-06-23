@@ -4,7 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import renderer from "react-test-renderer";
 import {MoviePage} from "./movie-page";
-import genreGroupsMock from "../../mocks/movies-groups";
+import movies from "../../mocks/movies";
 import card from "../../mocks/movie-card";
 
 const initialState = {};
@@ -17,10 +17,10 @@ it(`MoviePage correctly renders default markup`, () => {
           initialEntries = {[`/`]}>
           <MoviePage
             movie={card}
-            movies={genreGroupsMock[`All Genres`]}
+            movies={movies}
             onMovieFetch={() => {}}
             onMovieReviewsFetch={() => {}}
-            onToMyListAdd={() => {}}
+            onToMyListToggle={() => {}}
           />
         </MemoryRouter>
       </Provider>

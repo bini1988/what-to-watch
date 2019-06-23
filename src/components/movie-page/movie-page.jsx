@@ -17,7 +17,7 @@ import MoviesCatalog from "../movies-catalog/movies-catalog";
 
 class MoviePage extends PureComponent {
   render() {
-    const {movie, movies, location = {}, onToMyListAdd} = this.props;
+    const {movie, movies, location = {}, onToMyListToggle} = this.props;
     const {hash = ``} = location;
     const tab = hash.slice(1) || undefined;
 
@@ -26,7 +26,7 @@ class MoviePage extends PureComponent {
         <MovieCard
           full
           card={movie}
-          onToMyListAdd={onToMyListAdd}>
+          onToMyListToggle={onToMyListToggle}>
           <MovieCard.Wrapper main>
             <MovieCard.Header component={PageHeader}>
               <PageTitle hidden>{`WTW`}</PageTitle>
@@ -73,8 +73,8 @@ MoviePage.propTypes = {
   onMovieFetch: PropTypes.func,
   /** Получить список отзывов к фильму */
   onMovieReviewsFetch: PropTypes.func,
-  /** Добавить фильм в список «к просмотру» */
-  onToMyListAdd: PropTypes.func,
+  /** Добавить/удалить фильм из списока «к просмотру» */
+  onToMyListToggle: PropTypes.func,
   /** Вложенные элементы */
   children: PropTypes.any,
 };
@@ -95,8 +95,8 @@ const mapDispatchToProps = (dispatch, {match}) => {
     onMovieReviewsFetch() {
       return dispatch(ReviewsOperation.fetchMovieReviews(id));
     },
-    onToMyListAdd(...params) {
-      return dispatch(MoviesOperation.addMovieToMyList(...params));
+    onToMyListToggle(...params) {
+      return dispatch(MoviesOperation.toggleMovieToMyList(...params));
     }
   };
 };
