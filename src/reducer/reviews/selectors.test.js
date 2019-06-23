@@ -1,33 +1,37 @@
 import NameSpace from "../name-spaces";
-import {getReviews, getReviewsItems, getMovieReviewsIds} from "./selectors";
+import reviews from "../../mocks/reviews";
+import {getReviews, getReviewsItems, getMovieReviewsIds, getMovieReviewsById} from "./selectors";
 import {initialState} from "./reviews";
 
+const movieId = 7;
 const mockStore = {
-  [NameSpace.Reviews]: {...initialState},
+  [NameSpace.Reviews]: {
+    ...initialState,
+    movieToItems: {
+      [movieId]: reviews.map((it) => it.id),
+    },
+    items: reviews.reduce((out, it) => {
+      out[it.id] = it;
+      return out;
+    }, {}),
+  },
 };
 
 describe(`User Selectors`, () => {
   it(`should return reviews state`, () => {
     expect(getReviews(mockStore))
-      .toEqual(initialState);
+      .toEqual(mockStore[NameSpace.Reviews]);
   });
   it(`should return reviews items object state`, () => {
     expect(getReviewsItems(mockStore))
-      .toEqual(initialState.items);
+      .toEqual(mockStore[NameSpace.Reviews].items);
   });
   it(`should return reviews ids by movie id`, () => {
-    const movieId = 7;
-    const movies = [`movie#0`, `movie#1`, `movie#2`];
-    const mockReviewsStore = {
-      [NameSpace.Reviews]: {
-        ...initialState,
-        movieToItems: {
-          [movieId]: movies,
-        },
-      },
-    };
-
-    expect(getMovieReviewsIds(mockReviewsStore, movieId))
-      .toEqual(movies);
+    expect(getMovieReviewsIds(mockStore, movieId))
+      .toEqual(reviews.map((it) => it.id));
+  });
+  it(`should return reviews by movie id`, () => {
+    expect(getMovieReviewsById(mockStore, movieId))
+      .toEqual(reviews);
   });
 });
