@@ -58,8 +58,8 @@ MovieCard.propTypes = {
   card: MovieCardPropTypes,
   /** Модификатор карточки */
   full: PropTypes.bool,
-  /** Добавить фильм в список «к просмотру» */
-  onToMyListAdd: PropTypes.func,
+  /** Добавить/удалить фильм из списока «к просмотру» */
+  onToMyListToggle: PropTypes.func,
   /** Вложенные элементы */
   children: PropTypes.any,
 };
