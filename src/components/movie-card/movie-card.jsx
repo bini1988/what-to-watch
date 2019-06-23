@@ -4,7 +4,7 @@ import cn from "classnames";
 
 import {MovieCardPropTypes} from "../../prop-types";
 
-import withMovieCard, {MovieCardContext} from "./hocs/withMovieCard";
+import withMovieCard, {MovieCardContext} from "../../hocs/with-movie-card";
 
 import Header from "./components/header";
 import Poster from "./components/poster";
