@@ -5,7 +5,7 @@ const MAX_RATING = 5;
 const toIndex = (it, index) => index + 1;
 
 function AddReview(props) {
-  const {rating, comment, invalid, onRatingChange, onCommentChange, handleSubmit} = props;
+  const {rating, comment, invalid, onRatingChange, onCommentChange, onSubmit} = props;
   const ratings = Array.from({length: MAX_RATING}, toIndex);
 
   return (
@@ -14,8 +14,8 @@ function AddReview(props) {
         className="add-review__form"
         onSubmit={(event) => {
           event.preventDefault();
-          if (handleSubmit) {
-            handleSubmit();
+          if (onSubmit) {
+            onSubmit();
           }
         }}>
         <div className="rating">

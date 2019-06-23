@@ -30,7 +30,7 @@ const withReviewForm = (Component) => {
         invalid={invalid}
         onRatingChange={this._handleRatingChange}
         onCommentChange={this._handleCommentChange}
-        handleSubmit={this._handleSubmit}/>;
+        onSubmit={this._handleSubmit}/>;
     }
 
     _handleRatingChange(rating) {
@@ -92,7 +92,7 @@ export const withReviewFormPropTypes = {
   /** Обработчик события изменения комментария */
   onCommentChange: PropTypes.func,
   /** Обработчик события изменения комментария */
-  handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
 };
 
 export default withReviewForm;

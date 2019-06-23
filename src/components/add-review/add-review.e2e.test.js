@@ -11,7 +11,7 @@ describe(`AddReview`, () => {
     const preventDefault = jest.fn();
     const wrapper = mount(
         <AddReview
-          handleSubmit={handleSubmit}/>
+          onSubmit={handleSubmit}/>
     );
 
     const form = wrapper.find(`.add-review__form`);

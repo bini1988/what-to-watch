@@ -44,7 +44,7 @@ describe(`withReviewForm`, () => {
 
     expect(component.prop(`comment`)).toEqual(commentValue);
   });
-  it(`should submit form by handleSubmit handler`, () => {
+  it(`should submit form by onSubmit handler`, () => {
     const form = {rating: 4.5, comment: `good comment`};
     const handleSubmit = jest.fn();
     const WrappedMockComponent = withReviewForm(MockComponent);
@@ -58,13 +58,34 @@ describe(`withReviewForm`, () => {
     component = wrapper.find(MockComponent);
     component.prop(`onRatingChange`)(form.rating);
     component.prop(`onCommentChange`)(form.comment);
-    component.prop(`handleSubmit`)();
+    component.prop(`onSubmit`)();
     wrapper.update();
 
     expect(handleSubmit).toHaveBeenCalledTimes(1);
     expect(handleSubmit).toHaveBeenCalledWith(form);
   });
   it(`should set invalid prop`, () => {
+    const form = {
+      rating: 2.5,
+      comment: Array.from({length: 60}).fill(`x`).join(``),
+    };
+    const WrappedMockComponent = withReviewForm(MockComponent);
+    const wrapper = mount(
+        <WrappedMockComponent/>
+    );
 
+    let component = null;
+
+    component = wrapper.find(MockComponent);
+
+    expect(component.prop(`invalid`)).toEqual(true);
+
+    component.prop(`onRatingChange`)(form.rating);
+    component.prop(`onCommentChange`)(form.comment);
+    wrapper.update();
+
+    component = wrapper.find(MockComponent);
+
+    expect(component.prop(`invalid`)).toEqual(false);
   });
 });
