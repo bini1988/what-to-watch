@@ -11,12 +11,13 @@ describe(`Genres Reducer`, () => {
     expect(reducer(initialState, action))
       .toEqual({...initialState, items: moviesIdsByGenres});
   });
-  it(`should change active genre by changeActiveGenre`, () => {
+  it(`should change active genre & reset limits by changeActiveGenre`, () => {
     const activeGenre = `All Genres`;
+    const state = {...initialState, limits: {[activeGenre]: 7}};
     const action = ActionCreator.changeActiveGenre(activeGenre);
 
-    expect(reducer(initialState, action))
-      .toEqual({...initialState, activeGenre});
+    expect(reducer(state, action))
+      .toEqual({...initialState, activeGenre, limits: {}});
   });
   it(`should change genre limit by changeGenreLimit`, () => {
     const genre = `All Genres`;

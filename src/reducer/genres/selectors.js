@@ -9,8 +9,8 @@ export const MAX_ITEMS_PER_PAGE = 20;
  * @param {Object} state Текущее состояние redux стора
  * @return {Object[]}
  */
-export const getGenres = (state) => {
-  return state[NameSpace.Genres];
+export const getGenres = (state = {}) => {
+  return state[NameSpace.Genres] || state;
 };
 
 /**
@@ -38,7 +38,8 @@ export const getMoviesGenres = (state) => {
  * @return {string[]}
  */
 export const getMoviesIdsByGenre = (state, genre) => {
-  return getMoviesGenres(state)[genre];
+  const moviesByGenre = getMoviesGenres(state);
+  return moviesByGenre && moviesByGenre[genre];
 };
 
 /**
@@ -61,7 +62,7 @@ export const getMoviesByGenre = createSelector(
  */
 export const getMoviesGenresList = createSelector(
     getMoviesGenres,
-    (genres) => {
+    (genres = {}) => {
       const GENRES_LIMIT = 10;
       return Object.keys(genres).slice(0, GENRES_LIMIT);
     }
@@ -94,7 +95,7 @@ export const getMoviesGenreLike = createSelector(
 export const getLimitByGenre = (state, genre) => {
   const {items, limits} = getGenres(state);
 
-  if (items[genre]) {
+  if (items && items[genre]) {
     const {[genre]: limit = MAX_ITEMS_PER_PAGE} = limits;
     return limit;
   }

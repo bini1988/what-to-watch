@@ -93,7 +93,7 @@ export default (state = initialState, action = {}) => {
     case ActionTypes.STORE_GENRES:
       return {...initialState, items: payload};
     case ActionTypes.CHANGE_ACTIVE_GENRE:
-      return {...state, activeGenre: payload};
+      return {...state, activeGenre: payload, limits: {}};
     case ActionTypes.CHANGE_GENRE_LIMIT:
       return {...state, limits: {...state.limits, [meta.genre]: payload}};
     default:
