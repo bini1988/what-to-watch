@@ -7,7 +7,7 @@ import NameSpace from "../name-spaces";
  * @return {Object[]}
  */
 export const getReviews = (state) => {
-  return state[NameSpace.Reviews];
+  return state[NameSpace.REVIEWS];
 };
 
 /**

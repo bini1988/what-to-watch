@@ -12,7 +12,7 @@ const mockMovies = {
   },
 };
 const mockStore = {
-  [NameSpace.Movies]: mockMovies,
+  [NameSpace.MOVIES]: mockMovies,
 };
 
 describe(`Movies Selectors`, () => {
@@ -37,7 +37,7 @@ describe(`Movies Selectors`, () => {
   });
   it(`should return movies list`, () => {
     const mockMoviesStore = {
-      [NameSpace.Movies]: {
+      [NameSpace.MOVIES]: {
         ...initialState,
         itemsIds: [`1`, `2`, `3`],
         items: {
@@ -57,7 +57,7 @@ describe(`Movies Selectors`, () => {
   });
   it(`should return my movies list`, () => {
     const mockMoviesStore = {
-      [NameSpace.Movies]: {
+      [NameSpace.MOVIES]: {
         ...initialState,
         itemsIds: [`1`, `2`, `3`],
         myListMoviesIds: [`1`, `3`],

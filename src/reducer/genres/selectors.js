@@ -10,7 +10,7 @@ export const MAX_ITEMS_PER_PAGE = 20;
  * @return {Object[]}
  */
 export const getGenres = (state = {}) => {
-  return state[NameSpace.Genres] || state;
+  return state[NameSpace.GENRES] || state;
 };
 
 /**

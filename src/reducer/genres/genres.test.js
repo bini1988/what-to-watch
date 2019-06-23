@@ -44,7 +44,7 @@ describe(`Genres Reducer`, () => {
     const genreCount = 5;
     const dispatch = jest.fn((arg) => arg);
     const getState = () => ({
-      [NameSpace.Genres]: {
+      [NameSpace.GENRES]: {
         ...initialState,
         items: {[genre]: Array.from({length: genreCount})},
         limits: {[genre]: limit}

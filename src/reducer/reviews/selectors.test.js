@@ -5,7 +5,7 @@ import {initialState} from "./reviews";
 
 const movieId = 7;
 const mockStore = {
-  [NameSpace.Reviews]: {
+  [NameSpace.REVIEWS]: {
     ...initialState,
     movieToItems: {
       [movieId]: reviews.map((it) => it.id),
@@ -20,11 +20,11 @@ const mockStore = {
 describe(`User Selectors`, () => {
   it(`should return reviews state`, () => {
     expect(getReviews(mockStore))
-      .toEqual(mockStore[NameSpace.Reviews]);
+      .toEqual(mockStore[NameSpace.REVIEWS]);
   });
   it(`should return reviews items object state`, () => {
     expect(getReviewsItems(mockStore))
-      .toEqual(mockStore[NameSpace.Reviews].items);
+      .toEqual(mockStore[NameSpace.REVIEWS].items);
   });
   it(`should return reviews ids by movie id`, () => {
     expect(getMovieReviewsIds(mockStore, movieId))

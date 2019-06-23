@@ -3,7 +3,7 @@ import {getUser, isAuthenticated, getUserData, getAuthError} from "./selectors";
 import {initialState} from "./user";
 
 const mockStore = {
-  [NameSpace.User]: {...initialState},
+  [NameSpace.USER]: {...initialState},
 };
 
 describe(`User Selectors`, () => {

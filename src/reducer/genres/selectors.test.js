@@ -19,8 +19,8 @@ const mockMovies = {
   }, {}),
 };
 const mockStore = {
-  [NameSpace.Genres]: mockGenres,
-  [NameSpace.Movies]: mockMovies,
+  [NameSpace.GENRES]: mockGenres,
+  [NameSpace.MOVIES]: mockMovies,
 };
 
 const toMovie = (id) => mockMovies.items[id];

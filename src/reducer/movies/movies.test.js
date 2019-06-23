@@ -73,7 +73,7 @@ describe(`Movies Reducer`, () => {
     const id = 17;
     const dispatch = jest.fn((arg) => arg);
     const getState = () => ({
-      [NameSpace.Movies]: {
+      [NameSpace.MOVIES]: {
         ...initialState,
       },
     });
@@ -97,7 +97,7 @@ describe(`Movies Reducer`, () => {
     const movie = {id};
     const dispatch = jest.fn((arg) => arg);
     const getState = () => ({
-      [NameSpace.Movies]: {
+      [NameSpace.MOVIES]: {
         ...initialState,
         items: {[id]: movie}
       },
@@ -143,7 +143,7 @@ describe(`Movies Reducer`, () => {
     const movie = {id, isInList: false};
     const dispatch = jest.fn();
     const getState = () => ({
-      [NameSpace.Movies]: {
+      [NameSpace.MOVIES]: {
         ...initialState,
         items: {[id]: movie}
       },
@@ -164,7 +164,7 @@ describe(`Movies Reducer`, () => {
     const movie = {id, isInList: true};
     const dispatch = jest.fn();
     const getState = () => ({
-      [NameSpace.Movies]: {
+      [NameSpace.MOVIES]: {
         ...initialState,
         items: {[id]: movie}
       },
@@ -184,7 +184,7 @@ describe(`Movies Reducer`, () => {
     const id = 7;
     const dispatch = jest.fn();
     const getState = () => ({
-      [NameSpace.Movies]: {
+      [NameSpace.MOVIES]: {
         ...initialState,
       },
     });

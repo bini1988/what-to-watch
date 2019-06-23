@@ -7,7 +7,7 @@ import NameSpace from "../name-spaces";
  * @return {Object}
  */
 export const getMovies = (state = {}) => {
-  return state[NameSpace.Movies] || state;
+  return state[NameSpace.MOVIES] || state;
 };
 
 /**
