@@ -1,22 +1,26 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {createStore} from "redux";
-import {MemoryRouter} from "react-router-dom";
+import configureStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import {createApi} from "../../api";
 
-import reducer from "../../reducer/reducer";
 import {Provider} from "react-redux";
-// import App from "./app";
+import App from "./app";
 
-it(`App correctly renders default markup`, () => {
+const api = createApi({onError: () => {}});
+
+const middlewares = [thunk.withExtraArgument(api)];
+const createMockStore = configureStore(middlewares);
+const mockStore = createMockStore();
+
+it(`App correctly renders main page markup`, () => {
   const tree = renderer
     .create(
-        <Provider store={createStore(reducer)}>
-          <MemoryRouter
-            initialEntries = {[`/`]}>
-            {/* <App/> */}
-          </MemoryRouter>
+        <Provider store={mockStore}>
+          <App/>
         </Provider>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+
