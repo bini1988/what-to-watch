@@ -2,7 +2,7 @@ import React from "react";
 import {MemoryRouter} from "react-router-dom";
 import renderer from "react-test-renderer";
 import MoviesCatalog from "./movies-catalog.jsx";
-import genreGroupsMock from "../../mocks/movies-groups";
+import genreGroupsMock from "../../mocks/movies-genres";
 
 const moviesGenres = Object.keys(genreGroupsMock);
 const activeGenre = moviesGenres[0];

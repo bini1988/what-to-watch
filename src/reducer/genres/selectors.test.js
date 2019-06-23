@@ -1,6 +1,6 @@
 import NameSpace from "../name-spaces";
 import movies from "../../mocks/movies";
-import moviesGenres, {moviesIdsByGenres} from "../../mocks/movies-groups";
+import moviesGenres, {moviesIdsByGenres} from "../../mocks/movies-genres";
 import {getGenres, getActiveGenre, getMoviesGenres, getMoviesIdsByGenre, getMoviesByGenre, getMoviesGenresList, getMoviesGenreLike, getLimitByGenre, MAX_ITEMS_PER_PAGE} from "./selectors";
 import {initialState} from "./genres";
 

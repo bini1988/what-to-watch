@@ -4,7 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import renderer from "react-test-renderer";
 import {MainPage} from "./main-page";
-import genreGroupsMock from "../../mocks/movies-groups";
+import genreGroupsMock from "../../mocks/movies-genres";
 import promoMovie from "../../mocks/movie-card";
 
 const initialState = {};

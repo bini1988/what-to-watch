@@ -1,6 +1,6 @@
 import movies from "../../mocks/movies";
 import NameSpace from "../name-spaces";
-import {moviesIdsByGenres} from "../../mocks/movies-groups";
+import {moviesIdsByGenres} from "../../mocks/movies-genres";
 import reducer, {initialState, ActionCreator, Operation} from "./movies";
 import {ActionCreator as GenresActionCreator} from "../genres/genres";
 

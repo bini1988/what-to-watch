@@ -3,7 +3,7 @@ import {MemoryRouter} from "react-router-dom";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MoviesCatalog from "./movies-catalog";
-import genreGroupsMock from "../../mocks/movies-groups";
+import genreGroupsMock from "../../mocks/movies-genres";
 
 configure({adapter: new Adapter()});
 
