@@ -1,14 +1,13 @@
 import {createSelector} from "reselect";
 import NameSpace from "../name-spaces";
-import {getMovieReviewsIds, getReviewsItems} from "../reviews/selectors";
 
 /**
  * Получение объекта данных хранимых фильмов
  * @param {Object} state Текущее состояние redux стора
  * @return {Object}
  */
-export const getMovies = (state) => {
-  return state[NameSpace.Movies];
+export const getMovies = (state = {}) => {
+  return state[NameSpace.Movies] || state;
 };
 
 /**
@@ -27,24 +26,9 @@ export const getMoviesItems = (state) => {
  * @return {Object}
  */
 export const getMovieById = (state, id) => {
-  return getMoviesItems(state)[id];
+  const items = getMoviesItems(state);
+  return items && items[id];
 };
-
-/**
- * Получение фильма с отзывами по id
- * @param {Object} state Текущее состояние redux стора
- * @param {number} id Id фильма
- * @return {Object}
- */
-export const getMovieWithReviewsById = createSelector(
-    [getReviewsItems, getMovieReviewsIds, getMovieById],
-    (reviewsItems, reviewsIds = [], movie) => {
-      const reviews = reviewsIds
-        .map((reviewId) => reviewsItems[reviewId]);
-
-      return {...movie, reviews};
-    }
-);
 
 /**
  * Получить текущий промо фильм

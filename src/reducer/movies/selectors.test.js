@@ -1,6 +1,6 @@
 import NameSpace from "../name-spaces";
 import movieCard from "../../mocks/movie-card";
-import {getMovies, getMoviesItems, getMovieById, getMovieWithReviewsById, getPromoMovie, getMoviesList, getMyListMovies} from "./selectors";
+import {getMovies, getMoviesItems, getMovieById, getPromoMovie, getMoviesList, getMyListMovies} from "./selectors";
 import {initialState} from "./movies";
 
 const mockMovies = {
