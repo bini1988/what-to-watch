@@ -96,6 +96,9 @@ describe(`Reviews Reducer`, () => {
         expect(NotificationManager.error).toHaveBeenCalledWith(error.message);
 
         spy.mockRestore();
+      })
+      .catch((err) => {
+        expect(err).toEqual(error);
       });
   });
 });

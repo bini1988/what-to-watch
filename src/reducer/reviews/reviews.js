@@ -51,6 +51,7 @@ export const Operation = {
           dispath(ActionCreator.storeReviews(id, items, itemsIds));
         }).catch((error) => {
           NotificationManager.error(error.message);
+          throw error;
         });
     };
   },
