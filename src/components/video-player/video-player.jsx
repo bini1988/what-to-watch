@@ -11,7 +11,6 @@ class VideoPlayer extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._videoRef = React.createRef();
     this._handleExit = this._handleExit.bind(this);
   }
 
