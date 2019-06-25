@@ -5,6 +5,8 @@ import withReviewForm from "./with-review-form";
 
 configure({adapter: new Adapter()});
 
+jest.useFakeTimers();
+
 function MockComponent() {
   return <div />;
 }
@@ -46,7 +48,7 @@ describe(`withReviewForm`, () => {
   });
   it(`should submit form by onSubmit handler`, () => {
     const form = {rating: 4.5, comment: `good comment`};
-    const handleSubmit = jest.fn();
+    const handleSubmit = jest.fn(() => Promise.resolve());
     const WrappedMockComponent = withReviewForm(MockComponent);
     const wrapper = mount(
         <WrappedMockComponent
@@ -58,11 +60,69 @@ describe(`withReviewForm`, () => {
     component = wrapper.find(MockComponent);
     component.prop(`onRatingChange`)(form.rating);
     component.prop(`onCommentChange`)(form.comment);
-    component.prop(`onSubmit`)();
-    wrapper.update();
 
-    expect(handleSubmit).toHaveBeenCalledTimes(1);
-    expect(handleSubmit).toHaveBeenCalledWith(form);
+    return component.prop(`onSubmit`)().then(() => {
+      wrapper.update();
+
+      expect(handleSubmit).toHaveBeenCalledTimes(1);
+      expect(handleSubmit).toHaveBeenCalledWith(form);
+    });
+  });
+  it(`should set submitting prop by onSubmit handler`, () => {
+    const handlePromise = (resolve) => setTimeout(() => resolve(), 100);
+    const handleSubmit = jest.fn(() => {
+      return new Promise(handlePromise);
+    });
+    const WrappedMockComponent = withReviewForm(MockComponent);
+    const wrapper = mount(
+        <WrappedMockComponent
+          onSubmit={handleSubmit}/>
+    );
+
+    let component = wrapper.find(MockComponent);
+    const submitPromise = component.prop(`onSubmit`)();
+
+    wrapper.update();
+    component = wrapper.find(MockComponent);
+    expect(component.prop(`submitting`)).toEqual(true);
+
+    jest.runAllTimers();
+
+    return Promise.resolve()
+      .then(() => submitPromise)
+      .then(() => {
+        wrapper.update();
+        component = wrapper.find(MockComponent);
+        expect(component.prop(`submitting`)).toEqual(false);
+      });
+  });
+  it(`should reset submitting prop if failed by onSubmit handler`, () => {
+    const handlePromise = (resolve, reject) => setTimeout(() => reject(), 100);
+    const handleSubmit = jest.fn(() => {
+      return new Promise(handlePromise);
+    });
+    const WrappedMockComponent = withReviewForm(MockComponent);
+    const wrapper = mount(
+        <WrappedMockComponent
+          onSubmit={handleSubmit}/>
+    );
+
+    let component = wrapper.find(MockComponent);
+    const submitPromise = component.prop(`onSubmit`)();
+
+    wrapper.update();
+    component = wrapper.find(MockComponent);
+    expect(component.prop(`submitting`)).toEqual(true);
+
+    jest.runAllTimers();
+
+    return Promise.resolve()
+      .then(() => submitPromise)
+      .catch(() => {
+        wrapper.update();
+        component = wrapper.find(MockComponent);
+        expect(component.prop(`submitting`)).toEqual(false);
+      });
   });
   it(`should set invalid prop`, () => {
     const form = {

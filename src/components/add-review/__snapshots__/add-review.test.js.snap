@@ -108,6 +108,11 @@ exports[`AddReview correctly renders default markup 1`] = `
         <button
           className="add-review__btn"
           disabled={true}
+          style={
+            Object {
+              "color": "#9c9c9c",
+            }
+          }
           type="submit"
         >
           Post

@@ -13,9 +13,11 @@ import UserBlock from "../user-block/user-block";
 import AddReview from "../add-review/add-review";
 
 function AddReviewPage({movie = {}, history, onReviewSubmit}) {
-  const handleRevieSubmit = (review) => {
-    onReviewSubmit(movie.id, review);
-    history.push(`/film/${movie.id}#Reviews`);
+  const handleReviewSubmit = (review) => {
+    return onReviewSubmit(movie.id, review)
+      .then(() => {
+        history.push(`/film/${movie.id}#Reviews`);
+      });
   };
 
   return (
@@ -30,7 +32,7 @@ function AddReviewPage({movie = {}, history, onReviewSubmit}) {
           mode="small"/>
       </MovieCard.Header>
       <AddReview
-        onSubmit={handleRevieSubmit}/>
+        onSubmit={handleReviewSubmit}/>
     </MovieCard>
   );
 }

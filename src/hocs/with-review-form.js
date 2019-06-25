@@ -13,24 +13,34 @@ const withReviewForm = (Component) => {
         comment: ``,
         /** Форма не валидна */
         invalid: true,
+        /** Форма в состоянии отправки */
+        submitting: false,
       };
 
       this._handleRatingChange = this._handleRatingChange.bind(this);
       this._handleCommentChange = this._handleCommentChange.bind(this);
+      this._resetSubmitting = this._resetSubmitting.bind(this);
       this._handleSubmit = this._handleSubmit.bind(this);
+
+      this._isMounted = true;
     }
 
     render() {
-      const {rating, comment, invalid} = this.state;
+      const {rating, comment, invalid, submitting} = this.state;
 
       return <Component
         {...this.props}
         rating={rating}
         comment={comment}
         invalid={invalid}
+        submitting={submitting}
         onRatingChange={this._handleRatingChange}
         onCommentChange={this._handleCommentChange}
         onSubmit={this._handleSubmit}/>;
+    }
+
+    componentWillUnmount() {
+      this._isMounted = false;
     }
 
     _handleRatingChange(rating) {
@@ -46,13 +56,24 @@ const withReviewForm = (Component) => {
       this.setState({comment, invalid});
     }
 
+    _resetSubmitting() {
+      if (this._isMounted) {
+        this.setState({submitting: false});
+      }
+    }
+
     _handleSubmit() {
       const {onSubmit} = this.props;
       const {rating, comment} = this.state;
 
-      if (onSubmit) {
-        onSubmit({rating, comment});
-      }
+      this.setState({submitting: true});
+
+      return onSubmit({rating, comment})
+        .then((response) => {
+          this._resetSubmitting();
+          return response;
+        })
+        .catch(this._resetSubmitting);
     }
 
     _validateComment(value) {
@@ -87,6 +108,8 @@ export const withReviewFormPropTypes = {
   comment: PropTypes.string,
   /** Валидна ли форма */
   invalid: PropTypes.bool,
+  /** Форма в состоянии отправки */
+  submitting: PropTypes.bool,
   /** Обработчик события изменения рейтенга */
   onRatingChange: PropTypes.func,
   /** Обработчик события изменения комментария */

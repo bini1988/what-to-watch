@@ -5,8 +5,9 @@ const MAX_RATING = 5;
 const toIndex = (it, index) => index + 1;
 
 function AddReview(props) {
-  const {rating, comment, invalid, onRatingChange, onCommentChange, onSubmit} = props;
+  const {rating, comment, invalid, submitting, onRatingChange, onCommentChange, onSubmit} = props;
   const ratings = Array.from({length: MAX_RATING}, toIndex);
+  const disabled = invalid || submitting;
 
   return (
     <div className="add-review">
@@ -53,7 +54,8 @@ function AddReview(props) {
             <button
               className="add-review__btn"
               type="submit"
-              disabled={invalid}>
+              style={{color: disabled ? `#9c9c9c` : undefined}}
+              disabled={disabled}>
               {`Post`}
             </button>
           </div>
