@@ -13,11 +13,14 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const api = createApi({
   url: `https://es31-server.appspot.com/wtw`,
   onError: (error) => {
+    const HTTP_CODE_FORBIDDEN = 403;
+    const HTTP_CODE_BAD_REQUEST = 400;
     const {response = {}} = error;
-    if (response.status && (response.status === 403)) {
+
+    if (response.status && (response.status === HTTP_CODE_FORBIDDEN)) {
       throw new Error(`Ошибка. Данное действие доступно только для авторизованных пользователей`);
     }
-    if (response.status && (response.status === 400)) {
+    if (response.status && (response.status === HTTP_CODE_BAD_REQUEST)) {
       throw new Error(response.data && response.data.error);
     }
   },

@@ -3,6 +3,7 @@ import MovieCard from "./models/movie-card";
 import MovieReview from "./models/movie-review";
 import User from "./models/user";
 
+const DEFAULT_API_TIMEOUT = 5000;
 const isFunction = (value) => typeof value === `function`;
 const injectErrorHandler = (handler) => {
   return (error) => {
@@ -12,7 +13,7 @@ const injectErrorHandler = (handler) => {
 };
 
 export const createApi = (options = {}) => {
-  const {url: baseURL, timeout = 5000, withCredentials = true} = options;
+  const {url: baseURL, timeout = DEFAULT_API_TIMEOUT, withCredentials = true} = options;
   const axiosInstance = axios.create({baseURL, timeout, withCredentials});
 
   const handleSuccess = isFunction(options.onSuccess)
