@@ -1,6 +1,10 @@
 import reducer, {initialState, ActionCreator, Operation, LOGIN_ERROR_MESSAGE} from "./user";
 
 describe(`User Reducer`, () => {
+  it(`should return initialState`, () => {
+    const action = {type: `UNKNOWN`};
+    expect(reducer(undefined, action)).toEqual(initialState);
+  });
   it(`should return state`, () => {
     const action = {type: `UNKNOWN`};
     expect(reducer(initialState, action)).toEqual(initialState);

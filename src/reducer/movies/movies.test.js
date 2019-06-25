@@ -13,6 +13,10 @@ const moviesItemsIds = movies.map((it) => it.id);
 
 
 describe(`Movies Reducer`, () => {
+  it(`should return initialState`, () => {
+    const action = {type: `UNKNOWN`};
+    expect(reducer(undefined, action)).toEqual(initialState);
+  });
   it(`should return state`, () => {
     const action = {type: `UNKNOWN`};
     expect(reducer(initialState, action)).toEqual(initialState);

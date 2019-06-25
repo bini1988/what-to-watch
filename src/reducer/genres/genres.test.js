@@ -5,6 +5,10 @@ import {MAX_ITEMS_PER_PAGE} from "./selectors";
 import reducer, {initialState, ActionCreator, Operation} from "./genres";
 
 describe(`Genres Reducer`, () => {
+  it(`should return initialState`, () => {
+    const action = {type: `UNKNOWN`};
+    expect(reducer(undefined, action)).toEqual(initialState);
+  });
   it(`should return state`, () => {
     const action = {type: `UNKNOWN`};
     expect(reducer(initialState, action)).toEqual(initialState);
@@ -63,5 +67,19 @@ describe(`Genres Reducer`, () => {
     expect(dispatch).toHaveBeenCalledWith(
         ActionCreator.changeGenreLimit(genre, nextLimit)
     );
+  });
+  it(`should ignore increase genre limit by increaseGenreLimit`, () => {
+    const genre = `Unknown Actions`;
+    const dispatch = jest.fn((arg) => arg);
+    const getState = () => ({
+      [NameSpace.GENRES]: {
+        ...initialState,
+      },
+    });
+    const increaseGenreLimitThunk = Operation.increaseGenreLimit(genre);
+
+    increaseGenreLimitThunk(dispatch, getState);
+
+    expect(dispatch).toHaveBeenCalledTimes(0);
   });
 });

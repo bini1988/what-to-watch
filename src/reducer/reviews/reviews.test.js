@@ -10,6 +10,10 @@ const itemsIds = reviews.map((it) => it.id);
 
 
 describe(`Reviews Reducer`, () => {
+  it(`should return initialState`, () => {
+    const action = {type: `UNKNOWN`};
+    expect(reducer(undefined, action)).toEqual(initialState);
+  });
   it(`should return state`, () => {
     const action = {type: `UNKNOWN`};
     expect(reducer(initialState, action)).toEqual(initialState);
