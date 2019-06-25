@@ -37,7 +37,9 @@ function UserBlock({user, location}) {
 
 UserBlock.propTypes = {
   /** Redux Route location */
-  location: PropTypes.object,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
   /** Данные пользователя */
   user: PropTypes.shape({
     id: PropTypes.number,

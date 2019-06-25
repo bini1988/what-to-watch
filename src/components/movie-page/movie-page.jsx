@@ -78,9 +78,15 @@ MoviePage.propTypes = {
       MovieReviewPropTypes,
   ),
   /** React Router location */
-  location: PropTypes.object,
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+  }),
   /** React Router match */
-  match: PropTypes.object,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
   /** Получить фильм */
   onMovieFetch: PropTypes.func,
   /** Получить список отзывов к фильму */

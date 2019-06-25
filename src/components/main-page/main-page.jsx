@@ -2,6 +2,8 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
+import {MovieCardPropTypes} from "../../prop-types";
+
 import {Operation} from "../../reducer/movies/movies";
 import {getPromoMovie} from "../../reducer/movies/selectors";
 
@@ -67,7 +69,7 @@ class MainPage extends PureComponent {
 
 MainPage.propTypes = {
   /** Текущий промо фильм */
-  promoMovieCard: PropTypes.object,
+  promoMovieCard: MovieCardPropTypes,
   /** Список отображаемых фильмов */
   movies: MoviesCatalog.propTypes.movies,
   /** Список отображаемых жанров фильмов */

@@ -37,7 +37,9 @@ function AddReviewPage({movie = {}, history, onReviewSubmit}) {
 
 AddReviewPage.propTypes = {
   /** Объект history React-Router */
-  history: PropTypes.object,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
   /** Карточка фильма */
   movie: MovieCardPropTypes,
   /** Обработчик события отправки формы */

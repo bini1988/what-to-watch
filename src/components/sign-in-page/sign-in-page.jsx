@@ -47,9 +47,15 @@ function SignInPage({hasAuth, error, onUserLogin, location, history}) {
 
 SignInPage.propTypes = {
   /** Объект location React-Router */
-  location: PropTypes.object.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      referrer: PropTypes.string,
+    }),
+  }),
   /** Объект history React-Router */
-  history: PropTypes.object.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
   /** Авторизован ли текущий пользователь */
   hasAuth: PropTypes.bool,
   /** Ошибка авторизации пользователя */

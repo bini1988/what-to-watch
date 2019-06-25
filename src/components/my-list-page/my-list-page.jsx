@@ -2,6 +2,8 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
+import {MovieCardPropTypes} from "../../prop-types";
+
 import {Operation} from "../../reducer/movies/movies";
 import {getMyListMovies} from "../../reducer/movies/selectors";
 
@@ -38,7 +40,7 @@ class MyListPage extends PureComponent {
 MyListPage.propTypes = {
   /** Список фильмов добавленных в список «к просмотру» */
   movies: PropTypes.arrayOf(
-      PropTypes.object,
+      MovieCardPropTypes,
   ),
   /** Получить список фильмов добавленных в список «к просмотру» */
   onMyListMoviesFetch: PropTypes.func,

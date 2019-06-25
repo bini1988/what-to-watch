@@ -28,7 +28,9 @@ VideoPlayerPage.propTypes = {
   /** Карточка фильма */
   movie: MovieCardPropTypes,
   /** Объект history React-Router */
-  history: PropTypes.object,
+  history: PropTypes.shape({
+    goBack: PropTypes.func,
+  }),
   /** Вложенные элементы */
   children: PropTypes.any,
 };
