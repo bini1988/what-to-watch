@@ -16,7 +16,7 @@ import PageFooter from "../page-footer/page-footer";
 import UserBlock from "../user-block/user-block";
 import MoviesCatalog from "../movies-catalog/movies-catalog";
 
-class MoviePage extends PureComponent {
+class MoviePageView extends PureComponent {
   render() {
     const {movie, movies, reviews, location = {}, onToMyListToggle} = this.props;
     const {hash = ``} = location;
@@ -68,7 +68,7 @@ class MoviePage extends PureComponent {
   }
 }
 
-MoviePage.propTypes = {
+MoviePageView.propTypes = {
   /** Карточка фильма */
   movie: MovieCardPropTypes,
   /** Список похожих фильмов */
@@ -110,7 +110,8 @@ const mapDispatchToProps = {
   onMovieReviewsFetch: ReviewsOperation.fetchMovieReviews,
   onToMyListToggle: MoviesOperation.toggleMovieToMyList,
 };
+const MoviePage = connect(mapStateToProps, mapDispatchToProps)(MoviePageView);
 
-export {MoviePage};
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
+export {MoviePageView};
+export default MoviePage;
 
