@@ -156,15 +156,16 @@ const withVideoPlayer = (options = {}) => (Component) => {
       this.setState({...this.initialState});
     }
 
-    _handleCanPlayThrough() {
-      const video = this._videoRef.current;
+    _handleCanPlayThrough(event) {
+      const video = event.target;
       const totalTime = (video && video.duration) || 0;
 
       this.setState({totalTime});
 
       if (this.props.autoplay) {
-        this._handlePlay();
+        return this._handlePlay();
       }
+      return null;
     }
 
     _handleTimeUpdate(event) {

@@ -204,6 +204,53 @@ describe(`withVideoPlayer`, () => {
         wrapper.instance().initialState
     );
   });
+  it(`should handle onCanPlayThrough video event`, () => {
+    const WrappedMockComponent = withVideoPlayer()(MockComponent);
+    const wrapper = mount(
+        <WrappedMockComponent/>
+    );
+
+    const video = wrapper
+      .find(MockComponent)
+      .renderProp(`renderPlayer`)();
+
+    const duration = 65;
+    const target = {duration};
+    video.find(`video`).prop(`onCanPlayThrough`)({target});
+    wrapper.update();
+
+    expect(wrapper.state()).toEqual({
+      ...wrapper.instance().initialState,
+      totalTime: duration,
+    });
+  });
+  it(`should handle onCanPlayThrough video event with autoplay`, () => {
+    HTMLVideoElement.prototype.play = jest.fn(() => Promise.resolve());
+
+    const WrappedMockComponent = withVideoPlayer()(MockComponent);
+    const wrapper = mount(
+        <WrappedMockComponent autoplay={true}/>
+    );
+
+    const video = wrapper
+      .find(MockComponent)
+      .renderProp(`renderPlayer`)();
+
+    const duration = 65;
+    const target = {duration};
+
+    return video.find(`video`).prop(`onCanPlayThrough`)({target}).then(() => {
+      wrapper.update();
+
+      expect(wrapper.state()).toEqual({
+        ...wrapper.instance().initialState,
+        totalTime: duration,
+        isPlaying: true,
+      });
+
+      HTMLVideoElement.prototype.play.mockRestore();
+    });
+  });
   it(`should handle onTimeUpdate video event`, () => {
     const WrappedMockComponent = withVideoPlayer()(MockComponent);
     const wrapper = mount(
