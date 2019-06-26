@@ -13,7 +13,7 @@ import PageFooter from "../page-footer/page-footer";
 import UserBlock from "../user-block/user-block";
 import MoviesCatalog from "../movies-catalog/movies-catalog";
 
-class MyListPage extends PureComponent {
+class MyListPageView extends PureComponent {
   render() {
     const {movies} = this.props;
 
@@ -37,7 +37,7 @@ class MyListPage extends PureComponent {
   }
 }
 
-MyListPage.propTypes = {
+MyListPageView.propTypes = {
   /** Список фильмов добавленных в список «к просмотру» */
   movies: PropTypes.arrayOf(
       MovieCardPropTypes,
@@ -54,7 +54,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   onMyListMoviesFetch: Operation.fetchMyListMovies,
 };
+const MyListPage = connect(mapStateToProps, mapDispatchToProps)(MyListPageView);
 
-export {MyListPage};
-export default connect(mapStateToProps, mapDispatchToProps)(MyListPage);
+export {MyListPageView};
+export default MyListPage;
 

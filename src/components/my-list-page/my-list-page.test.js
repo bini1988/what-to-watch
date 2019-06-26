@@ -4,17 +4,17 @@ import {Provider} from "react-redux";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import movies from "../../mocks/movies";
-import {MyListPage} from "./my-list-page";
+import {MyListPageView} from "./my-list-page";
 
 const initialState = {};
 const mockStore = configureStore();
 
-it(`MyListPage correctly renders default markup`, () => {
+it(`MyListPageView correctly renders default markup`, () => {
   const tree = renderer.create(
       <Provider store={mockStore(initialState)}>
         <MemoryRouter
           initialEntries = {[`/`]}>
-          <MyListPage
+          <MyListPageView
             movies={movies}
             onMyListMoviesFetch={() => {}}
           />

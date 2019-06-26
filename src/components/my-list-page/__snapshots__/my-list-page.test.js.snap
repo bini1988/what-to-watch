@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MyListPage correctly renders default markup 1`] = `
+exports[`MyListPageView correctly renders default markup 1`] = `
 <div
   className="user-page"
 >
