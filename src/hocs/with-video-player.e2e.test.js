@@ -121,6 +121,89 @@ describe(`withVideoPlayer`, () => {
       HTMLVideoElement.prototype.load.mockRestore();
     });
   });
+  it(`should handle onPause video event`, () => {
+    const WrappedMockComponent = withVideoPlayer()(MockComponent);
+    const wrapper = mount(
+        <WrappedMockComponent/>
+    );
+
+    const state = {
+      isPlaying: true,
+      totalTime: 100,
+      currentTime: 50,
+      progress: 50,
+    };
+    wrapper.setState(state);
+    wrapper.update();
+
+    const video = wrapper
+      .find(MockComponent)
+      .renderProp(`renderPlayer`)();
+
+    video.find(`video`).prop(`onPause`)();
+
+    wrapper.update();
+
+    expect(wrapper.state()).toEqual({
+      ...state, isPlaying: false,
+    });
+  });
+  it(`should handle onEnded video event`, () => {
+    const WrappedMockComponent = withVideoPlayer()(MockComponent);
+    const wrapper = mount(
+        <WrappedMockComponent/>
+    );
+
+    const state = {
+      isPlaying: true,
+      totalTime: 100,
+      currentTime: 50,
+      progress: 50,
+    };
+    wrapper.setState(state);
+    wrapper.update();
+
+    const video = wrapper
+      .find(MockComponent)
+      .renderProp(`renderPlayer`)();
+
+    video.find(`video`).prop(`onEnded`)();
+
+    wrapper.update();
+
+    expect(wrapper.state()).toEqual({
+      ...state,
+      isPlaying: false,
+      currentTime: 0,
+      progress: 0
+    });
+  });
+  it(`should handle onLoadStart video event`, () => {
+    const WrappedMockComponent = withVideoPlayer()(MockComponent);
+    const wrapper = mount(
+        <WrappedMockComponent/>
+    );
+
+    wrapper.setState({
+      isPlaying: true,
+      totalTime: 100,
+      currentTime: 50,
+      progress: 50,
+    });
+    wrapper.update();
+
+    const video = wrapper
+      .find(MockComponent)
+      .renderProp(`renderPlayer`)();
+
+    video.find(`video`).prop(`onLoadStart`)();
+
+    wrapper.update();
+
+    expect(wrapper.state()).toEqual(
+        wrapper.instance().initialState
+    );
+  });
   it(`should return audio on renderPlayer method call`, () => {
     const WrappedMockComponent = withVideoPlayer()(MockComponent);
     const wrapper = mount(

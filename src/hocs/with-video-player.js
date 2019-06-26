@@ -70,7 +70,6 @@ const withVideoPlayer = (options = {}) => (Component) => {
           ref={this._videoRef}
           onPause={this._handlePause}
           onEnded={this._handleEnded}
-          onAbort={this._handleAbort}
           onLoadStart={this._handleLoadStart}
           onCanPlayThrough={this._handleCanPlayThrough}
           onTimeUpdate={this._handleTimeUpdate}/>
