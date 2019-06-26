@@ -167,20 +167,14 @@ const withVideoPlayer = (options = {}) => (Component) => {
       }
     }
 
-    _handleTimeUpdate() {
-      const video = this._videoRef.current;
+    _handleTimeUpdate(event) {
       const {currentTime, totalTime} = this.state;
-
-      if (!video) {
-        return;
-      }
-
+      const video = event.target;
       const SAMPLING_TIME = 0.3; // sec
 
       if (Math.abs(video.currentTime - currentTime) >= SAMPLING_TIME) {
         const progress = (totalTime > 0)
-          ? (currentTime / totalTime) * 100 : 0;
-
+          ? (video.currentTime / totalTime) * 100 : 0;
         this.setState({currentTime: video.currentTime, progress});
       }
     }
