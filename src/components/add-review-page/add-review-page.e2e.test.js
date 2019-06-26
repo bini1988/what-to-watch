@@ -6,7 +6,7 @@ import AddReview from "../add-review/add-review";
 
 configure({adapter: new Adapter()});
 
-describe(`ListButton`, () => {
+describe(`AddReviewPage`, () => {
   it(`Should call onReviewSubmit handler`, () => {
     const review = {comment: `comment`, rating: 5};
     const id = 7;
