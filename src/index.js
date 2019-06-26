@@ -23,7 +23,6 @@ const api = createApi({
     if (response.status && (response.status === HTTP_CODE_BAD_REQUEST)) {
       throw new Error(response.data && response.data.error);
     }
-
     throw new Error(`Ошибка. Произошла ошибка, проверьте ваше подключение к сети`);
   },
 });
