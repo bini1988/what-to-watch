@@ -11,7 +11,7 @@ import PageHeader from "../page-header/page-header";
 import PageFooter from "../page-footer/page-footer";
 import SignIn from "../sign-in/sign-in";
 
-function SignInPage({hasAuth, error, onUserLogin, location, history}) {
+function SignInPageView({hasAuth, error, onUserLogin, location, history}) {
   const {state} = location;
   const handleSubmit = (user) => {
     return onUserLogin(user).then(() => {
@@ -45,7 +45,7 @@ function SignInPage({hasAuth, error, onUserLogin, location, history}) {
   );
 }
 
-SignInPage.propTypes = {
+SignInPageView.propTypes = {
   /** Объект location React-Router */
   location: PropTypes.shape({
     state: PropTypes.shape({
@@ -73,6 +73,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   onUserLogin: Operation.loginUser,
 };
+const SignInPage = connect(mapStateToProps, mapDispatchToProps)(SignInPageView);
 
-export {SignInPage};
-export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);
+export {SignInPageView};
+export default SignInPage;
