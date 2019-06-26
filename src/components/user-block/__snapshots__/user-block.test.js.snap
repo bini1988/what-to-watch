@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserBlock correctly renders default markup 1`] = `
+exports[`UserBlockView correctly renders default markup 1`] = `
 <div
   className="user-block"
 >
@@ -22,7 +22,7 @@ exports[`UserBlock correctly renders default markup 1`] = `
 </div>
 `;
 
-exports[`UserBlock correctly renders signin markup 1`] = `
+exports[`UserBlockView correctly renders signin markup 1`] = `
 <div
   className="user-block"
 >
