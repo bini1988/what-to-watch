@@ -15,7 +15,7 @@ import VideoPlayerPage from "../video-player-page/video-player-page";
 
 const AuthRoute = withRouteAuth(Route);
 
-class App extends PureComponent {
+class AppView extends PureComponent {
   render() {
     return (
       <BrowserRouter>
@@ -52,7 +52,7 @@ class App extends PureComponent {
   }
 }
 
-App.propTypes = {
+AppView.propTypes = {
   /** Авторизован ли текущий пользователь */
   onAuthCheck: PropTypes.func,
 };
@@ -60,6 +60,7 @@ App.propTypes = {
 const mapDispatchToProps = {
   onAuthCheck: Operation.echoUser,
 };
+const App = connect(null, mapDispatchToProps)(AppView);
 
-export {App};
-export default connect(null, mapDispatchToProps)(App);
+export {AppView};
+export default App;
