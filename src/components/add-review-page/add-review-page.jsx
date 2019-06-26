@@ -12,7 +12,7 @@ import PageTitle from "../page-title/page-title";
 import UserBlock from "../user-block/user-block";
 import AddReview from "../add-review/add-review";
 
-function AddReviewPage({movie = {}, history, onReviewSubmit}) {
+function AddReviewPageView({movie = {}, history, onReviewSubmit}) {
   const handleReviewSubmit = (review) => {
     return onReviewSubmit(movie.id, review)
       .then(() => {
@@ -37,7 +37,7 @@ function AddReviewPage({movie = {}, history, onReviewSubmit}) {
   );
 }
 
-AddReviewPage.propTypes = {
+AddReviewPageView.propTypes = {
   /** Объект history React-Router */
   history: PropTypes.shape({
     push: PropTypes.func,
@@ -57,6 +57,7 @@ const mapStateToProps = (state, {match}) => {
 const mapDispatchToProps = {
   onReviewSubmit: Operation.submitMovieReview,
 };
+const AddReviewPage = connect(mapStateToProps, mapDispatchToProps)(AddReviewPageView);
 
-export {AddReviewPage};
-export default connect(mapStateToProps, mapDispatchToProps)(AddReviewPage);
+export {AddReviewPageView};
+export default AddReviewPage;

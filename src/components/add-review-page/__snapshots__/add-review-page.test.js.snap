@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddReviewPage correctly renders default markup 1`] = `
+exports[`AddReviewPageView correctly renders default markup 1`] = `
 <section
   className="movie-card movie-card--full"
   style={
