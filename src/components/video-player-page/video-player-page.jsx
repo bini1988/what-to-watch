@@ -6,7 +6,7 @@ import {MovieCardPropTypes} from "../../prop-types";
 import {getMovieById} from "../../reducer/movies/selectors";
 import VideoPlayer from "../video-player/video-player";
 
-function VideoPlayerPage({movie = {}, history}) {
+function VideoPlayerPageView({movie = {}, history}) {
   const {title, trailer, images = {}} = movie;
   const handleExit = () => {
     if (history) {
@@ -24,7 +24,7 @@ function VideoPlayerPage({movie = {}, history}) {
   );
 }
 
-VideoPlayerPage.propTypes = {
+VideoPlayerPageView.propTypes = {
   /** Карточка фильма */
   movie: MovieCardPropTypes,
   /** Объект history React-Router */
@@ -42,7 +42,8 @@ const mapStateToProps = (state, {match}) => {
   };
 };
 const mapDispatchToProps = {};
+const VideoPlayerPage = connect(mapStateToProps, mapDispatchToProps)(VideoPlayerPageView);
 
-export {VideoPlayerPage};
-export default connect(mapStateToProps, mapDispatchToProps)(VideoPlayerPage);
+export {VideoPlayerPageView};
+export default VideoPlayerPage;
 

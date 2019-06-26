@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VideoPlayerPage correctly renders default markup 1`] = `
+exports[`VideoPlayerPageView correctly renders default markup 1`] = `
 <div
   className="player"
 >
