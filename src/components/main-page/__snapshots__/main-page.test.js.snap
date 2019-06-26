@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainPage correctly renders default markup 1`] = `
+exports[`MainPageView correctly renders default markup 1`] = `
 Array [
   <section
     className="movie-card"

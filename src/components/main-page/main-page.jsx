@@ -17,7 +17,7 @@ import PageFooter from "../page-footer/page-footer";
 import UserBlock from "../user-block/user-block";
 import MoviesCatalog from "../movies-catalog/movies-catalog";
 
-class MainPage extends PureComponent {
+class MainPageView extends PureComponent {
   render() {
     const {
       promoMovieCard = {},
@@ -67,7 +67,7 @@ class MainPage extends PureComponent {
   }
 }
 
-MainPage.propTypes = {
+MainPageView.propTypes = {
   /** Текущий промо фильм */
   promoMovieCard: MovieCardPropTypes,
   /** Список отображаемых фильмов */
@@ -110,7 +110,8 @@ const mapDispatchToProps = {
   onPromoMovieFetch: Operation.fetchPromoMovie,
   onToMyListToggle: Operation.toggleMovieToMyList,
 };
+const MainPage = connect(mapStateToProps, mapDispatchToProps)(MainPageView);
 
-export {MainPage};
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export {MainPageView};
+export default MainPage;
 
