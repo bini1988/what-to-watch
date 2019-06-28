@@ -184,15 +184,29 @@ const withVideoPlayer = (options = {}) => (Component) => {
       const video = this._videoRef.current;
 
       if (video && !document.fullscreenElement) {
-        video.requestFullscreen();
+        if (video.requestFullscreen) {
+          video.requestFullscreen();
+        } else if (video.mozRequestFullScreen) {
+          video.mozRequestFullScreen();
+        } else if (video.webkitRequestFullscreen) {
+          video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) {
+          video.msRequestFullscreen();
+        }
       }
     }
 
     _handleFullScreenExit() {
-      const video = this._videoRef.current;
-
-      if (video && document.fullscreenElement) {
-        video.exitFullscreen();
+      if (document.fullscreenElement) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
       }
     }
   }

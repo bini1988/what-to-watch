@@ -341,8 +341,10 @@ describe(`withVideoPlayer`, () => {
     HTMLVideoElement.prototype.requestFullscreen.mockRestore();
   });
   it(`should exit full screen mode with onPlayerFullScreenExit handler`, () => {
-    HTMLVideoElement.prototype.exitFullscreen = jest.fn();
+    const exitFullscreen = document.exitFullscreen;
     const fullscreenElement = document.fullscreenElement;
+
+    document.exitFullscreen = jest.fn();
     document.fullscreenElement = true;
 
     const WrappedMockComponent = withVideoPlayer()(MockComponent);
@@ -359,9 +361,9 @@ describe(`withVideoPlayer`, () => {
     component.prop(`onPlayerFullScreenExit`)();
     wrapper.update();
 
-    expect(HTMLVideoElement.prototype.exitFullscreen).toHaveBeenCalledTimes(1);
+    expect(document.exitFullscreen).toHaveBeenCalledTimes(1);
 
-    HTMLVideoElement.prototype.exitFullscreen.mockRestore();
+    document.exitFullscreen = exitFullscreen;
     document.fullscreenElement = fullscreenElement;
   });
 });
