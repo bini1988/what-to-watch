@@ -11,6 +11,8 @@ exports[`VideoPlayerPageView correctly renders default markup 1`] = `
     onLoadStart={[Function]}
     onPause={[Function]}
     onTimeUpdate={[Function]}
+    poster="https://es31-server.appspot.com/wtw/static/film/preview/war-of-the-worlds.jpg"
+    src="http://media.xiph.org/mango/tears_of_steel_1080p.webm"
   />
   <button
     className="player__exit"
@@ -73,7 +75,9 @@ exports[`VideoPlayerPageView correctly renders default markup 1`] = `
       </button>
       <div
         className="player__name"
-      />
+      >
+        War of the Worlds
+      </div>
       <button
         className="player__full-screen"
         onClick={[Function]}

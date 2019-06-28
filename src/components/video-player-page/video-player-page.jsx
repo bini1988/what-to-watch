@@ -1,36 +1,55 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {MovieCardPropTypes} from "../../prop-types";
+import {Operation as MoviesOperation} from "../../reducer/movies/movies";
 import {getMovieById} from "../../reducer/movies/selectors";
 import VideoPlayer from "../video-player/video-player";
 
-function VideoPlayerPageView({movie = {}, history}) {
-  const {title, trailer, images = {}} = movie;
-  const handleExit = () => {
-    if (history) {
-      history.goBack();
-    }
-  };
+class VideoPlayerPageView extends PureComponent {
+  render() {
+    const {movie = {}, history} = this.props;
+    const {title, trailer, images = {}} = movie;
+    const handleExit = () => {
+      if (history) {
+        history.push(`/film/${movie.id}`);
+      }
+    };
 
-  return (
-    <VideoPlayer
-      autoplay
-      src={trailer}
-      title={title}
-      poster={images.preview}
-      onExit={handleExit}/>
-  );
+    return (
+      <VideoPlayer
+        autoplay
+        src={trailer}
+        title={title}
+        poster={images.preview}
+        onExit={handleExit}/>
+    );
+  }
+
+  componentDidMount() {
+    const {match} = this.props;
+    const id = match && match.params.id;
+
+    this.props.onMovieFetch(id);
+  }
 }
 
 VideoPlayerPageView.propTypes = {
+  /** React Router match */
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
   /** Карточка фильма */
   movie: MovieCardPropTypes,
   /** Объект history React-Router */
   history: PropTypes.shape({
-    goBack: PropTypes.func,
+    push: PropTypes.func,
   }),
+  /** Получить фильм */
+  onMovieFetch: PropTypes.func,
   /** Вложенные элементы */
   children: PropTypes.any,
 };
@@ -41,7 +60,9 @@ const mapStateToProps = (state, {match}) => {
     movie: getMovieById(state, id),
   };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  onMovieFetch: MoviesOperation.fetchMovie,
+};
 const VideoPlayerPage = connect(mapStateToProps, mapDispatchToProps)(VideoPlayerPageView);
 
 export {VideoPlayerPageView};
