@@ -23,7 +23,7 @@ const VideoPlayerPage = withLoader(() => import(/* webpackChunkName: "video-play
 class AppView extends PureComponent {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="/what-to-watch">
         <Switch>
           <Route
             path="/"
