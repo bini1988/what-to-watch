@@ -27,6 +27,7 @@ describe(`VideoPlayer utils`, () => {
     const SECONDS_PER_HOUR = 3600;
     const SECONDS_PER_MINUTE = 60;
 
+    // eslint-disable-next-line no-unused-vars
     for (const test of tests) {
       const [hours, minutes, seconds] = test;
       const time =
