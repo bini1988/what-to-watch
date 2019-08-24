@@ -7,7 +7,9 @@ describe(`MovieCard model`, () => {
       .toEqual(card);
   });
   it(`should return movie reting level`, () => {
-    for (const [level, range] of Object.entries(RatingLevels)) {
+    // eslint-disable-next-line no-unused-vars
+    for (const item of Object.entries(RatingLevels)) {
+      const [level, range] = item;
       const [min, max] = range;
       for (let score = min; score < max; score++) {
         expect(getRatingLevel(score)).toEqual(level);
