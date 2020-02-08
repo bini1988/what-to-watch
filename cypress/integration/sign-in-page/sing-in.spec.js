@@ -39,7 +39,7 @@ describe('Sign in on login page', function () {
 
     cy
       .url()
-      .should('include', '/');
+      .should('eq', Cypress.config().baseUrl + '/');
     cy
       .get('.user-block')
       .should('exist');
