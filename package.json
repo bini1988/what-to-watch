@@ -9,7 +9,8 @@
     "eslint": "eslint src/**/*.js src/**/*.jsx",
     "test": "npm run eslint && jest",
     "jest": "jest",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "cypress-run": "cypress run"
   },
   "devDependencies": {
     "@babel/core": "7.5.5",
