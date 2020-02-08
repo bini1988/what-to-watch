@@ -555,6 +555,7 @@ main {
 
 .catalog__movies-card {
   width: calc((100% - 30px) / 4);
+  min-width: 280px;
   margin-right: 10px;
   margin-bottom: 55px; }
   .catalog__movies-card:nth-child(4n) {
