@@ -39,3 +39,13 @@ Cypress.Commands.add('uilogin', () => {
     .url()
     .should('eq', Cypress.config().baseUrl + '/');
 });
+
+Cypress.Commands.add('login', () => {
+  cy.request({
+      method: 'POST',
+      url: 'https://es31-server.appspot.com/wtw/login',
+      body: {"email":"test-user@email.ru","password":"password"},
+    }).then(() => {
+      cy.visit('/');
+    });
+});
