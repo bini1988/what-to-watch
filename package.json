@@ -8,7 +8,9 @@
     "start": "webpack-dev-server",
     "eslint": "eslint src/**/*.js src/**/*.jsx",
     "test": "npm run eslint && jest",
-    "jest": "jest"
+    "jest": "jest",
+    "cypress": "cypress open",
+    "cypress-run": "cypress run"
   },
   "devDependencies": {
     "@babel/core": "7.5.5",
@@ -19,6 +21,7 @@
     "babel-eslint": "10.0.2",
     "babel-jest": "24.9.0",
     "babel-loader": "8.0.6",
+    "cypress": "4.0.1",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
     "eslint": "6.2.2",
